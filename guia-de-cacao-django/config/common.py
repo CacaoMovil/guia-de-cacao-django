@@ -37,7 +37,7 @@ class Common(Configuration):
         'django.contrib.admin',
     )
     THIRD_PARTY_APPS = (
-        #'crispy_forms',  # Form layouts
+        'crispy_forms',  # Form layouts
         #'avatar',  # for user avatars
         'allauth',  # registration
         'allauth.account',  # registration
@@ -46,7 +46,7 @@ class Common(Configuration):
 
     # Apps specific for this project go here.
     LOCAL_APPS = (
-        #'users',  # custom users app
+        'users',  # custom users app
         # Your stuff: custom apps go here
     )
 
