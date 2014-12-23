@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from cacao.models import Guia
+from cacao.models import Guide
 
 def guia_items(request):
-	guia = Guia.objects.all().order_by('numero')
+	guide = Guide.objects.all().order_by('number')
 	dicc = {
-			 'guia_items': guia,
+			 'guide_items': guide,
 		   }
 	return dicc

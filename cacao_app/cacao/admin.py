@@ -5,12 +5,12 @@ from django.forms import ModelForm
 
 from suit_ckeditor.widgets import CKEditorWidget
 
-from .models import Guia, Seccion, Contenido, Descarga
+from .models import Guide, Section, Content, Download
 
 
-class GuiaForm(ModelForm):
+class GuideForm(ModelForm):
     class Meta:
-        model = Guia
+        model = Guide
 
         _ck_editor_toolbar = [
             {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup']},
@@ -29,30 +29,30 @@ class GuiaForm(ModelForm):
                              'toolbarGroups': _ck_editor_toolbar}
 
         widgets = {
-            'descripcion': CKEditorWidget(editor_options=_ck_editor_config),
+            'description': CKEditorWidget(editor_options=_ck_editor_config),
         }
     
 
-class GuiaAdmin(ModelAdmin):
-    form = GuiaForm
-    search_fields = ('numero', 'nombre')
-    list_display = ('nombre', 'numero')
+class GuideAdmin(ModelAdmin):
+    form = GuideForm
+    search_fields = ('number', 'name')
+    list_display = ('name', 'number')
     fieldsets = [
       (None, {
-        'fields': ['numero', 'nombre', 'descripcion', 'imagen_portada']}
+        'fields': ['number', 'name', 'description', 'image']}
       )
     ]
     
 
-class SeccionAdmin(admin.ModelAdmin):
-    model = Seccion
-    search_fields = ('titulo',)
-    list_filter = ('titulo', 'guia')
-    list_display = ('titulo','guia')
+class SectionAdmin(admin.ModelAdmin):
+    model = Section
+    search_fields = ('title',)
+    list_filter = ('title', 'guide')
+    list_display = ('title','guide')
 
-class ContenidoForm(ModelForm):
+class ContentForm(ModelForm):
     class Meta:
-        model = Contenido
+        model = Content
 
         _ck_editor_toolbar = [
             {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup']},
@@ -71,22 +71,22 @@ class ContenidoForm(ModelForm):
                              'toolbarGroups': _ck_editor_toolbar}
 
         widgets = {
-            'contenido': CKEditorWidget(editor_options=_ck_editor_config),
+            'description': CKEditorWidget(editor_options=_ck_editor_config),
         }
 
-class ContenidoAdmin(ModelAdmin):
-    form = ContenidoForm
-    search_fields = ('titulo',)
-    list_filter = ('seccion',)
-    list_display = ('titulo','seccion')
+class ContentAdmin(ModelAdmin):
+    form = ContentForm
+    search_fields = ('title',)
+    list_filter = ('section',)
+    list_display = ('title','section')
     fieldsets = [
       (None, {
-        'fields': ['seccion', 'titulo', 'contenido', 'peso', 'imagen_contenido']}
+        'fields': ['section', 'title', 'description', 'peso', 'image']}
       )
     ]
 
 
-admin.site.register(Guia, GuiaAdmin)
-admin.site.register(Seccion, SeccionAdmin)
-admin.site.register(Contenido, ContenidoAdmin)
-admin.site.register(Descarga)
+admin.site.register(Guide, GuideAdmin)
+admin.site.register(Section, SectionAdmin)
+admin.site.register(Content, ContentAdmin)
+admin.site.register(Download)

@@ -40,23 +40,23 @@
                                         <!-- toolbar overlay -->
                                         <div class="overlay">
                                             <div class="toolbar">
-                                                <a href="{{ guia.get_absolute_url }}" target="_blank" class="btn back-guia{{ guia.numero }}" title="Ver Guía"><i class="flaticon-eye46 fsize18"></i></a>
-                                                <a href="./" class="btn back-guia{{ guia.numero }}" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
-                                                <a href="./" class="btn back-guia{{ guia.numero }}" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" ></i></a>
+                                                <a href="{{ guia.get_absolute_url }}" target="_blank" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18"></i></a>
+                                                <a href="./" class="btn back-guia{{ guia.number }}" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
+                                                <a href="./" class="btn back-guia{{ guia.number }}" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" ></i></a>
                                             </div>
                                         </div>
                                         <!--/ toolbar overlay -->
-                                        {% thumbnail guia.imagen_portada "247x311" crop="center" as img %}
+                                        {% thumbnail guia.image "247x311" crop="center" as img %}
                                         <img src="{{ img.url }}" alt="Cover" width="100%" />
                                         {% endthumbnail %}
                                         <!-- book effect -->
                                         <div class="effect"></div>
                                         <!--/ book effect -->
-                                        <div class="header back-guia{{ guia.numero }} text-uppercase text-white">
-                                            <h4 class="title" >{{ guia.nombre }}</h4>
+                                        <div class="header back-guia{{ guia.number }} text-uppercase text-white">
+                                            <h4 class="title" >{{ guia.name }}</h4>
                                             <div class="guia" >
                                                 <span>Guía</span>
-                                                <span class="number">{{ guia.numero }}</span>
+                                                <span class="number">{{ guia.number }}</span>
                                             </div>
                                         </div>
                                     </div>

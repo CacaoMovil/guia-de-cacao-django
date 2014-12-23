@@ -33,7 +33,7 @@
     <!--/ END Head -->
 
     <!-- START Body -->
-    <body id="guia-{% if contenido %}{{ contenido.seccion.guia.numero }}{% else %}{{ guia.numero }}{% endif %}">
+    <body id="guia-{% if contenido %}{{ contenido.section.guide.number }}{% else %}{{ guia.number }}{% endif %}">
         <!-- START Template Header -->
         <header id="header" class="navbar navbar-fixed-top">
             <!-- START navbar header -->
@@ -56,7 +56,7 @@
                 </ul>
                 <!-- Brand sm -->
                 <div class="navbar-title text-uppercase">
-                    <span><strong class="visible-lg-inline">GUÍA {% if contenido %}{{ contenido.seccion.guia.numero }}{% else %}{{ guia.numero }}{% endif %}: </strong>{% if contenido %}{{ contenido.seccion.guia.nombre }}{% else %}{{ guia.nombre }}{% endif %}</span>
+                    <span><strong class="visible-lg-inline">GUÍA {% if contenido %}{{ contenido.section.guide.number }}{% else %}{{ guia.number }}{% endif %}: </strong>{% if contenido %}{{ contenido.section.guide.name }}{% else %}{{ guia.name }}{% endif %}</span>
                 </div>
                 <!--/ Brand sm -->
                 <!--/ END Left nav -->
@@ -105,24 +105,24 @@
                 <!-- START Template Navigation/Menu -->
                 <ul class="topmenu topmenu-responsive" data-toggle="menu">
                     <li {% if not contenido %}class="active"{% endif %}>
-                        <a href="{% if contenido %}{{ contenido.seccion.guia.get_absolute_url }}{% else %}{{ guia.get_absolute_url }}{% endif %}" >
+                        <a href="{% if contenido %}{{ contenido.section.guide.get_absolute_url }}{% else %}{{ guia.get_absolute_url }}{% endif %}" >
                             <span class="text text-uppercase">Presentación</span>
                         </a>
                     </li>
                     {% for seccion in seccion_list %}
-                    <li {% if contenido.seccion.id == seccion.id %}class="active open"{% endif %}>
-                        <a href="javascript:void(0);" data-toggle="submenu" data-target="#{{ seccion.titulo }}" data-parent=".topmenu">
-                            <span class="text text-uppercase">{{ seccion.titulo }}</span>
+                    <li {% if contenido.section.id == seccion.id %}class="active open"{% endif %}>
+                        <a href="javascript:void(0);" data-toggle="submenu" data-target="#{{ seccion.title }}" data-parent=".topmenu">
+                            <span class="text text-uppercase">{{ seccion.title }}</span>
                             <!-- <span class="arrow"></span> -->
                         </a>
                          <!-- START 2nd Level Menu -->
 
-                        <ul id="{{ seccion.titulo }}" class="submenu collapse {% if contenido.seccion.id == seccion.id %}in{% endif %}">
+                        <ul id="{{ seccion.title }}" class="submenu collapse {% if contenido.section.id == seccion.id %}in{% endif %}">
                           {% for obj in seccion.contenidos.all %}
                           <li {% if obj == contenido %}class="active"{% endif %}>
                               <a href="{{ obj.get_absolute_url }}">
                                   <span class="figure"><i class="ico-file8"></i></span>
-                                  <span class="text">{{ obj.titulo }}</span>
+                                  <span class="text">{{ obj.title }}</span>
                               </a>
                           </li>
                           {% endfor %}
@@ -180,30 +180,30 @@
             <div class="content slimscroll">
                 <!-- START list guias -->
                 <ul class="list-guias list-unstyled">
-                    {% for guia in guia_items %}
+                    {% for guia in guide_items %}
                     <li class="hidden-xs hidden-sm">
                         <!-- thumbnail -->
                         <div class="thumbnail animation animating delay fadeInLeft">
                             <!-- media -->
                             <div class="media">
-                                <div class="header back-guia{{ guia.numero }} text-uppercase text-white">
-                                    <h4 class="title" >{{ guia.nombre }}</h4>
+                                <div class="header back-guia{{ guia.number }} text-uppercase text-white">
+                                    <h4 class="title" >{{ guia.name }}</h4>
                                     <div class="guia" >
                                         <span>Guía</span>
-                                        <span class="number">{{ guia.numero }}</span>
+                                        <span class="number">{{ guia.number }}</span>
                                     </div>
                                 </div>
                                  <!-- book effect --> <div class="effect"></div> <!--/ book effect -->
                                 <!-- toolbar overlay -->
                                 <div class="overlay">
                                     <div class="toolbar">
-                                        <a href="{{ guia.get_absolute_url }}" class="btn back-guia{{ guia.numero }}" title="Ver Guía"><i class="flaticon-eye46 fsize18" ></i></a>
-                                        <a href="{{ guia.get_absolute_url }}" class="btn back-guia{{ guia.numero }} hidden-sm hidden-xs" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
-                                        <a href="./" class="btn back-guia{{ guia.numero }} hidden-sm hidden-xs" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" ></i></a>
+                                        <a href="{{ guia.get_absolute_url }}" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18" ></i></a>
+                                        <a href="{{ guia.get_absolute_url }}" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
+                                        <a href="./" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" ></i></a>
                                     </div>
                                 </div>
                                 <!--/ toolbar overlay -->
-                                {% thumbnail guia.imagen_portada "247x311" crop="center" as img %}
+                                {% thumbnail guia.image "247x311" crop="center" as img %}
                                 <img src="{{ img.url }}" alt="Cover" width="100%" />
                                 {% endthumbnail %}
                             </div>
@@ -270,16 +270,6 @@
          <!-- <script type="text/javascript" src="./js/jquery.sparkline.min.js"></script> -->
         <!-- will be use globaly as a summary on sidebar menu -->
         <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-        <script type="text/javascript">
-        $( document ).ready(function(){
-          main_url = $(location).attr('pathname');
-          url = "{% if contenido %}{{ contenido.get_absolute_url }}{% else %}{{ guia.get_absolute_url }}{% endif %}"
-          if( main_url == url ){
-            console.log("test")
-          }
-        });
-        </script>
-               
         <!--/ App and page level script -->
         <!--/ END JAVASCRIPT SECTION -->
     </body>

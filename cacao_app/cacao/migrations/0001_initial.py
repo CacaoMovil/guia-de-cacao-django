@@ -11,56 +11,64 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Contenido',
+            name='Content',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('titulo', models.CharField(max_length=250)),
-                ('contenido', models.TextField()),
-                ('imagen_contenido', models.ImageField(upload_to=b'cacao/')),
+                ('title', models.CharField(max_length=250)),
+                ('description', models.TextField()),
+                ('peso', models.IntegerField(verbose_name=b'Peso del contenido')),
+                ('image', models.ImageField(upload_to=b'cacao/')),
+            ],
+            options={
+                'verbose_name': 'Contenido',
+                'verbose_name_plural': 'Contenidos',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Download',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('download', models.FileField(upload_to=b'descargas/')),
             ],
             options={
             },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Descargas',
+            name='Guide',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('descarga', models.FileField(upload_to=b'descargas/')),
+                ('number', models.IntegerField()),
+                ('name', models.CharField(max_length=250)),
+                ('description', models.TextField()),
+                ('image', models.ImageField(upload_to=b'cacao/')),
             ],
             options={
+                'ordering': ['number'],
+                'verbose_name': 'Guia',
+                'verbose_name_plural': 'Guias',
             },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Guia',
+            name='Section',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('numero', models.IntegerField()),
-                ('nombre', models.CharField(max_length=250)),
-                ('descripcion', models.TextField()),
-                ('imagen_portada', models.ImageField(upload_to=b'cacao/')),
+                ('title', models.CharField(max_length=250)),
+                ('image', models.ImageField(upload_to=b'cacao/')),
+                ('guide', models.ForeignKey(to='cacao.Guide')),
             ],
             options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='Seccion',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('titulo', models.CharField(max_length=250)),
-                ('foto_seccion', models.ImageField(upload_to=b'cacao/')),
-                ('guia', models.ForeignKey(to='cacao.Guia')),
-            ],
-            options={
+                'verbose_name': 'Seccion',
+                'verbose_name_plural': 'Secciones',
             },
             bases=(models.Model,),
         ),
         migrations.AddField(
-            model_name='contenido',
-            name='seccion',
-            field=models.ForeignKey(to='cacao.Seccion'),
+            model_name='content',
+            name='section',
+            field=models.ForeignKey(related_name='contenidos', to='cacao.Section'),
             preserve_default=True,
         ),
     ]

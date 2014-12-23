@@ -2,77 +2,77 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
-class Guia(models.Model):
+class Guide(models.Model):
     """docstring for Guia"""
-    numero = models.IntegerField()
-    nombre = models.CharField(max_length=250)
-    descripcion = models.TextField()
-    imagen_portada = models.ImageField(upload_to='cacao/')
+    number = models.IntegerField()
+    name = models.CharField(max_length=250)
+    description = models.TextField()
+    image = models.ImageField(upload_to='cacao/')
 
     class Meta:
         verbose_name = "Guia"
         verbose_name_plural  = "Guias"
-        ordering = ["numero"]
+        ordering = ["number"]
             
     def __unicode__(self):
-        return self.nombre
+        return self.name
 
     def get_absolute_url(self):
         return reverse('guia_detail', args=(self.pk,))
 
     def next(self):
         try:
-            return Contenido.objects.get(pk=self.pk)
+            return Content.objects.get(pk=self.pk)
         except:
             return None
 
-class Seccion(models.Model):
+class Section(models.Model):
     """docstring for seccion"""
-    guia = models.ForeignKey(Guia)
-    titulo = models.CharField(max_length=250)
-    foto_seccion = models.ImageField(upload_to='cacao/')
+    guide = models.ForeignKey(Guide)
+    title = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='cacao/')
 
     class Meta:
         verbose_name = "Seccion"
         verbose_name_plural  = "Secciones"
 
     def __unicode__(self):
-        return self.titulo
+        return self.title
 
-class Contenido(models.Model):
+class Content(models.Model):
     """docstring for Contenido"""
-    seccion = models.ForeignKey(Seccion, related_name='contenidos')
-    titulo = models.CharField(max_length=250)
-    contenido = models.TextField()
+    section = models.ForeignKey(Section, related_name='contenidos')
+    title = models.CharField(max_length=250)
+    description = models.TextField()
     peso = models.IntegerField("Peso del contenido")
-    imagen_contenido = models.ImageField(upload_to='cacao/')
+    image = models.ImageField(upload_to='cacao/')
 
     class Meta:
         verbose_name = "Contenido"
         verbose_name_plural  = "Contenidos"
 
     def __unicode__(self):
-        return self.titulo
+        return self.title
 
     def get_absolute_url(self):
         return reverse('contenido_detail', args=(self.pk,))
 
     def next(self):
         try:
-            return Contenido.objects.get(pk=self.pk+1)
+            return Content.objects.get(pk=self.pk+1)
         except:
             return None
 
     def previous(self):
         try:
-            return Contenido.objects.get(pk=self.pk-1)
+            return Content.objects.get(pk=self.pk-1)
         except:
             return None
 
     @property
-    def guia(self):
-        return self.seccion.guia
+    def guide(self):
+        return self.section.guide
 
-class Descarga(models.Model):
+class Download(models.Model):
     """docstring for Descargas"""
-    descarga = models.FileField(upload_to='descargas/')
+    download = models.FileField(upload_to='descargas/')
