@@ -34,20 +34,26 @@ class Common(Configuration):
         # 'django.contrib.humanize',
 
         # Admin
+        'suit',
         'django.contrib.admin',
     )
     THIRD_PARTY_APPS = (
-        #'crispy_forms',  # Form layouts
+        'crispy_forms',  # Form layouts
         #'avatar',  # for user avatars
         'allauth',  # registration
         'allauth.account',  # registration
         #'allauth.socialaccount',  # registration
+        'suit_ckeditor',
+        'sorl.thumbnail',
+        'envelope',
+        'solo', 
     )
 
     # Apps specific for this project go here.
     LOCAL_APPS = (
-        #'users',  # custom users app
-        # Your stuff: custom apps go here
+        'users',  # custom users 
+        'cacao',
+        'configuracion', 
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -103,7 +109,7 @@ class Common(Configuration):
     # MANAGER CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
     ADMINS = (
-        ("""Kronoscode""", 'info@kronoscode.com'),
+        ("""Kronoscode""", 'lead@kronoscode.com'),
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -160,6 +166,7 @@ class Common(Configuration):
         'django.contrib.messages.context_processors.messages',
         'django.core.context_processors.request',
         # Your stuff: custom template context processers go here
+        'context.guia_items',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
@@ -266,3 +273,13 @@ class Common(Configuration):
     # END LOGGING CONFIGURATION
 
     # Your common stuff: Below this line define 3rd party library settings
+
+    SUIT_CONFIG = {
+        'ADMIN_NAME': 'Cacao',
+        'SHOW_REQUIRED_ASTERISK': True,
+        'CONFIRM_UNSAVED_CHANGES': True,
+        'MENU_ICONS': {
+            'sites': 'icon-leaf',
+            'auth': 'icon-lock',
+        }
+    }

@@ -1,0 +1,100 @@
+// Below variable created to suite this template look and feel
+// change at your own risk :)
+// ----------------------------------------------------------------------------
+// Color variation
+// ----------------------------------------------------------------------------
+@dark:                                  #444; // do not change this
+@gray:                                  #eee; // do not change this
+@white:                                 #fff; // do not change this
+
+@accent-base-color:                     #99BD43;
+@default:                               #f5f5f5;
+@primary:                               #00B1E1;
+@success:                               #91C854;
+@info:                                  #63D3E9;
+@warning:                               #FFD66A;
+@inverse:                               #2a2a2a;
+@danger:                                #ED5466;
+@teal:                                  #6BCCB4;
+@facebook:                              #3b5998;
+@twitter:                               #55acee;
+
+// border color
+@border-color:                          darken(@maincontent-base-color, 10%); 
+
+// border radius
+@border-radius:                         3px;
+
+// Typography
+@font-family:                           "Merriweather Sans", sans-serif;
+@font-family-alt:                       "Open Sans", sans-serif;
+@font-size-global:                      14px;                
+
+
+// Template layout
+// ----------------------------------------------------------------------------
+// Infobar
+@infobar-height:                        36px;
+
+// Header
+@header-height:                         70px; //60px;
+@header-height-md:                      @header-height; // @header-height + 10;
+
+// Sidebar
+@sidebar-header-height:                 155px;
+@sidebar-base-color:                    #272322;
+@sidebar-width:                         270px;
+@sidebar-collapse-width:                60px;
+
+// Sidebar menu
+@sidebar-color-menu:					#CCC; 		//lighten(@sidebar-base-color, 63%);
+@sidebar-color-menu-index:				#88A33D; 	//lighten(@sidebar-base-color, 63%);
+@sidebar-base-color-menu:				#302C29; 	//lighten(@sidebar-base-color, 3.4%)
+@sidebar-color-submenu:					#696C6E; 	//lighten(@sidebar-base-color, 20%)
+
+// footer
+@footer-base-color:						@sidebar-base-color;
+@footer-height: 						@header-height - 10;
+@footer-text-color:						@sidebar-color-submenu;
+
+// Main Content
+@maincontent-base-color:                #F2F2F2;
+
+// color guias
+@colors:								9; 								
+@color-guia1:							#872058;
+@color-guia2:							#7A132C;
+@color-guia3:							#26799B;
+@color-guia4:							#894C1D;
+@color-guia5:							#DC661E;
+@color-guia6:							#918144;
+@color-guia7:							#5F2E23;
+@color-guia8:							#991A72;
+@color-guia9:							#C01772;
+
+// Media queries breakpoints
+// ----------------------------------------------------------------------------
+// Extra small screen / phone
+@screen-xs:                  480px;
+@screen-xs-min:              @screen-xs;
+@screen-phone:               @screen-xs-min;
+
+// Small screen / tablet
+@screen-sm:                  768px;
+@screen-sm-min:              @screen-sm;
+@screen-tablet:              @screen-sm-min;
+
+// Medium screen / desktop
+@screen-md:                  992px;
+@screen-md-min:              @screen-md;
+@screen-desktop:             @screen-md-min;
+
+// Large screen / wide desktop
+@screen-lg:                  1200px;
+@screen-lg-min:              @screen-lg;
+@screen-lg-desktop:          @screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max:              (@screen-sm-min - 1);
+@screen-sm-max:              (@screen-md-min - 1);
+@screen-md-max:              (@screen-lg-min - 1);

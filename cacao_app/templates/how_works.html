@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load staticfiles i18n %}
+{% block content %}
+        <!-- START Template Main -->
+        <section id="main" role="main">
+            <!-- START page header -->
+            <section class="page-header page-header-block nm">
+                <!-- pattern -->
+                <div class="bg-icon-3 bg-icon-right" style="right: 30px;"></div>
+                <!--/ pattern -->
+                <div class="container-fluid pt15 pb15">
+                    <div class="page-header-section">
+                        <h1 class="title font-alt">Como Funciona</h1>
+                    </div>
+                    <div class="page-header-section">
+                    </div>
+                </div>
+            </section>
+
+            <section class="section"> <!-- bgcolor-white -->
+                <div class="container-fluid pl15">
+                    <!-- START Row -->
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1 col- mb15">
+                            <!-- Header -->
+                            <div class="section-header section-header-bordered mb10">
+                                <h3 class="section-title">
+                                    <p class="font-alt nm">Resumen</p>
+                                </h3>
+                            </div>
+                            <!--/ Header -->
+                            <!-- Content -->
+                            <!-- Iframe container -->
+                            <div class="iframe-container">
+                                <iframe width="100%" src="//www.youtube.com/embed/TN8cWYsvuBE" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <hr>
+                            <div class="text-justify">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </div>
+                            <!--/ Iframe container -->
+                            <!--/ Content -->
+                        </div>
+                    </div>
+                    <!--/ END Row -->
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1 col- mb15 mt15">
+                            <div class="section-header section-header-bordered mb10">
+                                <h3 class="section-title">
+                                    <p class="font-alt nm">Disposiciones Escritorio – Laptop </p>
+                                </h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4>Menu</h4>
+                                    <p>commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="{% static 'image/how-it-works/3ra-Guia-Laptop.png' %}" class="img-responsive" alt="Responsive image Laptop">
+                                </div>
+                                <div class="col-md-4">
+                                    <h4>Acciones</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1 col- mb15 mt15">
+                            <div class="section-header section-header-bordered mb10">
+                                <h3 class="section-title">
+                                    <p class="font-alt nm">Disposiciones Tablet – Teléfonos</p>
+                                </h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4>Menu</h4>
+                                    <p>commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="{% static 'image/how-it-works/3ra-Guia-Tablet2.png' %}" class="img-responsive" alt="Responsive image Tablet">
+                                </div>
+                                <div class="col-md-4">
+                                    <h4>Acciones</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <hr>
+                                <div class="col-sm-4">
+                                    <img src="{% static 'image/how-it-works/step_01.png' %}" class="img-responsive" alt="Responsive image Tablet">
+                                </div>
+                                <div class="col-sm-4">
+                                    <img src="{% static 'image/how-it-works/step_02.png' %}" class="img-responsive" alt="Responsive image Tablet">
+                                </div>
+                                <div class="col-sm-4">
+                                    <img src="{% static 'image/how-it-works/step_03.png' %}" class="img-responsive" alt="Responsive image Tablet">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ END Contact Form + Infos -->
+{% endblock content %}
+{% block extra_footer %}
+<script type="text/javascript">
+$( document ).ready(function() {
+  main_url = $(location).attr('pathname');
+  if( main_url == '/how-it-works/' ){
+    $('.topmenu .active').removeClass('active');
+    $('.topmenu li:nth-child(2)').addClass('active');
+  } 
+});
+</script>
+{% endblock extra_footer %}

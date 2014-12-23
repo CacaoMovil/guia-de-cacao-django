@@ -1,0 +1,287 @@
+{% load staticfiles i18n thumbnail %}
+<!DOCTYPE html>
+<html>
+    <!-- START Head -->
+    <head>
+        <!-- START META SECTION -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Lutheran World Relief</title>
+        <meta name="author" content="kronoscode.com/">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'image/touch/apple-touch-icon-144x144-precomposed.png' %}">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'image/touch/apple-touch-icon-114x114-precomposed.png' %}">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'image/touch/apple-touch-icon-72x72-precomposed.png' %}">
+        <link rel="apple-touch-icon-precomposed" href="{% static 'image/touch/apple-touch-icon-57x57-precomposed.png' %}">
+        <link rel="shortcut icon" href="{% static 'image/favicon.ico' %}">
+        <!--/ END META SECTION -->
+
+        <!-- Application stylesheet : mandatory -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/layout.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/uielement.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/custom.min.css' %}">
+        <!--/ Application stylesheet -->
+        <!-- END STYLESHEETS -->
+
+        <!-- START JAVASCRIPT SECTION - Load only modernizr script here -->
+        <script src="{% static 'js/modernizr.2.8.3.min.js' %}"></script>
+        <!--/ END JAVASCRIPT SECTION -->
+    </head>
+    <!--/ END Head -->
+
+    <!-- START Body -->
+    <body id="guia-{% if contenido %}{{ contenido.seccion.guia.numero }}{% else %}{{ guia.numero }}{% endif %}">
+        <!-- START Template Header -->
+        <header id="header" class="navbar navbar-fixed-top">
+            <!-- START navbar header -->
+            <div class="navbar-header">
+                <!-- Brand -->
+                <a class="navbar-brand text-uppercase" href="/">
+                    <span class="logo-figure"></span>
+                    <span class="text hidden-xs"><small>caja de herramientas</small>de cacao</span>
+                    <!-- <span class="logo-text"></span> -->
+                </a>
+                <!--/ Brand -->
+            </div>
+            <!--/ END navbar header -->
+            <!-- START Toolbar -->
+            <div class="navbar-toolbar clearfix">
+                <!-- START Left nav -->
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="text-uppercase">
+                    </li>
+                </ul>
+                <!-- Brand sm -->
+                <div class="navbar-title text-uppercase">
+                    <span><strong class="visible-lg-inline">GUÍA {% if contenido %}{{ contenido.seccion.guia.numero }}{% else %}{{ guia.numero }}{% endif %}: </strong>{% if contenido %}{{ contenido.seccion.guia.nombre }}{% else %}{{ guia.nombre }}{% endif %}</span>
+                </div>
+                <!--/ Brand sm -->
+                <!--/ END Left nav -->
+                <ul class="nav navbar-nav navbar-main navbar-right text-uppercase" >
+                    <li>
+                        <a href="{% url 'home' %}" title="Guías">
+                            <span class="icon"><i class="flaticon-home151 fsize30"></i></span>
+                            <span class="text hidden-xs">Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" title="Guías" class="hidden-sm hidden-xs">
+                            <span class="icon"><i class="flaticon-printer78"></i></span>
+                            <span class="text">Imprimir</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" title="Guías" class="hidden-sm hidden-xs">
+                            <span class="icon"><i class="flaticon-download170"></i></span>
+                            <span class="text hidden-xs">Descargar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="sidebar" data-direction="rtl" rel="tooltip" title="Guías">
+                            <span class="icon"><i class="flaticon-document9"></i></span>
+                            <span class="text hidden-xs">Guías</span>
+                        </a>
+                    </li>
+                    <!--/ Offcanvas right -->
+                </ul>
+            </div>
+            <!--/ END Toolbar -->
+        </header>
+        <!--/ END Template Header -->
+
+        <!-- START Template Sidebar (Left) -->
+        <aside class="sidebar sidebar-left sidebar-menu">
+            <!-- START Sidebar Content -->
+            <section class="content slimscroll">
+                <div class="heading">
+                    <span class="figure">
+                        <i class="ico-paragraph-justify3"></i>
+                    </span>
+                    <span class="text">Indice</span>
+                </div>
+                <!-- START Template Navigation/Menu -->
+                <ul class="topmenu topmenu-responsive" data-toggle="menu">
+                    <li {% if not contenido %}class="active"{% endif %}>
+                        <a href="{% if contenido %}{{ contenido.seccion.guia.get_absolute_url }}{% else %}{{ guia.get_absolute_url }}{% endif %}" >
+                            <span class="text text-uppercase">Presentación</span>
+                        </a>
+                    </li>
+                    {% for seccion in seccion_list %}
+                    <li {% if contenido.seccion.id == seccion.id %}class="active open"{% endif %}>
+                        <a href="javascript:void(0);" data-toggle="submenu" data-target="#{{ seccion.titulo }}" data-parent=".topmenu">
+                            <span class="text text-uppercase">{{ seccion.titulo }}</span>
+                            <!-- <span class="arrow"></span> -->
+                        </a>
+                         <!-- START 2nd Level Menu -->
+
+                        <ul id="{{ seccion.titulo }}" class="submenu collapse {% if contenido.seccion.id == seccion.id %}in{% endif %}">
+                          {% for obj in seccion.contenidos.all %}
+                          <li {% if obj == contenido %}class="active"{% endif %}>
+                              <a href="{{ obj.get_absolute_url }}">
+                                  <span class="figure"><i class="ico-file8"></i></span>
+                                  <span class="text">{{ obj.titulo }}</span>
+                              </a>
+                          </li>
+                          {% endfor %}
+                        </ul>
+                        <!--/ END 2nd Level Menu -->
+                    </li>
+                    {% endfor %}
+                </ul>
+                <!--/ END Template Navigation/Menu -->
+                <!-- START Sidebar summary -->
+                <!-- Summary -->
+                <h5 class="heading text-center" style="margin-top:40px;">Caja de herramientas también disponible para dispositivos android</h5>
+                <div class="wrapper text-center">
+                    <div class="table-layout">
+                        <img src="{% static 'image/ipad.png' %}" alt="ipad image">
+                    </div>
+                    <!-- START button google play -->
+                    <div class="table-layout">
+                        <a class="btn btn-google-play" href="./" >
+                            <img src="{% static 'image/google-play.png' %}" alt="image google play image">
+                        </a>
+                    </div>
+                    <!--/ END button google play -->
+                </div>
+                <!--/ Summary -->
+                <!--/ END Sidebar summary -->
+                <!-- Credit -->
+                <hr>
+                <div class="wrapper text-center text-white">
+                    <div class="table-layout">
+                        <span style="color: #696c6e; display: block; margin-bottom: 5px;"><small>Un producto de:</small></span>
+                        <a href="/" >
+                            <img src="{% static 'image/logo/logo-min.png' %}">
+                        </a>
+                    </div>
+                </div>
+                <div class="wrapper text-center text-white">
+                    <div class="table-layout">
+                        <span style="color: #696c6e;"><small>Diseñado y desarrollado por:</small></span>
+                        <a href="http://kronoscode.com/" target="_blank" >
+                            <img src="{% static 'image/kronoscode.png' %}">
+                        </a>
+                    </div>
+                </div>
+                <!--/ Credit -->
+            </section>
+            <!--/ END Sidebar Container -->
+        </aside>
+        <!--/ END Template Sidebar (Left) -->
+        {% block content %}            
+        {% endblock content %}
+        <!-- START Template Sidebar (right) -->
+        <aside class="sidebar sidebar-right">
+            <!-- START Offcanvas -->
+            <div class="content slimscroll">
+                <!-- START list guias -->
+                <ul class="list-guias list-unstyled">
+                    {% for guia in guia_items %}
+                    <li class="hidden-xs hidden-sm">
+                        <!-- thumbnail -->
+                        <div class="thumbnail animation animating delay fadeInLeft">
+                            <!-- media -->
+                            <div class="media">
+                                <div class="header back-guia{{ guia.numero }} text-uppercase text-white">
+                                    <h4 class="title" >{{ guia.nombre }}</h4>
+                                    <div class="guia" >
+                                        <span>Guía</span>
+                                        <span class="number">{{ guia.numero }}</span>
+                                    </div>
+                                </div>
+                                 <!-- book effect --> <div class="effect"></div> <!--/ book effect -->
+                                <!-- toolbar overlay -->
+                                <div class="overlay">
+                                    <div class="toolbar">
+                                        <a href="{{ guia.get_absolute_url }}" class="btn back-guia{{ guia.numero }}" title="Ver Guía"><i class="flaticon-eye46 fsize18" ></i></a>
+                                        <a href="{{ guia.get_absolute_url }}" class="btn back-guia{{ guia.numero }} hidden-sm hidden-xs" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
+                                        <a href="./" class="btn back-guia{{ guia.numero }} hidden-sm hidden-xs" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" ></i></a>
+                                    </div>
+                                </div>
+                                <!--/ toolbar overlay -->
+                                {% thumbnail guia.imagen_portada "247x311" crop="center" as img %}
+                                <img src="{{ img.url }}" alt="Cover" width="100%" />
+                                {% endthumbnail %}
+                            </div>
+                            <!--/ media -->
+                        </div>
+                        <!--/ thumbnail -->
+                    </li>
+                    {% endfor %}
+                </ul>
+                <!--/ END list guias -->
+            </div>
+            <!--/ END Offcanvas -->
+        </aside>
+        <!--/ END Template Sidebar (right) -->
+
+        <!-- FOOTER (visible a partir de sm) -->
+        <footer class="footer hidden-md hidden-lg">
+            <!-- Credit -->
+            <section class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-6 col-480">
+                        <div class="wrapper">
+                            <div class="table-layout">
+                                <div class="col-xs-6 valign-middle text-right">
+                                    <span><small>Un producto de:</small>&nbsp&nbsp</span>
+                                </div>
+                                <div class="col-xs-6 valign-middle">
+                                    <a href="/" >
+                                        <img src="{% static 'image/logo/logo-min.png' %}">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-480">
+                        <div class="wrapper">
+                            <div class="table-layout">
+                                <div class="col-xs-7 col-sm-6 valign-middle text-right">
+                                    <span><small>Diseñado y desarrollado por:</small></span>
+                                </div>
+                                <div class="col-xs-5 col-sm-6 valign-middle">
+                                    <a href="http://kronoscode.com/" target="_blank">
+                                        <img src="{% static 'image/kronoscode.png' %}"  style="padding: 9px 0;" >
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ Credit -->
+        </footer>
+        <!--/ FOOTER (visible a partir de sm) -->
+
+        <!-- START JAVASCRIPT SECTION (Load javascripts at bottom to reduce load time) -->
+        <!-- Library script : mandatory -->
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery-migrate.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/core.js' %}"></script> 
+        <!--/ Library script -->
+ 
+        <!-- App and page level script -->
+         <!-- <script type="text/javascript" src="./js/jquery.sparkline.min.js"></script> -->
+        <!-- will be use globaly as a summary on sidebar menu -->
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+        <script type="text/javascript">
+        $( document ).ready(function(){
+          main_url = $(location).attr('pathname');
+          url = "{% if contenido %}{{ contenido.get_absolute_url }}{% else %}{{ guia.get_absolute_url }}{% endif %}"
+          if( main_url == url ){
+            console.log("test")
+          }
+        });
+        </script>
+               
+        <!--/ App and page level script -->
+        <!--/ END JAVASCRIPT SECTION -->
+    </body>
+    <!--/ END Body -->
+</html>

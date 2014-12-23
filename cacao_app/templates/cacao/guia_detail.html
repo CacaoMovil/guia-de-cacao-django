@@ -1,0 +1,53 @@
+{% extends "guia_detail_base.html" %}
+{% block content %}
+<!-- START Template Main -->
+        <section id="main" role="main">
+            <!-- Page Header -->
+            <nav class="page-header page-header-block affix">
+                <div class="pager">
+                    <a class="indice" href="javascript:void(0);" data-toggle="sidebar" data-direction="ltr" rel="tooltip" title="Menu sidebar">
+                        <span class="figure">
+                            <i class="ico-paragraph-justify3"></i>
+                        </span>
+                        <span class="text text-uppercase">Indice</span>
+                    </a>
+					<div class="previous"><a href="#"><i class="flaticon-previous11"></i></a></div>
+                    <div class="next"><a href="#"><i class="flaticon-next15"></i></a></div>
+                    <h4 class="title-item text-capitalize">Presentación</h4>
+                </div>
+            </nav>
+            <!-- Page Header -->
+<!-- START Template Container -->
+            <div class="container-fluid">
+                <!-- START Rows -->
+                <div class="row">
+                    <div class="col-lg-8 col-sm-10 col-sm-offset-1 col-lg-offset-2">
+                        <p class="fsize18 mt15"></p>
+                        <p>{{ guia.descripcion|safe }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 col-sm-6 col-sm-offset-3 col-md-offset-6">
+                        <a class="next-item" href="{{ guia.next.get_absolute_url }}">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <span class="text-top text-uppercase">SIGUIENTE TEMA</span>
+                                    <span>{{ guia.next }}</span>
+                                </div>
+                                <div class="col-xs-2">
+                                    <i class="flaticon-right106 fsize30"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- END Rows -->
+            </div>
+            <!--/ END Template Container -->
+
+            <!-- START To Top Scroller -->
+            <a href="#" class="totop animation" data-toggle="waypoints totop" data-showanim="bounceIn" data-hideanim="bounceOut" data-offset="50%"><i class="ico-angle-up"></i></a>
+            <!--/ END To Top Scroller -->
+        </section>
+<!--/ END Template Main -->
+{% endblock content %}
