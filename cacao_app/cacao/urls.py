@@ -11,5 +11,12 @@ from .views import GuideList, GuideDetail, ContentDetail
 urlpatterns = patterns('cacao.views',
     url(r'^$', GuideList.as_view(), name="home"),
     url(r'^guia/(?P<pk>\d+)/$', GuideDetail.as_view(), name="guia_detail"),
-    url(r'^contenido/(?P<pk>\d+)/$', ContentDetail.as_view(), name="contenido_detail"),
+    url(r'^guia/(?P<guide>\d)/contenido/(?P<slug>[-\w]+)/$', ContentDetail.as_view(), name="contenido_detail"),
+    url(r'^static-generator/$', 'staticGenerator', name="static_generator"),
+
+    # api
+    url(r'^api/v1/guides/$', 'guides_collection'),
+    url(r'^api/v1/guide/(?P<pk>[0-9]+)$', 'guide_elements'),
+    url(r'^api/v1/guide/(?P<pk>[0-9]+)/version/(?P<num_version>[0-9]+)$', 'guide_element'),
+    url(r'^api/v1/guide/(?P<pk>[0-9]+)/last$', 'guide_last'),
 )

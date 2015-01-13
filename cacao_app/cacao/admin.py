@@ -85,8 +85,18 @@ class ContentAdmin(ModelAdmin):
       )
     ]
 
+class DownloadAdmin(admin.ModelAdmin):
+    model = Download
+    search_fields = ('guide',)
+    list_filter = ('guide',)
+    list_display = ('name', 'num_version', 'guide')
+    fieldsets = [
+      (None, {
+          'fields': ['guide', 'num_version', 'file']}
+      )
+    ]        
 
 admin.site.register(Guide, GuideAdmin)
 admin.site.register(Section, SectionAdmin)
 admin.site.register(Content, ContentAdmin)
-admin.site.register(Download)
+admin.site.register(Download, DownloadAdmin)

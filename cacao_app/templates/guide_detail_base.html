@@ -1,4 +1,4 @@
-{% load staticfiles i18n thumbnail %}
+{% load i18n thumbnail  %}
 <!DOCTYPE html>
 <html>
     <!-- START Head -->
@@ -19,6 +19,7 @@
         <!--/ END META SECTION -->
 
         <!-- Application stylesheet : mandatory -->
+        
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/layout.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/uielement.min.css' %}">
@@ -39,7 +40,7 @@
             <!-- START navbar header -->
             <div class="navbar-header">
                 <!-- Brand -->
-                <a class="navbar-brand text-uppercase" href="/">
+                <a class="navbar-brand text-uppercase" href="{% url 'home' %}">
                     <span class="logo-figure"></span>
                     <span class="text hidden-xs"><small>caja de herramientas</small>de cacao</span>
                     <!-- <span class="logo-text"></span> -->
@@ -74,7 +75,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" title="Guías" class="hidden-sm hidden-xs">
+                        <a href="{% if contenido %}{{ contenido.section.guide.get_download_url }}{% else %}{{ guia.get_download_url }}{% endif %}" title="Guías" class="hidden-sm hidden-xs">
                             <span class="icon"><i class="flaticon-download170"></i></span>
                             <span class="text hidden-xs">Descargar</span>
                         </a>
@@ -102,10 +103,10 @@
                     </span>
                     <span class="text">Indice</span>
                 </div>
-                <!-- START Template Navigation/Menu -->
+                <!-- START Template Navigation/Menu reverse('guia_detail', args=(self.pk,)) -->
                 <ul class="topmenu topmenu-responsive" data-toggle="menu">
                     <li {% if not contenido %}class="active"{% endif %}>
-                        <a href="{% if contenido %}{{ contenido.section.guide.get_absolute_url }}{% else %}{{ guia.get_absolute_url }}{% endif %}" >
+                        <a href="{% if contenido %}{% url 'guia_detail' contenido.section.guide.pk %}{% else %}{% url 'guia_detail' guia.pk %}{% endif %}" >
                             <span class="text text-uppercase">Presentación</span>
                         </a>
                     </li>
@@ -120,7 +121,7 @@
                         <ul id="{{ seccion.title }}" class="submenu collapse {% if contenido.section.id == seccion.id %}in{% endif %}">
                           {% for obj in seccion.contenidos.all %}
                           <li {% if obj == contenido %}class="active"{% endif %}>
-                              <a href="{{ obj.get_absolute_url }}">
+                              <a href="{% url 'contenido_detail' obj.section.guide.pk obj.slug %}">
                                   <span class="figure"><i class="ico-file8"></i></span>
                                   <span class="text">{{ obj.title }}</span>
                               </a>
@@ -197,8 +198,8 @@
                                 <!-- toolbar overlay -->
                                 <div class="overlay">
                                     <div class="toolbar">
-                                        <a href="{{ guia.get_absolute_url }}" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18" ></i></a>
-                                        <a href="{{ guia.get_absolute_url }}" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
+                                        <a href="{% url 'guia_detail' guia.pk %}" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18" ></i></a>
+                                        <a href="{{ guia.get_download_url }}" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
                                         <a href="./" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" ></i></a>
                                     </div>
                                 </div>

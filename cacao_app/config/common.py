@@ -46,7 +46,10 @@ class Common(Configuration):
         'suit_ckeditor',
         'sorl.thumbnail',
         'envelope',
-        'solo', 
+        'solo',
+        'django_perseus',
+        'rest_framework',
+        'easy_pdf',
     )
 
     # Apps specific for this project go here.

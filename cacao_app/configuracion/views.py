@@ -22,5 +22,4 @@ class Contact(FormMessagesMixin, ContactView):
     def get_context_data(self, **kwargs):
         context = super(Contact, self).get_context_data(**kwargs)
         context['contact'] = Contacto.objects.get()
-        print context
         return context

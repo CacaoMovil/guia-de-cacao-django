@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.template import defaultfilters
+from django.template.base import add_to_builtins
 
 class Guide(models.Model):
     """docstring for Guia"""
@@ -20,11 +23,20 @@ class Guide(models.Model):
     def get_absolute_url(self):
         return reverse('guia_detail', args=(self.pk,))
 
+    def get_download_url(self):
+        download = Download.objects.filter(guide=self.pk).order_by('-num_version')[0]
+        return download.file.url
+
     def next(self):
         try:
             return Content.objects.get(pk=self.pk)
         except:
             return None
+
+    @property
+    def latest_version(self):
+        return self.versions.order_by('-num_version')[0]
+    
 
 class Section(models.Model):
     """docstring for seccion"""
@@ -44,8 +56,9 @@ class Content(models.Model):
     section = models.ForeignKey(Section, related_name='contenidos')
     title = models.CharField(max_length=250)
     description = models.TextField()
-    peso = models.IntegerField("Peso del contenido")
+    peso = models.PositiveIntegerField("Peso del contenido", unique=True)
     image = models.ImageField(upload_to='cacao/')
+    slug = models.SlugField(max_length=100)
 
     class Meta:
         verbose_name = "Contenido"
@@ -54,8 +67,14 @@ class Content(models.Model):
     def __unicode__(self):
         return self.title
 
+
+    def save(self, *args, **kwargs):
+        self.slug = defaultfilters.slugify(self.title)
+        super(Content, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
-        return reverse('contenido_detail', args=(self.pk,))
+        guide = self.section.guide.pk
+        return reverse('contenido_detail', args=[guide, self.slug])
 
     def next(self):
         try:
@@ -75,4 +94,30 @@ class Content(models.Model):
 
 class Download(models.Model):
     """docstring for Descargas"""
-    download = models.FileField(upload_to='descargas/')
+    guide = models.ForeignKey(Guide, related_name='versions')
+    name = models.CharField(max_length=250)
+    file = models.FileField(upload_to='descargas/')
+    num_version = models.PositiveIntegerField()
+    # No Visible
+    date = models.DateField(auto_now_add=True, editable=False)
+
+    class Meta:
+        verbose_name = "Descarga"
+        verbose_name_plural = "Descargas"
+        unique_together = ("guide", "num_version")
+
+    def __unicode__(self):
+        return self.guide.name
+
+    def save(self, *args, **kwargs):
+        self.name = self.guide.name
+        super(Download, self).save(*args, **kwargs)
+
+### Monkey Patch
+
+if getattr(settings, 'USE_PERSEUS', False):
+    add_to_builtins('cacao.templatetags.django_perseus_tags')
+else:
+    add_to_builtins('django.templatetags.static')
+
+

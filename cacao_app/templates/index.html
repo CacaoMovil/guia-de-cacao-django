@@ -1,6 +1,6 @@
 <!-- START Template Container -->
 {% extends "base.html" %}
-{% load thumbnail staticfiles i18n %}
+{% load thumbnail i18n %}
 {% block content %}
         <!-- START Template Main -->
         <section id="main" role="main">
@@ -41,7 +41,7 @@
                                         <div class="overlay">
                                             <div class="toolbar">
                                                 <a href="{{ guia.get_absolute_url }}" target="_blank" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18"></i></a>
-                                                <a href="./" class="btn back-guia{{ guia.number }}" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
+                                                <a href="{{ guia.get_download_url }}" class="btn back-guia{{ guia.number }}" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
                                                 <a href="./" class="btn back-guia{{ guia.number }}" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" ></i></a>
                                             </div>
                                         </div>
