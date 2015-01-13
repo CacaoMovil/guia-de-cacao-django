@@ -1,0 +1,51 @@
+// less variable
+@import "./variables.less";
+@var: 'color-guia';
+
+.generate-colors (@n, @i:1) when (@i =< @n) {
+	@color: "@{var}@{i}";
+	.back-guia@{i}{
+		background: @@color !important;
+	}
+	.generate-colors(@n, (@i + 1));
+}
+.generate-colors(@colors);
+
+.generate-color-theme (@n, @i:1) when (@i =< @n) {
+	@color: "@{var}@{i}";
+	#guia-@{i}{
+		#header.navbar{
+				background-color: @@color;
+			.navbar-header{
+				background-color: darken(@@color, 7.888%); //#661D4B #661843
+			}
+		}
+		.title-item{
+			color: @@color !important;
+		}
+		.navbar-main{
+			background-color: @@color;
+			box-shadow: -15px 0px 5px -5px @@color;
+		}
+		.sidebar .topmenu li{
+			&.active{
+				&:before{
+					background-color: darken(@@color, 7.888%) !important;
+				    border: 1px solid @@color;
+				}
+				>a{
+					background-color: darken(@@color, 7.888%); 
+				} 
+			}
+		}
+		#main{
+			.container-fluid{
+				h1, h2, h3, h4, h5, h6{
+					color: @@color !important;
+				}
+			}
+		}  
+	}
+	.generate-color-theme(@n, (@i + 1));
+}
+.generate-color-theme(@colors);
