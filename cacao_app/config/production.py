@@ -109,7 +109,7 @@ class Production(Common):
     # CACHING
     # Only do this here because thanks to django-pylibmc-sasl and pylibmc
     # memcacheify is painful to install on windows.
-    CACHES = values.CacheURLValue(default="hiredis://127.0.0.1:6379/1")
+    CACHES = values.CacheURLValue(default="hiredis://127.0.0.1:6379/2")
     # END CACHING
 
     # Your production stuff: Below this line define 3rd party libary settings
