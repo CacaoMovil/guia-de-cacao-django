@@ -12,7 +12,7 @@ urlpatterns = patterns('cacao.views',
     url(r'^$', GuideList.as_view(), name="home"),
     url(r'^guia/(?P<pk>\d+)/$', GuideDetail.as_view(), name="guia_detail"),
     url(r'^guia/(?P<guide>\d)/contenido/(?P<slug>[-\w]+)/$', ContentDetail.as_view(), name="contenido_detail"),
-    url(r'^static-generator/$', 'staticGenerator', name="static_generator"),
+    url(r'^render/$', 'renderElement', name="render_element"),
 
     # api
     url(r'^api/v1/guides/$', 'guides_collection'),

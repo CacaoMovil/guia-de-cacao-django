@@ -49,14 +49,13 @@ class Common(Configuration):
         'solo',
         'django_perseus',
         'rest_framework',
-        'easy_pdf',
     )
 
     # Apps specific for this project go here.
     LOCAL_APPS = (
         'users',  # custom users 
         'cacao',
-        'configuracion', 
+        'configuracion',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -281,8 +280,29 @@ class Common(Configuration):
         'ADMIN_NAME': 'Cacao',
         'SHOW_REQUIRED_ASTERISK': True,
         'CONFIRM_UNSAVED_CHANGES': True,
-        'MENU_ICONS': {
-            'sites': 'icon-leaf',
-            'auth': 'icon-lock',
-        }
+        'MENU': (
+
+            {'app': 'cacao', 'label':'Guias de Cacao', 'icon':'icon-leaf'},
+
+            {'app': 'configuracion', 'icon':'icon-cog'},
+
+            {'label': 'Estaticos', 'icon':'icon-globe', 'models': (
+                {'label': 'Generar Estaticos', 'url': '/admin/static-generator/'},
+            )},
+
+            {'app': 'auth', 'label':'Groups', 'icon': 'icon-lock'},
+
+            {'app': 'users', 'icon': 'icon-lock'},
+
+            {'app': 'sites', 'icon': 'icon-chevron-right'},
+        ),
+        # misc
+        'LIST_PER_PAGE': 15
     }
+    # used for the views delete folders and open the guide folder
+    PERSEUS_BUILD_DIR = os.path.join(
+        BASE_DIR, '..', "temp"
+    )
+    PERSEUS_SOURCE_DIR = os.path.join(
+        BASE_DIR, '..', "_output"
+    )

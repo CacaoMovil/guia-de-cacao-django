@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
 from rest_framework import serializers
 from .models import Guide, Download
 
 
 class GuidesSerializer(serializers.ModelSerializer):
+    """ Serializers for list all guides"""
     date = serializers.SerializerMethodField('latest_guide_date')
     file = serializers.SerializerMethodField('guide_file')
     num_version = serializers.SerializerMethodField('guide_version')
@@ -22,7 +24,7 @@ class GuidesSerializer(serializers.ModelSerializer):
 
 
 class GuideSerializer(serializers.ModelSerializer):
-    """docstring for GuideSerializer"""
+    """Serializers for guide element, guide versions and last guide"""
     
     class Meta:
         model = Download

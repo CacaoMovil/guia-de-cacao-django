@@ -6,7 +6,6 @@ import hashlib
 
 from django.conf import settings
 from django.test.client import Client
-from django.core.urlresolvers import reverse
 
 from django_perseus.exceptions import RendererException
 from django_perseus.renderers.base import BaseRenderer
@@ -16,6 +15,11 @@ from .models import Guide, Content
 logger = logging.getLogger('perseus')
 
 class GuideRenderer(BaseRenderer):
+    """
+    This serializer extend from Django perseus - BaseRenderer
+    this serializer convert the name of a url to hashlib and 
+    append the web file extention.
+    """
     def render_path(self, path=None, view=None):
         if path:
             # create deploy dir if not exists
@@ -62,12 +66,24 @@ class GuideRenderer(BaseRenderer):
 
 
 class HomeRenderer(GuideRenderer):
+    """
+    This class make the render from dinamic pages,
+    the filter is from the base command
+    """
+    def __init__(self, guide_number=None):
+        self.guide_number = guide_number
+
     def paths(self):
         paths = set([])
-        guides = Guide.objects.all()
+        if self.guide_number:
+            guides = Guide.objects.filter(number=self.guide_number)
+            contents = Content.objects.filter(section__guide=self.guide_number)
+        else:
+            guides = Guide.objects.all()
+            contents = Content.objects.all()
+
         for guide in guides:
             paths.add(guide.get_absolute_url())
-        contents = Content.objects.all()
         for content in contents:
             paths.add(content.get_absolute_url())
 

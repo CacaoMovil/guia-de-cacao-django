@@ -1,3 +1,7 @@
+"""
+Django Perseus media importers, this get specific
+static or media files and move to the deploy dir
+"""
 # -*- coding: utf-8 -*-
 from django_perseus.importers.base import BaseImporter
 

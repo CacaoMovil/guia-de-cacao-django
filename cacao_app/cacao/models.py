@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.db.models import Max
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.template import defaultfilters
@@ -24,8 +25,11 @@ class Guide(models.Model):
         return reverse('guia_detail', args=(self.pk,))
 
     def get_download_url(self):
-        download = Download.objects.filter(guide=self.pk).order_by('-num_version')[0]
-        return download.file.url
+        try:
+            download = Download.objects.filter(guide=self.pk).order_by('-num_version')[0]
+            return download.file.url
+        except:
+            return None
 
     def next(self):
         try:
@@ -35,7 +39,10 @@ class Guide(models.Model):
 
     @property
     def latest_version(self):
-        return self.versions.order_by('-num_version')[0]
+        try:
+            return self.versions.order_by('-num_version')[0]
+        except:
+            return None
     
 
 class Section(models.Model):
@@ -95,11 +102,12 @@ class Content(models.Model):
 class Download(models.Model):
     """docstring for Descargas"""
     guide = models.ForeignKey(Guide, related_name='versions')
-    name = models.CharField(max_length=250)
     file = models.FileField(upload_to='descargas/')
     num_version = models.PositiveIntegerField()
     # No Visible
     date = models.DateField(auto_now_add=True, editable=False)
+    name = models.CharField(max_length=250)
+
 
     class Meta:
         verbose_name = "Descarga"
@@ -112,6 +120,14 @@ class Download(models.Model):
     def save(self, *args, **kwargs):
         self.name = self.guide.name
         super(Download, self).save(*args, **kwargs)
+
+    def get_last_version(self, number):
+        try:
+            last_version = Download.objects.filter(guide__number=number).aggregate(Max('num_version'))
+            return last_version.get('num_version__max') + 1
+        except:
+            last_version = 1
+            return last_version
 
 ### Monkey Patch
 
