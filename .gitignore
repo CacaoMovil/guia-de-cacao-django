@@ -31,3 +31,6 @@ node_modules/
 # Campass
 .sass-cache
 fabfile.py
+
+#OSX
+.DS_Store

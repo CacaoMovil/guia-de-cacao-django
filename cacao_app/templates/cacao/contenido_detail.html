@@ -1,0 +1,90 @@
+{% extends "guide_detail_base.html" %}
+{% block content %}
+        <!-- START Template Main -->
+        <section id="main" role="main">
+            <!-- Page Header -->
+            <nav class="page-header page-header-block affix">
+                <div class="pager">
+                    <a class="indice" href="javascript:void(0);" data-toggle="sidebar" data-direction="ltr" rel="tooltip" title="Menu sidebar">
+                        <span class="figure">
+                            <i class="ico-paragraph-justify3"></i>
+                        </span>
+                        <span class="text text-uppercase">Indice</span>
+                    </a>
+                    <div class="previous"><a href="#"><i class="flaticon-previous11"></i></a></div>
+                    <div class="next"><a href="#"><i class="flaticon-next15"></i></a></div>
+                    <h4 class="title-item text-capitalize">TEMAS</h4>
+                </div>
+            </nav>
+            <!-- Page Header -->
+
+            <!-- START jumbotron -->
+            <section class="jumbotron jumbotron-bg2" style="min-height:370px;">
+                <!-- pattern overlay -->
+                <div class="pattern overlay"></div>
+                <!--/ pattern overlay -->
+                <div class="container" style="padding-top:225px;">
+                    <div class="row">
+                        <div class="col-lg-8 col-sm-10 col-sm-offset-1 col-lg-offset-2">
+                            <h2 class="thin text-white">{{ contenido.titulo }}</h2>
+                            <p>El cacao se reconoce por la forma de la mazorca, el color de la flor, la forma de la semilla, su color y sabor.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/ END jumbotron -->
+
+             <!-- START Template Container -->
+            <div class="container-fluid">
+                <!-- START Rows -->
+                <div class="row">
+                    <div class="col-lg-8 col-sm-10 col-sm-offset-1 col-lg-offset-2">
+
+                        <p class="mb15 pb15">{{ contenido.description|safe }}</p>
+                        <div class="row">
+                            
+                            <div class="col-sm-6">
+                                {% if contenido.previous == None %}
+                                {% else %}
+                                <a class="next-item" href="{{ contenido.previous.get_absolute_url }}">
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                            <i class="flaticon-thin35 fsize30"></i>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <span class="text-top text-uppercase">TEMA Anterior</span>
+                                            <span>{{ contenido.previous }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-6">
+                                {% if contenido.next == None %}
+                                {% else %}
+                                <a class="next-item" href="{{ contenido.next.get_absolute_url }}">
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <span class="text-top text-uppercase">SIGUIENTE TEMA</span>
+                                            <span> {{ contenido.next }}</span>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <i class="flaticon-right106 fsize30 pull-right"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Rows -->
+            </div>
+            <!--/ END Template Container -->
+
+            <!-- START To Top Scroller -->
+            <a href="#" class="totop animation" data-toggle="waypoints totop" data-showanim="bounceIn" data-hideanim="bounceOut" data-offset="50%"><i class="ico-angle-up"></i></a>
+            <!--/ END To Top Scroller -->
+        </section>
+        <!--/ END Template Main -->
+{% endblock content %}

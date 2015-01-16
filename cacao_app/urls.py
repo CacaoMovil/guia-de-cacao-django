@@ -8,15 +8,17 @@ from django.views.generic import TemplateView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+
+from cacao.views import renderElement
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$',  # noqa
-        TemplateView.as_view(template_name='pages/home.html'),
-        name="home"),
-    url(r'^about/$',
-        TemplateView.as_view(template_name='pages/about.html'),
-        name="about"),
+    url(r'^how-it-works/$',
+        TemplateView.as_view(template_name='how_works.html'),
+        name="how_it_works"),
+
+    url(r'^admin/static-generator/$', renderElement),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
@@ -29,5 +31,7 @@ urlpatterns = patterns('',
     url(r'^avatar/', include('avatar.urls')),
 
     # Your stuff: custom urls go here
+    url(r'', include('cacao.urls')),
+    url(r'', include('configuracion.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

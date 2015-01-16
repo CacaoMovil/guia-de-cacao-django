@@ -9,7 +9,7 @@ dj-database-url==0.3.0
 
 # Forms
 django-braces==1.4.0
-#django-crispy-forms==1.4.0
+django-crispy-forms==1.4.0
 #django-floppyforms==1.2.0
 
 # Models
@@ -36,3 +36,13 @@ django-avatar==2.0
 pytz==2014.7
 
 # Your custom requirements go here
+django-suit==0.2.12
+django-suit-ckeditor==0.0.2
+sorl-thumbnail==11.12.1b
+django-envelope==1.0
+django-solo==1.1.0
+#django-perseus==0.1.0
+celery==3.1.17
+redis==2.10.3
+djangorestframework==3.0.2
+-e git+git://github.com/kronoscode/django-perseus.git#egg=django-perseus
