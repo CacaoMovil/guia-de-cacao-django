@@ -62,9 +62,10 @@ class Content(models.Model):
     """docstring for Contenido"""
     section = models.ForeignKey(Section, related_name='contenidos')
     title = models.CharField(max_length=250)
+    extract = models.CharField("Extracto del Contenido",max_length=250)
     description = models.TextField()
     peso = models.PositiveIntegerField("Peso del contenido", unique=True)
-    image = models.ImageField(upload_to='cacao/')
+    image = models.ImageField(upload_to='cacao/', help_text="Required dimensions 1563x538")
     slug = models.SlugField(max_length=100)
 
     class Meta:
