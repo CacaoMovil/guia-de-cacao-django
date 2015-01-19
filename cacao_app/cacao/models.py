@@ -56,7 +56,7 @@ class Section(models.Model):
         verbose_name_plural  = "Secciones"
 
     def __unicode__(self):
-        return self.title
+        return "%s - Guia: %s" %(self.title, self.guide)
 
 class Content(models.Model):
     """docstring for Contenido"""
