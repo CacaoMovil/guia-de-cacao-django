@@ -26,3 +26,4 @@ class Local(Common):
         'cacao.importers.MediaImporter',
         'cacao.importers.StaticImporter',
     ]
+    MEDIA_URL = 'static/'
