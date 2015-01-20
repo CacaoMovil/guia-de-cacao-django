@@ -41,8 +41,8 @@ django-suit-ckeditor==0.0.2
 sorl-thumbnail==11.12.1b
 django-envelope==1.0
 django-solo==1.1.0
-#django-perseus==0.1.0
+django-perseus==0.1.1
 celery==3.1.17
 redis==2.10.3
 djangorestframework==3.0.2
--e git+git://github.com/kronoscode/django-perseus.git#egg=django-perseus
+django-phantom-pdf==0.1
