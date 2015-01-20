@@ -7,6 +7,8 @@ __pycache__
 *.log
 pip-log.txt
 
+staticfiles/
+
 # Unit test / coverage reports
 .coverage
 .tox
