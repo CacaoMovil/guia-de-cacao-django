@@ -275,7 +275,6 @@ class Common(Configuration):
     # END LOGGING CONFIGURATION
 
     # Your common stuff: Below this line define 3rd party library settings
-    THUMBNAIL_DEBUG = True
     SUIT_CONFIG = {
         'ADMIN_NAME': 'Cacao',
         'SHOW_REQUIRED_ASTERISK': True,

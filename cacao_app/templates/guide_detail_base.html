@@ -69,10 +69,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" title="Guías" class="hidden-sm hidden-xs">
-                            <span class="icon"><i class="flaticon-printer78"></i></span>
-                            <span class="text">Imprimir</span>
-                        </a>
+                        <form action="{% url 'create_pdf' %}" method="GET"><!--
+                          <a  title="Guías" class="hidden-sm hidden-xs">
+                              <span class="icon"><i class="flaticon-printer78"></i></span>
+                              <span class="text">Imprimir</span>
+                          </a>-->
+                          <input type="submit" name="print" value="pdf" class="hidden">
+                        </form>
                     </li>
                     <li>
                         <a href="{% if contenido %}{{ contenido.section.guide.get_download_url }}{% else %}{{ guia.get_download_url }}{% endif %}" title="Guías" class="hidden-sm hidden-xs">

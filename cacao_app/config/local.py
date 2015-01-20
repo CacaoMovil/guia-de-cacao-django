@@ -15,6 +15,7 @@ class Local(Common):
     # DEBUG
     DEBUG = values.BooleanValue(True)
     TEMPLATE_DEBUG = DEBUG
+    THUMBNAIL_DEBUG = DEBUG
     # END DEBUG
 
     # INSTALLED_APPS

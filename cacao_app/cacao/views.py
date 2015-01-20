@@ -20,6 +20,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import GuidesSerializer, GuideSerializer
 
+from phantom_pdf import render_to_pdf
+
 from tasks import makeRender, test_celery
 
 from .models import Guide, Content, Section, Download
@@ -89,6 +91,13 @@ def renderElement(request):
 
     return render_to_response(template, context,
                               context_instance=RequestContext(request))
+def createPdf(request):
+    if request.GET.get("print", None) == "pdf":
+        return render_to_pdf(request, 'frula')
+    else:
+        return HttpResponse("Hello World!")
+        
+    
 
 @api_view(['GET'])
 def guides_collection(request):

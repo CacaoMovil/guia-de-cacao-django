@@ -14,6 +14,8 @@ urlpatterns = patterns('cacao.views',
     url(r'^guia/(?P<guide>\d)/contenido/(?P<slug>[-\w]+)/$', ContentDetail.as_view(), name="contenido_detail"),
     url(r'^render/$', 'renderElement', name="render_element"),
 
+    # pdf
+    url(r'pdf/$', 'createPdf', name="create_pdf"),
     # api
     url(r'^api/v1/guides/$', 'guides_collection'),
     url(r'^api/v1/guide/(?P<pk>[0-9]+)$', 'guide_elements'),
