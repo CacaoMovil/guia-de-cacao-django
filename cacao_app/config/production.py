@@ -110,6 +110,21 @@ class Production(Common):
     # Only do this here because thanks to django-pylibmc-sasl and pylibmc
     # memcacheify is painful to install on windows.
     CACHES = values.CacheURLValue(default="hiredis://127.0.0.1:6379/2")
+    CACHES = {
+        'default': {
+            'BACKEND': 'redis_cache.RedisCache',
+            'LOCATION': '127.0.0.1:6379',
+            'OPTIONS': {
+                'DB': 2,
+                'PARSER_CLASS': 'redis.connection.HiredisParser',
+                'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
+                'CONNECTION_POOL_CLASS_KWARGS': {
+                    'max_connections': 50,
+                    'timeout': 20,
+                }
+            },
+        },
+    }
     # END CACHING
 
     # Your production stuff: Below this line define 3rd party libary settings
