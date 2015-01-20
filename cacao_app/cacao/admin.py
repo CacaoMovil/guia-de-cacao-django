@@ -19,8 +19,7 @@ class GuideForm(ModelForm):
             {'name': 'document', 'groups': ['mode']}, '/',
             {'name': 'styles'}, {'name': 'colors'},
             {'name': 'insert_custom',
-             'items': ['Image', 'Flash', 'Table', 'HorizontalRule']},
-            {'name': 'about'}]
+             'items': ['Image', 'Flash', 'Table', 'HorizontalRule']}]
 
         _ck_editor_config = {'autoGrow_onStartup': True,
                              'autoGrow_minHeight': 100,
@@ -61,8 +60,7 @@ class ContentForm(ModelForm):
             {'name': 'document', 'groups': ['mode']}, '/',
             {'name': 'styles'}, {'name': 'colors'},
             {'name': 'insert_custom',
-             'items': ['Image', 'Flash', 'Table', 'HorizontalRule']},
-            {'name': 'about'}]
+             'items': ['Image', 'Flash', 'Table', 'HorizontalRule']}]
 
         _ck_editor_config = {'autoGrow_onStartup': True,
                              'autoGrow_minHeight': 100,

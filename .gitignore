@@ -1,3 +1,9 @@
+#OSX
+.DS_Store
+
+#Unused folders
+cacao_app/media/
+
 # Basics
 *.py[cod]
 *.pyc

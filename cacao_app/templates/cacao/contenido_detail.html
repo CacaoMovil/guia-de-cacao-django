@@ -1,4 +1,5 @@
 {% extends "guide_detail_base.html" %}
+{% load i18n thumbnail  %}
 {% block content %}
         <!-- START Template Main -->
         <section id="main" role="main">
@@ -19,15 +20,19 @@
             <!-- Page Header -->
 
             <!-- START jumbotron -->
-            <section class="jumbotron jumbotron-bg2" style="min-height:370px;">
+            <section class="jumbotron jumbotron-bg2" 
+            style="min-height:370px; 
+            {% thumbnail contenido.image "1563x538" crop="center" as img %}
+            background: url( {{ img.url }} ) no-repeat center top fixed !important;
+            {% endthumbnail %}">
                 <!-- pattern overlay -->
                 <div class="pattern overlay"></div>
                 <!--/ pattern overlay -->
                 <div class="container" style="padding-top:225px;">
                     <div class="row">
                         <div class="col-lg-8 col-sm-10 col-sm-offset-1 col-lg-offset-2">
-                            <h2 class="thin text-white">{{ contenido.titulo }}</h2>
-                            <p>El cacao se reconoce por la forma de la mazorca, el color de la flor, la forma de la semilla, su color y sabor.</p>
+                            <h2 class="thin text-white">{{ contenido.title }}</h2>
+                            <p>{{ contenido.extract }}</p>
                         </div>
                     </div>
                 </div>
