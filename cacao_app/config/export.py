@@ -5,22 +5,18 @@ Django Perseus Config
 import os
 from os.path import join, dirname
 
-from .common import Common
+from .production import Production
 
 BASE_DIR = dirname(dirname(__file__))
 
-class Local(Common):
+class Local(Production):
     USE_PERSEUS = True
     DEBUG = True
     RENDER_STATIC = True
-    PERSEUS_SOURCE_DIR = os.path.join(
-        BASE_DIR, '..', "_output"
-    )
+    PERSEUS_BUILD_DIR = '/tmp/perseus/build'
+    PERSEUS_SOURCE_DIR = '/tmp/perseus/_output'
     PERSEUS_STATIC_DIR = os.path.join(
         PERSEUS_SOURCE_DIR, "static"
-    )
-    PERSEUS_BUILD_DIR = os.path.join(
-        BASE_DIR, '..', "temp"
     )
     PERSEUS_IMPORTERS = [
         'cacao.importers.MediaImporter',
