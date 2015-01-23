@@ -301,12 +301,8 @@ class Common(Configuration):
     # used for the views delete folders and open the guide folder
     PROJECT_DIR = dirname(dirname(abspath(__file__)))
 
-    PERSEUS_BUILD_DIR = os.path.join(
-        BASE_DIR, '..', "temp"
-    )
-    PERSEUS_SOURCE_DIR = os.path.join(
-        BASE_DIR, '..', "_output"
-    )
+    PERSEUS_BUILD_DIR = '/tmp/perseus/build'
+    PERSEUS_SOURCE_DIR = '/tmp/perseus/_output'
     # config for create pdf's
     GENERATE_PDF_JS = os.path.join(
         os.path.dirname(
