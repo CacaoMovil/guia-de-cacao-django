@@ -118,13 +118,13 @@
                     </li>
                     {% for seccion in seccion_list %}
                     <li {% if contenido.section.id == seccion.id %}class="active open"{% endif %}>
-                        <a href="javascript:void(0);" data-toggle="submenu" data-target="#{{ seccion.title }}" data-parent=".topmenu">
+                        <a href="javascript:void(0);" data-toggle="submenu" data-target="#{{ seccion.id }}" data-parent=".topmenu">
                             <span class="text text-uppercase">{{ seccion.title }}</span>
                             <!-- <span class="arrow"></span> -->
                         </a>
                          <!-- START 2nd Level Menu -->
 
-                        <ul id="{{ seccion.title }}" class="submenu collapse {% if contenido.section.id == seccion.id %}in{% endif %}">
+                        <ul id="{{ seccion.id }}" class="submenu collapse {% if contenido.section.id == seccion.id %}in{% endif %}">
                           {% for obj in seccion.contenidos.all %}
                           <li {% if obj == contenido %}class="active"{% endif %}>
                               <a href="{% url 'contenido_detail' obj.section.guide.pk obj.slug %}">
