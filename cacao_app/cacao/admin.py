@@ -41,13 +41,6 @@ class GuideAdmin(ModelAdmin):
         'fields': ['number', 'name', 'description', 'image']}
       )
     ]
-    
-
-class SectionAdmin(admin.ModelAdmin):
-    model = Section
-    search_fields = ('title',)
-    list_filter = ('title', 'guide')
-    list_display = ('title', 'guide')
 
 class ContentForm(ModelForm):
     class Meta:
@@ -79,9 +72,16 @@ class ContentAdmin(ModelAdmin):
     list_display = ('title', 'section')
     fieldsets = [
       (None, {
-        'fields': ['section', 'title', 'description', 'peso', 'image']}
+        'fields': ['section', 'title', 'extract', 'description', 'peso', 'image']}
       )
     ]
+
+class SectionAdmin(admin.ModelAdmin):
+    model = Section
+    #inlines = [ContentForm, ContentAdmin]
+    search_fields = ('title',)
+    list_filter = ('title', 'guide')
+    list_display = ('title', 'guide')
 
 class DownloadAdmin(admin.ModelAdmin):
     model = Download
