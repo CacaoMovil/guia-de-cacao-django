@@ -54,4 +54,13 @@
 {# Footer copyright (right side) #}
 {% block copyright %}
   Copyright &copy; 2015 Cacao<br>Proudly Developed by <a href="http://www.kronoscode.com" target="_blank">Kronoscode</a> 
+  <script type="text/javascript">
+  $( document ).ready(function() {
+    console.log( "ready!" );
+    $('.controls div').attr('style', function(i, style)
+      {
+      return style.replace(/margin-left[^;]+;?/g, '');
+    });
+  });
+  </script>
 {% endblock %}
