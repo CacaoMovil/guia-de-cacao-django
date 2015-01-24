@@ -72,7 +72,8 @@ class Content(models.Model):
     Content have many Contents
     """
     section = models.ForeignKey(Section, related_name='contenidos')
-    title = models.CharField('Titulo', max_length=250)
+    title = models.CharField('Titulo Menu', max_length=250)
+    title_content = models.CharField('Titulo Contenido', max_length=250)
     extract = models.CharField("Extracto del Contenido", max_length=250)
     description = models.TextField('Descripcion')
     peso = models.PositiveIntegerField("Peso del Contenido", unique=True)
