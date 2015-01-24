@@ -3,10 +3,8 @@ from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 
 from .models import Guide, Section, Content, Download
-from .forms import GuideForm, ContentForm
 
 class GuideAdmin(ModelAdmin):
-    form = GuideForm
     search_fields = ('number', 'name')
     list_display = ('name', 'number')
     fieldsets = [
@@ -17,10 +15,9 @@ class GuideAdmin(ModelAdmin):
 
 class ContentInline(admin.StackedInline):
     model = Content
-    form = ContentForm
     exclude = ('slug',)
     extra = 1
-    
+
 class SectionAdmin(admin.ModelAdmin):
     model = Section
     inlines = [ContentInline,]

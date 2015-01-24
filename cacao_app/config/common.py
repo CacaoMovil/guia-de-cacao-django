@@ -49,6 +49,7 @@ class Common(Configuration):
         'solo',
         'django_perseus',
         'rest_framework',
+        'ckeditor',
     )
 
     # Apps specific for this project go here.
@@ -297,6 +298,16 @@ class Common(Configuration):
         ),
         # misc
         'LIST_PER_PAGE': 15
+    }
+    # CKEditor
+    CKEDITOR_UPLOAD_PATH = "uploads/"
+    CKEDITOR_IMAGE_BACKEND = "pillow"
+    CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+    CKEDITOR_CONFIGS = {
+        'default': {
+            'toolbar': 'full',
+            'width': 600,
+        },
     }
     # used for the views delete folders and open the guide folder
     PROJECT_DIR = dirname(dirname(abspath(__file__)))

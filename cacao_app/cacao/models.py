@@ -6,13 +6,15 @@ from django.core.urlresolvers import reverse
 from django.template import defaultfilters
 from django.template.base import add_to_builtins
 
+from ckeditor.fields import RichTextField
+
 class Guide(models.Model):
     """
     This model store the Guia objects
     """
     number = models.IntegerField('Numero')
     name = models.CharField('Nombre', max_length=250)
-    description = models.TextField('Descripcion')
+    description = RichTextField('Descripcion', config_name='default')
     image = models.ImageField('Imagen', upload_to='cacao/')
 
     class Meta:
@@ -75,7 +77,7 @@ class Content(models.Model):
     title = models.CharField('Titulo Menu', max_length=250)
     title_content = models.CharField('Titulo Contenido', max_length=250)
     extract = models.CharField("Extracto del Contenido", max_length=250)
-    description = models.TextField('Descripcion')
+    description = RichTextField('Descripcion', config_name='default')
     peso = models.PositiveIntegerField("Peso del Contenido", help_text='Entre mayor sea el peso mas al fondo se ubica')
     image = models.ImageField('Imagen', upload_to='cacao/', help_text='Required dimensions 1563x538', blank=True)
     slug = models.SlugField(max_length=100)

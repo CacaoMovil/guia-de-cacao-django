@@ -33,5 +33,6 @@ urlpatterns = patterns('',
     # Your stuff: custom urls go here
     url(r'', include('cacao.urls')),
     url(r'', include('configuracion.urls')),
+    url(r'^ckeditor/', include('ckeditor.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
