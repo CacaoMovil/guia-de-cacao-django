@@ -188,40 +188,42 @@
                 <!-- START list guias -->
                 <ul class="list-guias list-unstyled">
                     {% for guia in guide_items %}
-                    <li class="">
-                        <!-- thumbnail -->
-                        <div class="thumbnail animation animating delay fadeInLeft">
-                            <!-- media -->
-                            <div class="media">
-                                <div class="header back-guia{{ guia.number }} text-uppercase text-white">
-                                    <h4 class="title" >{{ guia.name }}</h4>
-                                    <div class="guia" >
-                                        <span>Guía</span>
-                                        <span class="number">{{ guia.number }}</span>
-                                    </div>
-                                </div>
-                                 <!-- book effect --> <div class="effect"></div> <!--/ book effect -->
-                                <!-- toolbar overlay -->
-                                <div class="overlay">
-                                    <div class="toolbar">
+                    <a href="#">
+                      <li class="">
+                          <!-- thumbnail -->
+                          <div class="thumbnail animation animating delay fadeInLeft">
+                              <!-- media -->
+                              <div class="media">
+                                  <div class="header back-guia{{ guia.number }} text-uppercase text-white">
+                                      <h4 class="title" >{{ guia.name }}</h4>
+                                      <div class="guia" >
+                                          <span>Guía</span>
+                                          <span class="number">{{ guia.number }}</span>
+                                      </div>
+                                  </div>
+                                   <!-- book effect --> <div class="effect"></div> <!--/ book effect -->
+                                  <!-- toolbar overlay -->
+                                  <div class="overlay">
+                                      <div class="toolbar">
 
-                                        <a href="{% url 'guia_detail' guia.pk %}" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18" ></i></a>
+                                          <a href="{% url 'guia_detail' guia.pk %}" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18" ></i></a>
 
-                                        <a href="{{ guia.get_download_url }}" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Descargar Guía" id="download-guide"><i class="flaticon-download170 fsize18" ></i></a>
+                                          <a href="{{ guia.get_download_url }}" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Descargar Guía" id="download-guide"><i class="flaticon-download170 fsize18" ></i></a>
 
-                                        <a href="./" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" id="print-guide"></i></a>
+                                          <a href="./" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" id="print-guide"></i></a>
 
-                                    </div>
-                                </div>
-                                <!--/ toolbar overlay -->
-                                {% thumbnail guia.image "247x311" crop="center" as img %}
-                                <img src="{{ img.url }}" alt="Cover" width="100%" />
-                                {% endthumbnail %}
-                            </div>
-                            <!--/ media -->
-                        </div>
-                        <!--/ thumbnail -->
-                    </li>
+                                      </div>
+                                  </div>
+                                  <!--/ toolbar overlay -->
+                                  {% thumbnail guia.image "247x311" crop="center" as img %}
+                                  <img src="{{ img.url }}" alt="Cover" width="100%" />
+                                  {% endthumbnail %}
+                              </div>
+                              <!--/ media -->
+                          </div>
+                          <!--/ thumbnail -->
+                      </li>
+                    </a>
                     {% endfor %}
                 </ul>
                 <!--/ END list guias -->

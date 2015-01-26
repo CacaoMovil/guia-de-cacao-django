@@ -12,8 +12,8 @@
                         </span>
                         <span class="text text-uppercase">Indice</span>
                     </a>
-                    <div class="previous"><a href="#"><i class="flaticon-previous11"></i></a></div>
-                    <div class="next"><a href="#"><i class="flaticon-next15"></i></a></div>
+                    <div class="previous"><a href="{% url 'guia_detail' contenido.section.guide.previous_guide.number %}"><i class="flaticon-previous11"></i></a></div>
+                    <div class="next"><a href="{% url 'guia_detail' contenido.section.guide.next_guide.number %}"><i class="flaticon-next15"></i></a></div>
                     <h4 class="title-item text-capitalize">TEMAS</h4>
                 </div>
             </nav>

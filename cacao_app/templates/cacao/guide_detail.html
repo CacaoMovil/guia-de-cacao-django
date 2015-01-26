@@ -12,8 +12,8 @@
                         </span>
                         <span class="text text-uppercase">Indice</span>
                     </a>
-                    <div class="previous"><a href="#"><i class="flaticon-previous11"></i></a></div>
-                    <div class="next"><a href="#"><i class="flaticon-next15"></i></a></div>
+                    <div class="previous"><a href="{% url 'guia_detail' guia.previous_guide.number %}"><i class="flaticon-previous11"></i></a></div>
+                    <div class="next"><a href="{% url 'guia_detail' guia.next_guide.number %}"><i class="flaticon-next15"></i></a></div>
                     <h4 class="title-item text-capitalize">Presentación</h4>
                 </div>
             </nav>
@@ -29,11 +29,11 @@
                 </div>
                 <div class="row">
                     <div class="col-md-5 col-sm-6 col-sm-offset-3 col-md-offset-6">
-                        <a class="next-item" href="{% url 'contenido_detail' guia.number guia.next.slug %}">
+                        <a class="next-item" href="{% url 'contenido_detail' guia.number guia.next_content.slug %}">
                             <div class="row">
                                 <div class="col-xs-10">
                                     <span class="text-top text-uppercase">SIGUIENTE TEMA</span>
-                                    <span>{{ guia.next }}</span>
+                                    <span>{{ guia.next_content }}</span>
                                 </div>
                                 <div class="col-xs-2">
                                     <i class="flaticon-right106 fsize30"></i>

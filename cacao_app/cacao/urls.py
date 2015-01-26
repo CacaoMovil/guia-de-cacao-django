@@ -10,7 +10,7 @@ from .views import GuideList, GuideDetail, ContentDetail
 
 urlpatterns = patterns('cacao.views',
     url(r'^$', GuideList.as_view(), name="home"),
-    url(r'^guia/(?P<pk>\d+)/$', GuideDetail.as_view(), name="guia_detail"),
+    url(r'^guia/(?P<number>\d+)/$', GuideDetail.as_view(), name="guia_detail"),
     url(r'^guia/(?P<guide>\d+)/contenido/(?P<slug>[-\w]+)/$', ContentDetail.as_view(), name="contenido_detail"),
     url(r'^render/$', 'render_element', name="render_element"),
 
@@ -19,7 +19,7 @@ urlpatterns = patterns('cacao.views',
 
     # api
     url(r'^api/v1/guides/$', 'guides_collection'),
-    url(r'^api/v1/guide/(?P<pk>\d+)/$', 'guide_elements'),
-    url(r'^api/v1/guide/(?P<pk>\d+)/version/(?P<num_version>\d+)/$', 'guide_element'),
-    url(r'^api/v1/guide/(?P<pk>\d+)/last/$', 'guide_last'),
+    url(r'^api/v1/guide/(?P<number>\d+)/$', 'guide_elements'),
+    url(r'^api/v1/guide/(?P<number>\d+)/version/(?P<num_version>\d+)/$', 'guide_element'),
+    url(r'^api/v1/guide/(?P<number>\d+)/last/$', 'guide_last'),
 )

@@ -43,6 +43,8 @@ class GuideDetail(DetailView):
     """
     model = Guide
     context_object_name = 'guia'
+    slug_field = 'number'
+    slug_url_kwarg = 'number'
 
     def get_context_data(self, **kwargs):
         context = super(GuideDetail, self).get_context_data(**kwargs)
@@ -140,13 +142,13 @@ def guides_collection(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-def guide_elements(request, pk):
+def guide_elements(request, number):
     """
     This method is for the api and return all
     the elements from a Guide in specific
     """
     try:
-        download = Download.objects.filter(guide=pk).all()
+        download = Download.objects.filter(guide=number).all()
     except Download.DoesNotExist:
         return HttpResponse(status=404)
 
@@ -157,13 +159,13 @@ def guide_elements(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-def guide_element(request, pk, num_version):
+def guide_element(request, number, num_version):
     """
     This method is for the api and retun one specific
     element from the Guide based in her num_version
     """
     try:
-        download = Download.objects.get(guide=pk, num_version=num_version)
+        download = Download.objects.get(guide=number, num_version=num_version)
     except Download.DoesNotExist:
         return HttpResponse(status=404)
 
@@ -174,13 +176,13 @@ def guide_element(request, pk, num_version):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-def guide_last(request, pk):
+def guide_last(request, number):
     """
     This method is for the api and return the last
     version from a Guide in specific
     """
     try:
-        download = Download.objects.filter(guide=pk).order_by('-num_version')[0]
+        download = Download.objects.filter(guide=number).order_by('-num_version')[0]
     except Download.DoesNotExist:
         return HttpResponse(status=404)
 

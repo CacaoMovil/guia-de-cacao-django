@@ -12,7 +12,7 @@ class Guide(models.Model):
     """
     This model store the Guia objects
     """
-    number = models.IntegerField('Numero')
+    number = models.IntegerField('Numero', unique=True)
     name = models.CharField('Nombre', max_length=250)
     description = RichTextField('Descripcion', config_name='default')
     image = models.ImageField('Imagen', upload_to='cacao/')
@@ -26,7 +26,7 @@ class Guide(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('guia_detail', args=(self.pk,))
+        return reverse('guia_detail', args=(self.number,))
 
     def get_download_url(self):
         try:
@@ -35,11 +35,23 @@ class Guide(models.Model):
         except:
             return None
 
-    def next(self):
+    def next_content(self):
         try:
             return Content.objects.get(pk=self.pk)
         except:
             return None
+
+    def next_guide(self):
+        try:
+            return Guide.objects.get(number=self.number+1)
+        except:
+            return Guide.objects.get(number=self.number)
+
+    def previous_guide(self):
+        try:
+            return Guide.objects.get(number=self.number-1)
+        except:
+            return Guide.objects.get(number=self.number)
 
     @property
     def latest_version(self):
@@ -97,7 +109,7 @@ class Content(models.Model):
         super(Content, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        guide = self.section.guide.pk
+        guide = self.section.guide.number
         return reverse('contenido_detail', args=[guide, self.slug])
 
     def next(self):
