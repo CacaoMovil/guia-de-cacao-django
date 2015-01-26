@@ -133,3 +133,4 @@ class Production(Common):
     PERSEUS_SOURCE_DIR = '/tmp/perseus/guia'
 
     VENV_PATH = '/home/kronos/.virtualenvs/cacao'
+    PHANTOMJS_PDF_DIR = '/tmp/pdf'
