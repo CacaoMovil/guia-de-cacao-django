@@ -3,13 +3,13 @@ Django Perseus Config
 '''
 # -*- coding: utf-8 -*-
 import os
-from os.path import join, dirname
+from os.path import dirname
 
 from .production import Production
 
 BASE_DIR = dirname(dirname(__file__))
 
-class Local(Production):
+class Export(Production):
     USE_PERSEUS = True
     DEBUG = True
     SECRET_KEY = "lallamaquellama"
