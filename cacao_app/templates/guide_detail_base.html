@@ -75,13 +75,13 @@
                       {% else %}
                       href="{% url 'create_pdf' guia.number %}?print=true"
                       {% endif %}
-                      class="hidden-sm hidden-xs">
+                      class="hidden-sm hidden-xs" id="print-guide">
                           <span class="icon"><i class="flaticon-printer78"></i></span>
                           <span class="text">Imprimir</span>
                       </a>    
                     </li>
                     <li>
-                        <a href="{% if contenido %}{{ contenido.section.guide.get_download_url }}{% else %}{{ guia.get_download_url }}{% endif %}" title="Guías" class="hidden-sm hidden-xs">
+                        <a href="{% if contenido %}{{ contenido.section.guide.get_download_url }}{% else %}{{ guia.get_download_url }}{% endif %}" title="Guías" class="hidden-sm hidden-xs" id="download-guide">
                             <span class="icon"><i class="flaticon-download170"></i></span>
                             <span class="text hidden-xs">Descargar</span>
                         </a>
@@ -204,9 +204,13 @@
                                 <!-- toolbar overlay -->
                                 <div class="overlay">
                                     <div class="toolbar">
+
                                         <a href="{% url 'guia_detail' guia.pk %}" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18" ></i></a>
-                                        <a href="{{ guia.get_download_url }}" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
-                                        <a href="./" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" ></i></a>
+
+                                        <a href="{{ guia.get_download_url }}" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Descargar Guía" id="download-guide"><i class="flaticon-download170 fsize18" ></i></a>
+
+                                        <a href="./" class="btn back-guia{{ guia.number }} hidden-sm hidden-xs" title="Imprimir Guía"><i class="flaticon-printer78 fsize18" id="print-guide"></i></a>
+
                                     </div>
                                 </div>
                                 <!--/ toolbar overlay -->
@@ -277,6 +281,12 @@
          <!-- <script type="text/javascript" src="./js/jquery.sparkline.min.js"></script> -->
         <!-- will be use globaly as a summary on sidebar menu -->
         <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+        <script type="text/javascript">
+          if (window.location.protocol != "http:") {
+            $('#download-guide').addClass('hidden');
+            $('#print-guide').addClass('hidden');
+          }
+        </script>
         <!--/ App and page level script -->
         <!--/ END JAVASCRIPT SECTION -->
     </body>
