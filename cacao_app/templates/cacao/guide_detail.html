@@ -29,7 +29,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-5 col-sm-6 col-sm-offset-3 col-md-offset-6">
-                        <a class="next-item" href="{{ guia.next.get_absolute_url }}">
+                        <a class="next-item" href="{% url 'contenido_detail' guia.number guia.next.slug %}">
                             <div class="row">
                                 <div class="col-xs-10">
                                     <span class="text-top text-uppercase">SIGUIENTE TEMA</span>
