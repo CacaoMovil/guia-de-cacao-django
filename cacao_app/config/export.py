@@ -12,6 +12,8 @@ BASE_DIR = dirname(dirname(__file__))
 class Local(Production):
     USE_PERSEUS = True
     DEBUG = True
+    SECRET_KEY = "lallamaquellama"
+    THUMBNAIL_DEBUG = True
     RENDER_STATIC = True
     PERSEUS_BUILD_DIR = '/tmp/perseus/build'
     PERSEUS_SOURCE_DIR = '/tmp/perseus/guia'

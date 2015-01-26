@@ -6,9 +6,9 @@ Local Configurations
 - Uses console backend for emails
 - Use Django Debug Toolbar
 '''
+import os
 from configurations import values
 from .common import Common
-
 
 class Local(Common):
 
@@ -44,4 +44,4 @@ class Local(Common):
 
     # Your local stuff: Below this line define 3rd party libary settings
     THUMBNAIL_DEBUG = True
-    VENV_PATH = '/Users/oscarmcm/.virtualenvs/cacao'
+    VENV_PATH = os.path.join(os.environ['HOME'], '.virtualenvs/cacao')
