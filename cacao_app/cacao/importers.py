@@ -26,5 +26,6 @@ class StaticImporter(BaseImporter):
         'css',
         'font',
         'js',
-        'image'
+        'image',
+        'uploads'
     ]
