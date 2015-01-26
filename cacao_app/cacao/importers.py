@@ -14,6 +14,7 @@ class MediaImporter(BaseImporter):
     sub_dirs = [
         'cache',
         'cacao',
+        'uploads',
     ]
 
 class StaticImporter(BaseImporter):
@@ -27,5 +28,4 @@ class StaticImporter(BaseImporter):
         'font',
         'js',
         'image',
-        'uploads'
     ]

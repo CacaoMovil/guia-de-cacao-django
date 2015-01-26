@@ -1,4 +1,5 @@
 {% extends "guide_detail_base.html" %}
+{% load cacao_tags %}
 {% block content %}
 <!-- START Template Main -->
         <section id="main" role="main">
@@ -23,7 +24,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-sm-10 col-sm-offset-1 col-lg-offset-2">
                         <p class="fsize18 mt15"></p>
-                        <p>{{ guia.description|safe }}</p>
+                        <p>{{ guia.description|offline_media|safe }}</p>
                     </div>
                 </div>
                 <div class="row">

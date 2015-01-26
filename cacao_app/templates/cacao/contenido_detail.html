@@ -1,5 +1,5 @@
 {% extends "guide_detail_base.html" %}
-{% load i18n thumbnail  %}
+{% load i18n thumbnail cacao_tags %}
 {% block content %}
         <!-- START Template Main -->
         <section id="main" role="main">
@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-sm-10 col-sm-offset-1 col-lg-offset-2">
 
-                        <p class="mb15 pb15">{{ contenido.description|safe }}</p>
+                        <p class="mb15 pb15">{{ contenido.description|offline_media|safe }}</p>
                         <div class="row">
                             
                             <div class="col-sm-6">
