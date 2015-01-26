@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+import os
+import re
 import logging
 import mimetypes
-import os
 import hashlib
 
 from django.conf import settings
@@ -20,6 +21,8 @@ class GuideRenderer(BaseRenderer):
     this serializer convert the name of a url to hashlib and
     append the web file extention.
     """
+    regex = re.compile("^/guia/(?P<pk>\d+)/$")
+
     def render_path(self, path=None, view=None):
         if path:
             # create deploy dir if not exists
@@ -29,7 +32,7 @@ class GuideRenderer(BaseRenderer):
                 os.makedirs(deploy_dir)
 
             # create the renders page
-            if path == '/':
+            if self.regex.findall(path):
                 response, mime = self.render_page(path)
                 outpath = os.path.join(outpath, 'index{0}'.format(mime))
                 self.save_page(response, outpath)
