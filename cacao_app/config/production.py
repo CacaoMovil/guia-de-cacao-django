@@ -130,6 +130,6 @@ class Production(Common):
     # Your production stuff: Below this line define 3rd party libary settings
 
     PERSEUS_BUILD_DIR = '/tmp/perseus/build'
-    PERSEUS_SOURCE_DIR = '/tmp/perseus/_output'
+    PERSEUS_SOURCE_DIR = '/tmp/perseus/guia'
 
     VENV_PATH = '/home/kronos/.virtualenvs/cacao'
