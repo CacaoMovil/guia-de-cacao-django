@@ -309,7 +309,7 @@ class Common(Configuration):
                 ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter',
                  'JustifyRight', 'JustifyBlock', 'PasteText','PasteFromWord'],
                 ['Find','Replace', 'Cut','Copy','Paste'],
-                ["Image", "Table", "Link", "Unlink", "Anchor", "SectionLink"], ['Undo', 'Redo'], ["Source"],
+                ["Image", "Table", "Link", "Unlink", "SectionLink"], ['Undo', 'Redo'], ["Source"],
                 ["Maximize"]],
         'width': 600,
         },
