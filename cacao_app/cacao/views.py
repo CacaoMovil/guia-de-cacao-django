@@ -19,7 +19,7 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import GuidesSerializer, GuideSerializer
+from .serializers import GuidesSerializer, DownloadSerializer
 
 from phantom_pdf import render_to_pdf
 
@@ -151,7 +151,7 @@ def guide_elements(request, pk):
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = GuideSerializer(download, many=True)
+        serializer = DownloadSerializer(download, many=True)
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -168,7 +168,7 @@ def guide_element(request, pk, num_version):
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = GuideSerializer(download)
+        serializer = DownloadSerializer(download)
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -185,7 +185,7 @@ def guide_last(request, pk):
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = GuideSerializer(download)
+        serializer = DownloadSerializer(download)
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
