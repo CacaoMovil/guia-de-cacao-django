@@ -25,10 +25,16 @@ class GuidesSerializer(serializers.ModelSerializer):
         fields = ('name', 'file', 'date', 'num_version', 'versions')
 
     def latest_guide_date(self, guide):
-        return guide.latest_version.date
+        try:
+            return guide.latest_version.date
+        except:
+            return None
 
     def guide_version(self, guide):
-        return guide.latest_version.num_version
+        try:
+            return guide.latest_version.num_version
+        except:
+            return None
 
     def guide_file(self, guide):
         try:
