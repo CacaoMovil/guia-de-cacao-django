@@ -31,4 +31,7 @@ class GuidesSerializer(serializers.ModelSerializer):
         return guide.latest_version.num_version
 
     def guide_file(self, guide):
-        return guide.latest_version.file.url
+        try:
+            return guide.latest_version.file.url
+        except:
+            return ''
