@@ -1,7 +1,7 @@
 """
 Custom template tag inspired in Django Perseus
 but whit custom code that help us to convert basic url
-to hashlib and make more easy the navigation 
+to hashlib and make more easy the navigation
 """
 # -*- coding: utf-8 -*-
 import hashlib
@@ -11,24 +11,33 @@ from django.conf import settings
 from django.template.defaulttags import url as django_url_tag
 from django.template.defaulttags import URLNode
 from django.templatetags.static import do_static, StaticNode
+from django.core.cache import get_cache
+
+cache = get_cache('default')
 
 register = template.Library()
 
 def render_static():
     return getattr(settings, 'RENDER_STATIC', False)
 
-
 class StaticUrlNode(StaticNode):
 
     def render(self, context):
         url = super(StaticUrlNode, self).render(context)
+        return_value = url
         if not render_static():
             return url
 
         if url.startswith('/'):
-            return url[1:]
+            return_value = url[1:]
 
-        return url
+        static_urls = cache.get('static_urls') or []
+        cleaned_value = return_value.replace('static/', '')
+        if cleaned_value not in static_urls:
+            static_urls.append(cleaned_value)
+        cache.set('static_urls', static_urls)
+
+        return return_value
 
 
 @register.tag

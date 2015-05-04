@@ -6,13 +6,18 @@ but with super powers and Kronoscode magic.
 from optparse import make_option
 
 from django.core.management.base import BaseCommand
+from django.core.cache import get_cache
 
 from django_perseus.utils import run_importers, zip_dir
 
 from cacao.utils import run_renderers
 
+cache = get_cache('default')
+
 class Command(BaseCommand):
     help = 'Make a render from the specific element'
+    cache.delete('media_urls')
+    cache.delete('static_urls')
 
     option_list = BaseCommand.option_list + (
         make_option('--archive',

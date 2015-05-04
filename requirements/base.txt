@@ -50,3 +50,4 @@ djangorestframework==3.0.2
 -e git+git://github.com/BananaDesk/django-phantom-pdf.git#egg=django-phantom-pdf
 Fabric==1.10.1
 django-ckeditor-updated==4.4.4
+pyquery==1.2.9
