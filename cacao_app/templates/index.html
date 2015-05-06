@@ -38,7 +38,7 @@
                                     <!-- media -->
                                     <div class="media">
                                         <!-- toolbar overlay -->
-                                        <div class="overlay">
+                                        <div class="overlay visible-md visible-lg">
                                             <div class="toolbar">
                                                 <a href="{{ guia.get_absolute_url }}" target="_blank" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18"></i></a>
                                                 <a href="{{ guia.get_download_url }}" class="btn back-guia{{ guia.number }}" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
@@ -47,13 +47,13 @@
                                         </div>
                                         <!--/ toolbar overlay -->
                                         {% thumbnail guia.image "247x311" crop="center" as img %}
-                                        <img src="{{ img.url }}" alt="Cover" width="100%" />
+                                         <a href="{{ guia.get_absolute_url }}" target="_blank"><img src="{{ img.url }}" alt="Cover" width="100%" /></a>
                                         {% endthumbnail %}
                                         <!-- book effect -->
                                         <div class="effect"></div>
                                         <!--/ book effect -->
                                         <div class="header back-guia{{ guia.number }} text-uppercase text-white">
-                                            <h4 class="title" >{{ guia.name }}</h4>
+                                            <h4 class="title" ><a href="{{ guia.get_absolute_url }}" target="_blank">{{ guia.name }}</a></h4>
                                             <div class="guia" >
                                                 <span>Guía</span>
                                                 <span class="number">{{ guia.number }}</span>
