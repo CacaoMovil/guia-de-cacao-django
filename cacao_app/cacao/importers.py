@@ -18,12 +18,7 @@ class MediaImporter(BaseImporter):
     """
     target_dir = 'PERSEUS_STATIC_DIR'
     source_dir = 'MEDIA_ROOT'
-    sub_dirs = [
-        #TODO: optimizar esto
-        #'cache',
-        'cacao',
-        #'uploads',
-    ]
+    sub_dirs = []
 
     def __init__(self):
         self.sub_dirs += cache.get('media_urls') or []
