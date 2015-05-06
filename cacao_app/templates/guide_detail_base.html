@@ -188,7 +188,7 @@
                 <!-- START list guias -->
                 <ul class="list-guias list-unstyled">
                     {% for guia in guide_items %}
-                    <a href="#">
+                    <a href="{{ guia.get_absolute_url }}">
                       <li class="">
                           <!-- thumbnail -->
                           <div class="thumbnail animation animating delay fadeInLeft">
@@ -203,7 +203,7 @@
                                   </div>
                                    <!-- book effect --> <div class="effect"></div> <!--/ book effect -->
                                   <!-- toolbar overlay -->
-                                  <div class="overlay">
+                                  <div class="overlay visible-md visible-lg">
                                       <div class="toolbar">
 
                                           <a href="{% url 'guia_detail' guia.pk %}" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18" ></i></a>
@@ -216,7 +216,7 @@
                                   </div>
                                   <!--/ toolbar overlay -->
                                   {% thumbnail guia.image "247x311" crop="center" as img %}
-                                  <img src="{{ img.url }}" alt="Cover" width="100%" />
+                                  <a href="{{ guia.get_absolute_url }}"><img src="{{ img.url }}" alt="Cover" width="100%" /></a>
                                   {% endthumbnail %}
                               </div>
                               <!--/ media -->
