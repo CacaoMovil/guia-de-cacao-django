@@ -20,7 +20,7 @@ class MediaImporter(BaseImporter):
     source_dir = 'MEDIA_ROOT'
     sub_dirs = [
         #TODO: optimizar esto
-        'cache',
+        #'cache',
         'cacao',
         #'uploads',
     ]
