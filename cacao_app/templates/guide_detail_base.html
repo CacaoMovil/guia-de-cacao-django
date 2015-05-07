@@ -40,7 +40,7 @@
             <!-- START navbar header -->
             <div class="navbar-header">
                 <!-- Brand -->
-                <a class="navbar-brand text-uppercase" href="{% url 'home' %}">
+                <a class="navbar-brand text-uppercase" href="{% url 'home' %}" id="guias-perseus">
                     <span class="logo-figure"></span>
                     <span class="text hidden-xs"><small>caja de herramientas</small>de cacao</span>
                     <!-- <span class="logo-text"></span> -->
@@ -63,7 +63,7 @@
                 <!--/ END Left nav -->
                 <ul class="nav navbar-nav navbar-main navbar-right text-uppercase" >
                     <li>
-                        <a href="{% url 'home' %}" title="Guías">
+                        <a href="{% url 'home' %}" title="Guías" id="guias-home-perseus">
                             <span class="icon"><i class="flaticon-home151 fsize30"></i></span>
                             <span class="text hidden-xs">Inicio</span>
                         </a>
@@ -112,7 +112,7 @@
                 <!-- START Template Navigation/Menu reverse('guia_detail', args=(self.pk,)) -->
                 <ul class="topmenu topmenu-responsive" data-toggle="menu">
                     <li {% if not contenido %}class="active"{% endif %}>
-                        <a href="{% if contenido %}{% url 'guia_detail' contenido.section.guide.pk %}{% else %}{% url 'guia_detail' guia.pk %}{% endif %}" >
+                        <a href="{% if contenido %}{% url 'guia_detail' contenido.section.guide.pk %}{% else %}{% url 'guia_detail' guia.pk %}{% endif %}" id="guias-presentacion-perseus">
                             <span class="text text-uppercase">Presentación</span>
                         </a>
                     </li>
@@ -288,6 +288,9 @@
             $('#download-guide').addClass('hidden');
             $('#print-guide').addClass('hidden');
             $('#list-guide').addClass('hidden');
+            document.getElementById("guias-perseus").href="index.html"; 
+            document.getElementById("guias-home-perseus").href="index.html"; 
+            document.getElementById("guias-presentacion-perseus").href="index.html"; 
           }
         </script>
         <!--/ App and page level script -->
