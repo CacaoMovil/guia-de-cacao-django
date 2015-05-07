@@ -54,16 +54,6 @@ class Guide(models.Model):
         except:
             return None
 
-    def previous_section(self):
-        """
-        Return the previous section of a guide pointing
-        to the first Content of this section
-        """
-        try:
-            return Content.objects.filter(section=self.section_set.all())[0]
-        except:
-            return None
-
     @property
     def latest_version(self):
         try:
@@ -158,7 +148,7 @@ class Content(models.Model):
         return the previous Content
         """
         try:
-            return Content.objects.filter(peso__lt=self.peso, section=self.section)[0]
+            return Content.objects.filter(peso__lt=self.peso, section=self.section).order_by('-peso')[0]
         except IndexError:
             try:
                 return Content.objects.filter(section=self.section.previous())[0]

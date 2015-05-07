@@ -12,7 +12,7 @@
                         </span>
                         <span class="text text-uppercase">Indice</span>
                     </a>
-                    <div class="previous"><a href="{% if contenido.previous == None %}{% else %}{% url 'contenido_detail' contenido.section.guide.number contenido.previous.slug %}{% endif %}"><i class="flaticon-previous11"></i></a></div>
+                    <div class="previous"><a href="{% if contenido.previous == None %}{% url 'guia_detail' contenido.section.guide.pk %}{% else %}{% url 'contenido_detail' contenido.section.guide.number contenido.previous.slug %}{% endif %}"><i class="flaticon-previous11"></i></a></div>
                     <div class="next"><a href="{% if contenido.next == None %}{% else %}{% url 'contenido_detail' contenido.section.guide.number contenido.next.slug %}{% endif %}"><i class="flaticon-next15"></i></a></div>
                     <h4 class="title-item text-capitalize">TEMAS</h4>
                 </div>
