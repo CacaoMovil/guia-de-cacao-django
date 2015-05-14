@@ -323,9 +323,7 @@ class Common(Configuration):
     GENERATE_PDF_JS = os.path.join(
         os.path.dirname(
             phantom_pdf_bin.__file__), 'generate_pdf.js')
-    PHANTOM_ROOT_DIR = os.path.join(
-        BASE_DIR, 'pdf'
-    )
+    PHANTOM_ROOT_DIR = '/tmp/phantom_pdf'
     PHANTOMJS_BIN = '/usr/local/bin/phantomjs'
     PHANTOMJS_COOKIE_DIR=os.path.join(PHANTOM_ROOT_DIR, 'cookies')
     PHANTOMJS_GENERATE_PDF=GENERATE_PDF_JS
