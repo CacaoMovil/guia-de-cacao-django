@@ -16,7 +16,7 @@ from os.path import join, dirname, abspath
 
 from configurations import Configuration, values
 
-BASE_DIR = dirname(dirname(__file__))
+BASE_DIR = dirname(dirname(abspath(__file__)))
 
 class Common(Configuration):
 
