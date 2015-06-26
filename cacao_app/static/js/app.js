@@ -112,4 +112,14 @@ $(function () {
         "dropdown": "#header-dd-notification",
         "url": "../server/notification.php"
     });
+
+    // Mostrar captions
+    $( ".content-body p img" ).each(function( index ) {
+        var img_style = $(this).attr('style');
+        $(this).wrap( "<div class='content-img'></div>" );
+        $(this).parent().attr('style',img_style);
+        $(this).removeAttr('style');
+        $(this).css({'width':'100%', 'height':'95%'});
+        $(this).parent().append($( this ).attr("alt"));
+    });
 });
