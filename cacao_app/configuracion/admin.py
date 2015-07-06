@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.forms import ModelForm
 
 from solo.admin import SingletonModelAdmin
-from suit_ckeditor.widgets import CKEditorWidget
+from ckeditor.widgets import CKEditorWidget
 
 from .models import Contacto, Acerca
 

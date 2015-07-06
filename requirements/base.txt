@@ -37,8 +37,6 @@ pytz==2014.7
 
 # Your custom requirements go here
 -e git+git://github.com/oscarmcm/django-suit.git@oscarmcm-patch-1#egg=django-suit
-#django-suit==0.2.12
-#django-suit-ckeditor==0.0.2
 sorl-thumbnail==11.12.1b
 django-envelope==1.0
 django-solo==1.1.0
@@ -49,5 +47,5 @@ djangorestframework==3.0.2
 #django-phantom-pdf==0.13
 -e git+git://github.com/BananaDesk/django-phantom-pdf.git#egg=django-phantom-pdf
 Fabric==1.10.1
-django-ckeditor-updated==4.4.4
+django-ckeditor==4.4.8
 pyquery==1.2.9

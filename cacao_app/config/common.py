@@ -38,12 +38,9 @@ class Common(Configuration):
         'django.contrib.admin',
     )
     THIRD_PARTY_APPS = (
-        'crispy_forms',  # Form layouts
-        #'avatar',  # for user avatars
-        'allauth',  # registration
-        'allauth.account',  # registration
-        #'allauth.socialaccount',  # registration
-        'suit_ckeditor',
+        'crispy_forms',
+        'allauth',
+        'allauth.account',
         'sorl.thumbnail',
         'envelope',
         'solo',
