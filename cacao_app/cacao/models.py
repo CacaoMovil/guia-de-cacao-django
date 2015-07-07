@@ -8,7 +8,9 @@ from django.template.base import add_to_builtins
 
 from ckeditor.fields import RichTextField
 
+
 class Guide(models.Model):
+
     """
     This model store the Guia objects
     """
@@ -19,7 +21,7 @@ class Guide(models.Model):
 
     class Meta:
         verbose_name = 'Guia'
-        verbose_name_plural  = 'Guias'
+        verbose_name_plural = 'Guias'
         ordering = ['number']
 
     def __unicode__(self):
@@ -30,7 +32,8 @@ class Guide(models.Model):
 
     def get_download_url(self):
         try:
-            download = Download.objects.filter(guide=self.number).order_by('-num_version')[0]
+            download = Download.objects.filter(
+                guide=self.number).order_by('-num_version')[0]
             return download.file.url
         except:
             return None
@@ -63,6 +66,7 @@ class Guide(models.Model):
 
 
 class Section(models.Model):
+
     """
     This model store the Section object and have a
     relationship with the Guide model because every
@@ -70,15 +74,16 @@ class Section(models.Model):
     """
     guide = models.ForeignKey(Guide)
     title = models.CharField('Titulo', max_length=250)
-    peso = models.PositiveIntegerField("Peso de la Seccion", help_text='Entre mayor sea el peso mas al fondo se ubica')
+    peso = models.PositiveIntegerField(
+        "Peso de la Seccion", help_text='Entre mayor sea el peso mas al fondo se ubica')
     image = models.ImageField('Imagen', upload_to='cacao/', blank=True)
 
     class Meta:
         verbose_name = 'Seccion'
-        verbose_name_plural  = 'Secciones'
+        verbose_name_plural = 'Secciones'
 
     def __unicode__(self):
-        return "%s - Guia: %s" %(self.title, self.guide)
+        return "%s - Guia: %s" % (self.title, self.guide)
 
     def next(self):
         """
@@ -98,7 +103,9 @@ class Section(models.Model):
         except Exception, e:
             raise e
 
+
 class Content(models.Model):
+
     """
     This model store the Contenido object and have a
     relationshipwith the Section model because every
@@ -109,19 +116,20 @@ class Content(models.Model):
     title_content = models.CharField('Titulo Contenido', max_length=250)
     extract = models.CharField("Extracto del Contenido", max_length=250)
     description = RichTextField('Descripcion', config_name='default')
-    peso = models.PositiveIntegerField("Peso del Contenido", help_text='Entre mayor sea el peso mas al fondo se ubica')
-    image = models.ImageField('Imagen', upload_to='cacao/', help_text='Required dimensions 1563x538', blank=True)
+    peso = models.PositiveIntegerField(
+        "Peso del Contenido", help_text='Entre mayor sea el peso mas al fondo se ubica')
+    image = models.ImageField(
+        'Imagen', upload_to='cacao/', help_text='Required dimensions 1563x538', blank=True)
     slug = models.SlugField(max_length=100)
 
     class Meta:
         verbose_name = 'Contenido'
-        verbose_name_plural  = 'Contenidos'
+        verbose_name_plural = 'Contenidos'
         ordering = ['peso']
         unique_together = ('peso', 'section')
 
     def __unicode__(self):
         return self.title
-
 
     def save(self, *args, **kwargs):
         self.slug = defaultfilters.slugify(self.title)
@@ -159,7 +167,9 @@ class Content(models.Model):
     def guide(self):
         return self.section.guide
 
+
 class Download(models.Model):
+
     """
     This model store the Descargas object and have
     a relationship with Guide because a Download file
@@ -186,13 +196,14 @@ class Download(models.Model):
 
     def get_last_version(self, number):
         try:
-            last_version = Download.objects.filter(guide__number=number).aggregate(Max('num_version'))
+            last_version = Download.objects.filter(
+                guide__number=number).aggregate(Max('num_version'))
             return last_version.get('num_version__max') + 1
         except:
             last_version = 1
             return last_version
 
-### Monkey Patch
+# Monkey Patch
 
 if getattr(settings, 'USE_PERSEUS', False):
     add_to_builtins('cacao.templatetags.django_perseus_tags')

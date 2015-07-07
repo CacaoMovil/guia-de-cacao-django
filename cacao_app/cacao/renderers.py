@@ -15,7 +15,9 @@ from .models import Guide, Content
 
 logger = logging.getLogger('perseus')
 
+
 class GuideRenderer(BaseRenderer):
+
     """
     This serializer extend from Django perseus - BaseRenderer
     this serializer convert the name of a url to hashlib and
@@ -28,8 +30,14 @@ class GuideRenderer(BaseRenderer):
             # create deploy dir if not exists
             deploy_dir = settings.PERSEUS_SOURCE_DIR
             outpath = os.path.join(deploy_dir, '')
+            android_filename = ".nomedia"
             if not os.path.exists(deploy_dir):
                 os.makedirs(deploy_dir)
+
+            # create the no media file for the android file
+            nomedia_dir = os.path.join(deploy_dir, android_filename)
+            nomedia_file = open(nomedia_dir, "w")
+            nomedia_file.close()
 
             # create the renders page
             if self.regex.findall(path):
@@ -68,10 +76,12 @@ class GuideRenderer(BaseRenderer):
 
 
 class HomeRenderer(GuideRenderer):
+
     """
     This class make the render from dinamic pages,
     the filter is from the base command
     """
+
     def __init__(self, guide_number=None):
         self.guide_number = guide_number
 

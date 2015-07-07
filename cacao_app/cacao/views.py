@@ -28,6 +28,7 @@ from .exporter import render_guide
 
 
 class GuideList(ListView):
+
     """
     This Class list all Guides objects
     from the Guide model
@@ -36,7 +37,9 @@ class GuideList(ListView):
     context_object_name = 'guias'
     template_name = 'index.html'
 
+
 class GuideDetail(DetailView):
+
     """
     This Class list one Guide object
     from the Guide model
@@ -48,11 +51,15 @@ class GuideDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(GuideDetail, self).get_context_data(**kwargs)
-        context['contenido_list'] = Content.objects.filter(section__guide=self.object)
-        context['seccion_list'] = Section.objects.filter(guide=self.object).order_by('peso')
+        context['contenido_list'] = Content.objects.filter(
+            section__guide=self.object)
+        context['seccion_list'] = Section.objects.filter(
+            guide=self.object).order_by('peso')
         return context
 
+
 class ContentDetail(DetailView):
+
     """
     This class list one Content object
     from the Content model
@@ -62,13 +69,16 @@ class ContentDetail(DetailView):
     template_name = 'cacao/contenido_detail.html'
 
     def get_queryset(self, **kwargs):
-        qs = super(ContentDetail, self).get_queryset().filter(section__guide=self.kwargs.get('guide'))
+        qs = super(ContentDetail, self).get_queryset().filter(
+            section__guide=self.kwargs.get('guide'))
         return qs
 
     def get_context_data(self, **kwargs):
         context = super(ContentDetail, self).get_context_data(**kwargs)
-        context['seccion_list'] = Section.objects.filter(guide=self.object.guide).order_by('peso')
+        context['seccion_list'] = Section.objects.filter(
+            guide=self.object.guide).order_by('peso')
         return context
+
 
 @staff_member_required
 def render_element(request):
@@ -90,22 +100,28 @@ def render_element(request):
 
         execute(render_guide, element_number)
 
-        file_path = os.path.join(settings.PERSEUS_BUILD_DIR, 'guia-%s.zip' %element_number)
+        file_path = os.path.join(
+            settings.PERSEUS_BUILD_DIR, 'guia-%s.zip' % element_number)
 
         download.guide = guide_element
         download.num_version = download.get_last_version(guide_element.number)
         with open(file_path, 'rb') as download_file:
-            download.file.save('guia%s-version%s.zip' %(element_number, download.get_last_version(guide_element.number)),
-                                File(download_file), save=True)
-        download.save()
+            download.file.save('guia%s-version%s.zip' % (element_number, download.get_last_version(guide_element.number)),
+                               File(download_file), save=True)
+            print os.getcwd()
+            media_file = open('nomedia.txt', 'w+')
+            media_file.close()
 
-        messages.add_message(request, messages.INFO, 'Se ha renderizado correctamente.')
+        download.save()
+        message_text = 'Se ha renderizado correctamente la guia: %s.' % guide_element.name
+        messages.add_message(request, messages.INFO, message_text)
 
         shutil.rmtree(settings.PERSEUS_SOURCE_DIR)
         shutil.rmtree(settings.PERSEUS_BUILD_DIR)
 
     return render_to_response(template, context,
                               context_instance=RequestContext(request))
+
 
 def create_pdf(request, guide_number):
     """
@@ -126,7 +142,8 @@ def create_pdf(request, guide_number):
         return render_to_pdf(request, pdf_name)
     else:
         return render_to_response(template, context,
-                              context_instance=RequestContext(request))
+                                  context_instance=RequestContext(request))
+
 
 @api_view(['GET'])
 def guides_collection(request):
@@ -140,6 +157,7 @@ def guides_collection(request):
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 def guide_elements(request, number):
@@ -158,6 +176,7 @@ def guide_elements(request, number):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET'])
 def guide_element(request, number, num_version):
     """
@@ -175,6 +194,7 @@ def guide_element(request, number, num_version):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET'])
 def guide_last(request, number):
     """
@@ -182,7 +202,8 @@ def guide_last(request, number):
     version from a Guide in specific
     """
     try:
-        download = Download.objects.filter(guide=number).order_by('-num_version')[0]
+        download = Download.objects.filter(
+            guide=number).order_by('-num_version')[0]
     except Download.DoesNotExist:
         return HttpResponse(status=404)
 

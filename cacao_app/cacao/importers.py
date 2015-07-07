@@ -12,7 +12,9 @@ from django_perseus.exceptions import ImporterException
 
 cache = get_cache('default')
 
+
 class MediaImporter(BaseImporter):
+
     """
     This class import the media files
     """
@@ -24,7 +26,9 @@ class MediaImporter(BaseImporter):
         self.sub_dirs += cache.get('media_urls') or []
         super(MediaImporter, self).__init__()
 
+
 class StaticImporter(BaseImporter):
+
     """
     This class import the static files
     """
@@ -41,5 +45,3 @@ class StaticImporter(BaseImporter):
     def __init__(self):
         self.sub_dirs += cache.get('static_urls') or []
         super(StaticImporter, self).__init__()
-
-
