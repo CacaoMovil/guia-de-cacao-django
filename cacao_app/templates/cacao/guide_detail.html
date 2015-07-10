@@ -4,7 +4,7 @@
 <!-- START Template Main -->
         <section id="main" role="main">
             <!-- Page Header -->
-            <nav class="page-header page-header-block">
+            <nav class="page-header page-header-block affix">
                 <div class="pager">
                     <a class="indice" href="javascript:void(0);" data-toggle="sidebar" data-direction="ltr" rel="tooltip" title="Menu sidebar">
                         <span class="figure">
@@ -52,13 +52,7 @@
 <!--/ END Template Main -->
 <style type="text/css">
     .page-header.page-header-block{
-       -webkit-backface-visibility: hidden;
-       position: fixed !important;
-       z-index: 10 !important;
-       width: 100% !important;
-    }
-    #main > .container-fluid, #main > .container{
-        padding-top:45px !important;
+       top:70px !important;
     }
 </style>
 {% endblock content %}
