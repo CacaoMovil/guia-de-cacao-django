@@ -1,15 +1,10 @@
 {% extends "guide_detail_base.html" %}
 {% load cacao_tags custom_sorl_tags %}
 {% block content %}
-<style type="text/css">
-    .page-header-block{
-        -webkit-backface-visibility: hidden;
-    }
-</style>
 <!-- START Template Main -->
         <section id="main" role="main">
             <!-- Page Header -->
-            <nav class="page-header page-header-block affix">
+            <nav class="page-header page-header-block">
                 <div class="pager">
                     <a class="indice" href="javascript:void(0);" data-toggle="sidebar" data-direction="ltr" rel="tooltip" title="Menu sidebar">
                         <span class="figure">
@@ -55,4 +50,15 @@
             <!--/ END To Top Scroller -->
         </section>
 <!--/ END Template Main -->
+<style type="text/css">
+    .page-header.page-header-block{
+       -webkit-backface-visibility: hidden;
+       position: fixed !important;
+       z-index: 10 !important;
+       width: 100% !important;
+    }
+    #main > .container-fluid, #main > .container{
+        padding-top:45px !important;
+    }
+</style>
 {% endblock content %}
