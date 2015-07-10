@@ -9,6 +9,6 @@ from django.views.generic import TemplateView
 from .views import acerca, Contact
 
 urlpatterns = patterns('configuracion.views',
-    url(r'^about/$', 'acerca', name="about"),
+    url(r'^acerca-de/$', 'acerca', name="about"),
     url(r'^contact/', Contact.as_view(), name="envelope-contact"),
 )
