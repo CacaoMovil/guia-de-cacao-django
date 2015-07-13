@@ -4,6 +4,9 @@ import re
 import logging
 import mimetypes
 import hashlib
+import json
+import time
+import calendar
 
 from django.conf import settings
 from django.test.client import Client
@@ -12,6 +15,7 @@ from django_perseus.exceptions import RendererException
 from django_perseus.renderers.base import BaseRenderer
 
 from .models import Guide, Content
+from .serializers import GuidesSerializer
 
 logger = logging.getLogger('perseus')
 
@@ -31,13 +35,20 @@ class GuideRenderer(BaseRenderer):
             deploy_dir = settings.PERSEUS_SOURCE_DIR
             outpath = os.path.join(deploy_dir, '')
             android_filename = ".nomedia"
+            manifest_filename = "manifest.json"
             if not os.path.exists(deploy_dir):
                 os.makedirs(deploy_dir)
 
-            # create the no media file for the android file
+            # create the no media file for the android app
             nomedia_dir = os.path.join(deploy_dir, android_filename)
             nomedia_file = open(nomedia_dir, "w")
             nomedia_file.close()
+
+            # create the Manifest file for the android app
+            manifest_dir = os.path.join(deploy_dir, manifest_filename)
+            manifest_file = open(manifest_dir, "w")
+            json.dump(self.create_manifest(), manifest_file, indent=4)
+            manifest_file.close()
 
             # create the renders page
             if self.regex.findall(path):
@@ -84,6 +95,30 @@ class HomeRenderer(GuideRenderer):
 
     def __init__(self, guide_number=None):
         self.guide_number = guide_number
+
+    def date_handler(foo, obj):
+        """
+        Simple python handler that conver
+        a datetime.date to human date
+        """
+        return obj.isoformat() if hasattr(obj, 'isoformat') else obj
+
+    def create_manifest(self):
+        """
+        Simple method that return our manifest
+        dict used in the manifest.json
+        """
+        guides = Guide.objects.all()
+        serializer = GuidesSerializer(guides, many=True)
+        content = json.dumps(serializer.data, default=self.date_handler, indent=4)
+        manifest_dict = {
+            "manifest_version": 1,
+            "guide_id": self.guide_number,
+            "guide_version": self.guide_number,
+            'generation_date': calendar.timegm(time.gmtime()),
+            'contents': json.loads(content)
+        }
+        return manifest_dict
 
     def paths(self):
         paths = set([])
