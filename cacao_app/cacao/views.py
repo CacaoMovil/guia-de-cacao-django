@@ -108,9 +108,8 @@ def render_element(request):
         with open(file_path, 'rb') as download_file:
             download.file.save('guia%s-version%s.zip' % (element_number, download.get_last_version(guide_element.number)),
                                File(download_file), save=True)
-            print os.getcwd()
-            media_file = open('nomedia.txt', 'w+')
-            media_file.close()
+            #media_file = open('nomedia.txt', 'w+')
+            #media_file.close()
 
         download.save()
         message_text = 'Se ha renderizado correctamente la guia: %s.' % guide_element.name
