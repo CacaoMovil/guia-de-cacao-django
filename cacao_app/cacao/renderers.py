@@ -86,6 +86,14 @@ class GuideRenderer(BaseRenderer):
             self.render_path(path=path)
 
 
+def date_handler(obj):
+    """
+    Simple python handler that conver
+    a datetime.date to human date
+    """
+    return obj.isoformat() if hasattr(obj, 'isoformat') else obj
+
+
 class HomeRenderer(GuideRenderer):
 
     """
@@ -96,13 +104,6 @@ class HomeRenderer(GuideRenderer):
     def __init__(self, guide_number=None):
         self.guide_number = guide_number
 
-    def date_handler(foo, obj):
-        """
-        Simple python handler that conver
-        a datetime.date to human date
-        """
-        return obj.isoformat() if hasattr(obj, 'isoformat') else obj
-
     def create_manifest(self):
         """
         Simple method that return our manifest
@@ -110,7 +111,7 @@ class HomeRenderer(GuideRenderer):
         """
         guides = Guide.objects.all()
         serializer = GuidesSerializer(guides, many=True)
-        content = json.dumps(serializer.data, default=self.date_handler, indent=4)
+        content = json.dumps(serializer.data, default=date_handler, indent=4)
         manifest_dict = {
             "manifest_version": 1,
             "guide_id": self.guide_number,
