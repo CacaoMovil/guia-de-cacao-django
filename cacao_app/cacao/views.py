@@ -98,15 +98,16 @@ def render_element(request):
 
         guide_element = Guide.objects.get(number=element_number)
 
-        execute(render_guide, element_number)
+        download.guide = guide_element
+        download.num_version = download.get_last_version(guide_element.number)
+
+        execute(render_guide, download.num_version)
 
         file_path = os.path.join(
             settings.PERSEUS_BUILD_DIR, 'guia-%s.zip' % element_number)
 
-        download.guide = guide_element
-        download.num_version = download.get_last_version(guide_element.number)
         with open(file_path, 'rb') as download_file:
-            download.file.save('guia%s-version%s.zip' % (element_number, download.get_last_version(guide_element.number)),
+            download.file.save('guia%s-version%s.zip' % (element_number, download.num_version),
                                File(download_file), save=True)
             #media_file = open('nomedia.txt', 'w+')
             #media_file.close()

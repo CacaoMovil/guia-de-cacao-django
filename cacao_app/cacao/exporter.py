@@ -13,8 +13,8 @@ def virtualenv(command):
 
 
 @task
-def render_guide(element_number):
+def render_guide(element_number, guide_version):
     with lcd(settings.PROJECT_DIR):
-        command = "python manage.py render_guia --configuration=Export --element=%(element)s --archive --filename=guia-%(element)s.zip" % {
-            'element': element_number}
+        command = "python manage.py render_guia --configuration=Export --guide-version=%(version)s --element=%(element)s --archive --filename=guia-%(element)s.zip" % {
+            'element': element_number, 'version': guide_version}
         virtualenv(command)
