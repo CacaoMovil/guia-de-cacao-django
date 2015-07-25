@@ -127,12 +127,12 @@ $(function () {
     if (localStorage.getItem('size-save')){
         var font = localStorage.getItem('size-save');
         console.log(font);
-        $('.content-body p, .jumbotron p').css("font-size",parseInt(font));
+        $('html body').css("font-size",parseInt(font));
     }
 
     $('.font-selector .dropdown-menu li a').click(function(){
         var size = $(this).data("size");
         localStorage.setItem('size-save', size);
-        $('.content-body p, .jumbotron p').css("font-size",size);
+        $('html body').css("font-size",size);
     });
 });
