@@ -101,7 +101,7 @@ def render_element(request):
         download.guide = guide_element
         download.num_version = download.get_last_version(guide_element.number)
 
-        execute(render_guide, download.num_version)
+        execute(render_guide, element_number, download.num_version)
 
         file_path = os.path.join(
             settings.PERSEUS_BUILD_DIR, 'guia-%s.zip' % element_number)
