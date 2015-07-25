@@ -36,6 +36,19 @@
                         </div>
                     </div>
                 </div>
+                <!-- font size selector -->
+                <div class="dropdown font-selector">
+                  <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <b><span class="ico-text-height2"></span></b> tamaño
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="#" data-size="14" style="font-size:14px;">Normal</a></li>
+                    <li><a href="#" data-size="16" style="font-size:16px;">Grande</a></li>
+                    <li><a href="#" data-size="18" style="font-size:18px;">Extra Grande</a></li>
+                  </ul>
+                </div>
+                <!-- End Font size selector -->
             </section>
             <!--/ END jumbotron -->
 
@@ -86,11 +99,12 @@
                     </div>
                 </div>
                 <!-- END Rows -->
-            </div>
+
             <!--/ END Template Container -->
 
             <!-- START To Top Scroller -->
             <a href="#" class="totop animation" data-toggle="waypoints totop" data-showanim="bounceIn" data-hideanim="bounceOut" data-offset="50%"><i class="ico-angle-up"></i></a>
+            
             <!--/ END To Top Scroller -->
         </section>
         <!--/ END Template Main -->
@@ -105,6 +119,12 @@
             }
             .page-header.page-header-block{
                top:70px !important;
+            }
+            .font-selector{
+                position: absolute;
+                top:65px;
+                z-index: 4;
+                right: 20px;
             }
         </style>
 {% endblock content %}

@@ -122,4 +122,10 @@ $(function () {
         $(this).css({'width':'100%', 'height':'95%'});
         $(this).parent().append($( this ).attr("alt"));
     });
+
+    //Font size
+    $('.font-selector .dropdown-menu li a').click(function(){
+        var size = $(this).data("size");
+        $('.content-body p, .jumbotron p').css("font-size",size);
+    });
 });
