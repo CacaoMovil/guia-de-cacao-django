@@ -58,7 +58,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-sm-10 col-sm-offset-1 col-lg-offset-2">
                     <div class="content-body">
-                        <p class="mb15 pb15">{{ contenido.description|offline_media|safe }}</p>
+                        {{ contenido.description|offline_media|safe }}
                     </div>
                     <div class="clearfix"></div>
                         <div class="row">
@@ -127,4 +127,7 @@
                 right: 20px;
             }
         </style>
+        <script type="text/javascript">
+
+        </script>
 {% endblock content %}
