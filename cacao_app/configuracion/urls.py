@@ -10,5 +10,5 @@ from .views import acerca, Contact
 
 urlpatterns = patterns('configuracion.views',
     url(r'^acerca-de/$', 'acerca', name="about"),
-    url(r'^contact/', Contact.as_view(), name="envelope-contact"),
+    url(r'^contacto/', Contact.as_view(), name="envelope-contact"),
 )
