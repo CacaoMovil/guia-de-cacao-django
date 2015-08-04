@@ -14,7 +14,7 @@ from cacao.views import render_element
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^how-it-works/$',
+    url(r'^como-funciona/$',
         TemplateView.as_view(template_name='how_works.html'),
         name="how_it_works"),
 
