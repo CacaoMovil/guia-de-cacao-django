@@ -186,6 +186,7 @@ class Download(models.Model):
         verbose_name = 'Descarga'
         verbose_name_plural = 'Descargas'
         unique_together = ('guide', 'num_version')
+        ordering = ['-num_version']
 
     def __unicode__(self):
         return self.guide.name
