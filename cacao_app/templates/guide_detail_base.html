@@ -27,6 +27,8 @@
         <!--/ Application stylesheet -->
         <!-- END STYLESHEETS -->
 
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery-migrate.min.js' %}"></script>
         <script type="text/javascript">
           if (window.location.protocol != "http:") {
             $('#download-guide').addClass('hidden');
@@ -284,8 +286,6 @@
 
         <!-- START JAVASCRIPT SECTION (Load javascripts at bottom to reduce load time) -->
         <!-- Library script : mandatory -->
-        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/jquery-migrate.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/core.js' %}"></script> 
         <!--/ Library script -->
