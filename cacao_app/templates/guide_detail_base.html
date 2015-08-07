@@ -29,15 +29,33 @@
 
         <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/jquery-migrate.min.js' %}"></script>
+
         <script type="text/javascript">
-          if (window.location.protocol != "http:") {
-            $('#download-guide').addClass('hidden');
-            $('#print-guide').addClass('hidden');
-            $('#list-guide').addClass('hidden');
-            document.getElementById("guias-perseus").href="index.html"; 
-            document.getElementById("guias-home-perseus").href="index.html"; 
-            document.getElementById("guias-presentacion-perseus").href="index.html"; 
-          }
+            $(document).ready(function() {
+                //Font size
+                if (localStorage.getItem('size-save')){
+                    var font = localStorage.getItem('size-save');
+                    console.log(font);
+                    $('html body, .jumbotron p').css("font-size",parseInt(font));
+                }
+
+                $('.font-selector .dropdown-menu li a').click(function(){
+                    var size = $(this).data("size");
+                    localStorage.setItem('size-save', size);
+                    $('html body, .jumbotron p').css("font-size",size);
+                });
+
+                // Hide menu for app
+                if (window.location.protocol != "http:") {
+                  $('#download-guide').addClass('hidden');
+                  $('#print-guide').addClass('hidden');
+                  $('#list-guide').addClass('hidden');
+                  document.getElementById("guias-perseus").href="index.html"; 
+                  document.getElementById("guias-home-perseus").href="index.html"; 
+                  document.getElementById("guias-presentacion-perseus").href="index.html"; 
+                }
+                alert(window.location.protocol);
+            });
         </script>
 
         <!-- START JAVASCRIPT SECTION - Load only modernizr script here -->
@@ -295,22 +313,6 @@
         <!-- will be use globaly as a summary on sidebar menu -->
         <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function() {
-                //Font size
-                if (localStorage.getItem('size-save')){
-                    var font = localStorage.getItem('size-save');
-                    console.log(font);
-                    $('html body, .jumbotron p').css("font-size",parseInt(font));
-                }
-
-                $('.font-selector .dropdown-menu li a').click(function(){
-                    var size = $(this).data("size");
-                    localStorage.setItem('size-save', size);
-                    $('html body, .jumbotron p').css("font-size",size);
-                });
-            });
-        </script>
         <!--/ App and page level script -->
         <!--/ END JAVASCRIPT SECTION -->
     </body>
