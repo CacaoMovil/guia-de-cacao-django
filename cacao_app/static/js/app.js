@@ -123,16 +123,4 @@ $(function () {
         $(this).parent().append($( this ).attr("alt"));
     });
 
-    //Font size
-    if (localStorage.getItem('size-save')){
-        var font = localStorage.getItem('size-save');
-        console.log(font);
-        $('html body, .jumbotron p').css("font-size",parseInt(font));
-    }
-
-    $('.font-selector .dropdown-menu li a').click(function(){
-        var size = $(this).data("size");
-        localStorage.setItem('size-save', size);
-        $('html body, .jumbotron p').css("font-size",size);
-    });
 });
