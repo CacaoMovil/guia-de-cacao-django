@@ -12,7 +12,7 @@ urlpatterns = patterns('cacao.views',
     url(r'^$', GuideList.as_view(), name="home"),
     url(r'^guia/(?P<number>\d+)/$', GuideDetail.as_view(), name="guia_detail"),
     url(r'^guia/(?P<guide>\d+)/contenido/(?P<slug>[-\w]+)/$', ContentDetail.as_view(), name="contenido_detail"),
-    url(r'^guia/descargar/(?P<guide_id>\d+)/(?P<version>\d+)/$', 'download_guide', name="download_guide"),
+    url(r'^guia/descargar/guia(?P<guide_id>\d+)-version(?P<version>\d+).zip$', 'download_guide', name="download_guide"),
     url(r'^render/$', 'render_element', name="render_element"),
 
     # pdf
