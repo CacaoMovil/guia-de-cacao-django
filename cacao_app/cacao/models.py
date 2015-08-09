@@ -176,7 +176,7 @@ class Download(models.Model):
     belongs to a Guide object
     """
     guide = models.ForeignKey(Guide, related_name='versions')
-    file = models.FileField(upload_to='descargas/')
+    file = models.FileField(upload_to='descargas/', null=True)
     num_version = models.PositiveIntegerField()
     # No Visible
     date = models.DateField(auto_now_add=True, editable=False)
@@ -204,8 +204,13 @@ class Download(models.Model):
             last_version = 1
             return last_version
 
-# Monkey Patch
+    def get_download_url(self):
+        if self.file:
+            return self.file.url
+        else:
+            return reverse('download_guide', args=(self.guide.id, self.num_version))
 
+# Monkey Patch
 if getattr(settings, 'USE_PERSEUS', False):
     add_to_builtins('cacao.templatetags.django_perseus_tags')
 else:

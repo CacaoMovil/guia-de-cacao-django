@@ -9,10 +9,14 @@ class DownloadSerializer(serializers.ModelSerializer):
     Serializers for guide element, guide versions
     and last guide
     """
+    file = serializers.SerializerMethodField('get_alternate_name')
+
     class Meta:
         model = Download
         fields = ('name', 'file', 'date', 'num_version')
 
+    def get_alternate_name(self, obj):
+        return obj.get_download_url()
 
 class GuidesSerializer(serializers.ModelSerializer):
 

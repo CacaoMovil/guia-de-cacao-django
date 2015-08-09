@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 
 from django.views.generic import ListView, DetailView
@@ -100,17 +100,21 @@ def render_element(request):
 
         download.guide = guide_element
         download.num_version = download.get_last_version(guide_element.number)
+        download.save()
+        try:
+            execute(render_guide, element_number, download.num_version)
 
-        execute(render_guide, element_number, download.num_version)
+            file_path = os.path.join(
+                settings.PERSEUS_BUILD_DIR, 'guia-%s.zip' % element_number)
 
-        file_path = os.path.join(
-            settings.PERSEUS_BUILD_DIR, 'guia-%s.zip' % element_number)
-
-        with open(file_path, 'rb') as download_file:
-            download.file.save('guia%s-version%s.zip' % (element_number, download.num_version),
-                               File(download_file), save=True)
-            #media_file = open('nomedia.txt', 'w+')
-            #media_file.close()
+            with open(file_path, 'rb') as download_file:
+                download.file.save('guia%s-version%s.zip' % (element_number, download.num_version),
+                                File(download_file), save=True)
+                #media_file = open('nomedia.txt', 'w+')
+                #media_file.close()
+        except:
+            download.delete()
+            raise
 
         download.save()
         message_text = 'Se ha renderizado correctamente la guia: %s.' % guide_element.name
@@ -212,3 +216,7 @@ def guide_last(request, number):
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def download_guide(request, guide_id, version):
+    download = get_object_or_404(Download, guide__id=guide_id, num_version=version)
+    return redirect(download.file.url)
