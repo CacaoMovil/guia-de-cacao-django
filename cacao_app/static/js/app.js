@@ -119,7 +119,7 @@ $(function () {
         $(this).wrap( "<div class='content-img'></div>" );
         $(this).parent().attr('style',img_style);
         $(this).removeAttr('style');
-        $(this).css({'width':'100%', 'height':'95%'});
+        $(this).css({'width':'100%'});
         $(this).parent().append($( this ).attr("alt"));
     });
 
