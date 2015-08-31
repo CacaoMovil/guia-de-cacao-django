@@ -13,6 +13,8 @@ from django.test.client import Client
 
 from django_perseus.exceptions import RendererException
 from django_perseus.renderers.base import BaseRenderer
+from django_perseus.renderers.default import DefaultRenderer
+from django.core.urlresolvers import reverse
 
 from .models import Guide, Content
 from .serializers import GuidesSerializer
@@ -136,5 +138,10 @@ class HomeRenderer(GuideRenderer):
             paths.add(content.get_absolute_url())
 
         return paths
+
+class AboutUsRenderer(DefaultRenderer):
+
+    def paths(self):
+        return [reverse('about')]
 
 renderers = [HomeRenderer, ]
