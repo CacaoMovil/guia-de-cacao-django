@@ -302,13 +302,19 @@ class Common(Configuration):
     CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
     CKEDITOR_CONFIGS = {
         'default': {
-            'toolbar': [["Format", "Bold", "Italic", "Underline", "SpellChecker"],
-                ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter',
-                 'JustifyRight', 'JustifyBlock', 'PasteText','PasteFromWord'],
-                ['Find','Replace', 'Cut','Copy','Paste'],
-                ["Image", "Table", "Link", "Unlink", "SectionLink"], ['Undo', 'Redo'], ["Source"],
-                ["Maximize"]],
-        'width': 600,
+            'toolbar': [
+                ['Format', 'Bold', 'Italic', 'Underline', 'SpellChecker',
+                 '-', 'NumberedList', 'BulletedList', 'Indent', 'Outdent', 'JustifyLeft', 'JustifyCenter',
+                 '-', 'JustifyRight', 'JustifyBlock', 'PasteText','PasteFromWord',
+                 '-', 'Find','Replace', 'Cut','Copy','Paste',
+                 '-', 'Image', 'Table', 'Link', 'Unlink', 'SectionLink', 'Undo', 'Redo', 'Source',
+                'Maximize',
+                ],
+            ],
+            'width': 'auto',
+            'allowedContent': True,
+            'removePlugins': 'stylesheetparser',
+            'extraAllowedContent': 'iframe[*]',
         },
     }
     # used for the views delete folders and open the guide folder
