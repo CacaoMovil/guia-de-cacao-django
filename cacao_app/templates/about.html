@@ -25,9 +25,7 @@
                             <!-- START Row -->
                             <div class="row">
                                 <div class="col-md-12 mb15">
-                                    
                                     {{ about.informacion_bienvenida|safe }}
-                                    
                                 </div>
                             </div>
                             <!--/ END Row -->
@@ -42,7 +40,7 @@
 <script type="text/javascript">
 $( document ).ready(function() {
   main_url = $(location).attr('pathname');
-  if( main_url == '/about/' ){
+  if( main_url == '/acerca-de/' ){
     $('.topmenu .active').removeClass('active');
     $('.topmenu li:nth-child(4)').addClass('active');
   } 

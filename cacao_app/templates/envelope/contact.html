@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load envelope_tags crispy_forms_tags %}
+{% load envelope_tags widget_tweaks %}
 {% block content %}
         <!-- START Template Main -->
         <section id="main" role="main">
@@ -41,14 +41,30 @@
                                 <form action="{% url 'envelope-contact' %}" class="form-horizontal" method="post">
                                   {% csrf_token %}
                                   {% antispam_fields %}
-                                  {{ form|crispy }}
+                                  <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label for="contact_name" class="control-label">Nombre <span class="text-danger">*</span></label>
+                                        {{ form.sender|add_class:"form-control" }}
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label for="contact_email" class="control-label">Email <span class="text-danger">*</span></label>
+                                        {{ form.email|add_class:"form-control" }}
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <div class="col-sm-12">
+                                          <label for="contact_email" class="control-label">Tu mensaje <span class="text-danger">*</span></label>
+                                          {{ form.message|add_class:"form-control" }}
+                                      </div>
+                                  </div>
                                   <button class="btn btn-primary" type="submit">Enviar Mensaje</button>
                                 </form>
                               </div>
                             <!--/ Form -->
                         </div>
                         <!--/ END Left Section -->
-                        
                         <!-- START Right Section -->
                         <div class="col-lg-3 col-md-4 col-lg-offset-1 col-md-offset-1">
                             <div class="row">
@@ -79,7 +95,7 @@
 <script type="text/javascript">
 $( document ).ready(function() {
   main_url = $(location).attr('pathname');
-  if( main_url == '/contact/' ){
+  if( main_url == '/contacto/' ){
     $('.topmenu .active').removeClass('active');
     $('.topmenu li:nth-child(3)').addClass('active');
   } 

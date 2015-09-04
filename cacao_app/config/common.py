@@ -47,6 +47,7 @@ class Common(Configuration):
         'django_perseus',
         'rest_framework',
         'ckeditor',
+        'widget_tweaks',
     )
 
     # Apps specific for this project go here.
