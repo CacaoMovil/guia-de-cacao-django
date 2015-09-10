@@ -72,3 +72,10 @@
             </div>
             <!--/ END Template Container -->
 {% endblock content %}
+{% block extra_footer %}
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('.topmenu .home-menu').addClass('active'); 
+    });
+</script>
+{% endblock extra_footer %}

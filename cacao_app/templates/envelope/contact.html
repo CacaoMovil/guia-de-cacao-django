@@ -93,12 +93,8 @@
 {% endblock content %}
 {% block extra_footer %}
 <script type="text/javascript">
-$( document ).ready(function() {
-  main_url = $(location).attr('pathname');
-  if( main_url == '/contacto/' ){
-    $('.topmenu .active').removeClass('active');
-    $('.topmenu li:nth-child(3)').addClass('active');
-  } 
-});
+    $( document ).ready(function() {
+        $('.topmenu .contact-menu').addClass('active'); 
+    });
 </script>
 {% endblock extra_footer %}
