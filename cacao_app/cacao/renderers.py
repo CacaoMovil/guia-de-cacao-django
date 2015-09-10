@@ -30,6 +30,7 @@ class GuideRenderer(BaseRenderer):
     append the web file extention.
     """
     regex = re.compile("^/guia/(?P<pk>\d+)/$")
+    about_regex = re.compile("^/acerca-de/$")
 
     def render_path(self, path=None, view=None):
         if path:
@@ -54,11 +55,20 @@ class GuideRenderer(BaseRenderer):
 
             # create the renders page
             if self.regex.findall(path):
+                # if the guide is 1 then name it index.html
                 response, mime = self.render_page(path)
                 outpath = os.path.join(outpath, 'index{0}'.format(mime))
                 self.save_page(response, outpath)
                 return
+            elif self.about_regex.findall(path):
+                # if the url in path is /acerca-de/ rename it
+                # to about.html
+                response, mime = self.render_page(path)
+                outpath = os.path.join(outpath, 'about{0}'.format(mime))
+                self.save_page(response, outpath)
+                return
             else:
+                # otherwise call it path with sha1 name
                 response, mime = self.render_page(path)
                 name = '%s.html' % hashlib.sha1(path).hexdigest()
                 outpath = os.path.join(deploy_dir, name)

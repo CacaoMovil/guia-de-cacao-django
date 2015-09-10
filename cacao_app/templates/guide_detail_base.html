@@ -50,6 +50,7 @@
                   $('#download-guide').addClass('hidden');
                   $('#print-guide').addClass('hidden');
                   $('#list-guide').addClass('hidden');
+                  $('#js-menu-about').removeClass('hidden');
                   document.getElementById("guias-perseus").href="index.html"; 
                   document.getElementById("guias-home-perseus").href="index.html"; 
                   document.getElementById("guias-presentacion-perseus").href="index.html"; 
@@ -169,6 +170,11 @@
                         <!--/ END 2nd Level Menu -->
                     </li>
                     {% endfor %}
+                    <li id="js-menu-about" class="hidden">
+                        <a href="about.html">
+                            <span class="text">Acerca de la aplicación</span>
+                        </a>
+                    </li>
                 </ul>
                 <!--/ END Template Navigation/Menu -->
                 <!-- START Sidebar summary -->
