@@ -124,6 +124,10 @@ class HomeRenderer(GuideRenderer):
         return manifest_dict
 
     def paths(self):
+        """
+        Create a dict with all paths ( urls )
+        used when we render all the elements
+        """
         paths = set([])
         if self.guide_number:
             guides = Guide.objects.filter(number=self.guide_number)
@@ -136,6 +140,9 @@ class HomeRenderer(GuideRenderer):
             paths.add(guide.get_absolute_url())
         for content in contents:
             paths.add(content.get_absolute_url())
+
+        # Add the 'acerca-de' url to the render path
+        paths.add(reverse('about'))
 
         return paths
 
