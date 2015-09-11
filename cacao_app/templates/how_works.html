@@ -3,19 +3,6 @@
 {% block content %}
         <!-- START Template Main -->
         <section id="main" role="main">
-            <!-- START page header -->
-            <section class="page-header page-header-block nm">
-                <!-- pattern -->
-                <div class="bg-icon-3 bg-icon-right" style="right: 30px;"></div>
-                <!--/ pattern -->
-                <div class="container-fluid pt15 pb15">
-                    <div class="page-header-section">
-                        <h1 class="title font-alt">Como Funciona</h1>
-                    </div>
-                    <div class="page-header-section">
-                    </div>
-                </div>
-            </section>
 
             <section class="section"> <!-- bgcolor-white -->
                 <div class="container-fluid pl15">
@@ -23,49 +10,37 @@
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1 col- mb15">
                             <!-- Header -->
-                            <div class="section-header section-header-bordered mb10">
-                                <h3 class="section-title">
-                                    <p class="font-alt nm">Resumen</p>
-                                </h3>
-                            </div>
+                            <h3 class="text-uppercase text-accent">Como Funciona</h3><br>
                             <!--/ Header -->
                             <!-- Content -->
-                            <!-- Iframe container -->
-                            <!-- 
-                            <div class="iframe-container">
-                                <iframe width="100%" src="//www.youtube.com/embed/TN8cWYsvuBE" frameborder="0" allowfullscreen></iframe>
-                            </div>
-                            <hr>
-                            -->
+                            
                             <div class="text-justify">
                                 <p>
-                                La Caja de Herramientas de Cacao: Aprendiendo e Innovando sobre el manejo sostenible del cultivo de cacao en sistemas agroforestales se compone de 10 guías prácticas con información sobre el cultivo de cacao para productores de cacao y sus cooperativas en la región de América Latina.  
-                                </p>
-                                <p>
-                                Desde este sitio se puede ver el contenido de estas guías, descargarlas e imprimirlas para acceder a ellas desde cualquier lugar.  Los conocimientos de estas guías han sido proporcionados por productores y productoras de cacao, así como organizaciones de productores, centros de investigación y agencias de desarrollo.
+                                La Caja de Herramientas para Cacao: Aprendiendo e Innovando sobre el manejo sostenible del cultivo de cacao en sistemas agroforestales se presenta en diferentes versiones o formatos, los cuales se explican a continuación.  
                                 </p>
                             </div>
-                            <!--/ Iframe container -->
+
                             <!--/ Content -->
                         </div>
                     </div>
                     <!--/ END Row -->
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1 col- mb15 mt15">
-                            <div class="section-header section-header-bordered mb10">
-                                <h3 class="section-title">
-                                    <p class="font-alt nm">Disposiciones Escritorio – Laptop </p>
-                                </h3>
+                            <div class="well-help">
+                                <strong>Caja de herramientas para Cacao versión online. </strong>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h4>Menu</h4>
-                                    <p>En la parte izquierda se cuenta con un menú navegable donde se puede acceder al Directorio de Guías, Contacto e información Acerca de la aplicación.  Dentro de cada guía, en la parte izquierda, se cuenta con un menú desplegable que muestra el contenido de la guía y permite navegar en ella.</p>
-                                </div>
-                                <div class="col-md-4">
                                     <img src="{% static 'image/how-it-works/3ra-Guia-Laptop.png' %}" class="img-responsive" alt="Responsive image Laptop">
+                                    <p>Es una versión de las guías que puede ser consultada visitando el sitio <a href="http://cacaomovil.com">cacaomovil.com</a> utilizando cualquier navegador web. Es una versión funcionalmente orientada para la navegación desde computadoras de escritorio o laptops, pero también se adapta a cualquier pantalla de tablet o dispositivo móvil.</p>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
+                                    <iframe width="100%" height="350" src="https://www.youtube.com/embed/zZhVA09kKNg" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                                <div class="col-md-12">
+                                    En el menú principal se puede acceder a la Lista de guías y a información Acerca de la aplicación. Dentro de cada guía, en la parte izquierda, se cuenta con un menú desplegable que muestra el contenido de la guía y permite navegar en ella. 
+                                </div>
+                                <div class="col-md-4" style="display:none;">
                                     <h4>Acciones</h4>
                                     <p>Dentro de cada guía, en la parte superior derecha, se cuenta con las siguientes acciones: Inicio para volver al Directorio de Guías, Imprimir para acceder a una versión imprimible de la guía , Descargar para descargar la guía en formato HTML que permitirá acceder a ella sin conexión a internet, y Guías que desplega un menú navegable para ver el resto de guías disponibles en el sitio.</p>
                                 </div>
@@ -74,22 +49,23 @@
                     </div>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1 col- mb15 mt15">
-                            <div class="section-header section-header-bordered mb10">
-                                <h3 class="section-title">
-                                    <p class="font-alt nm">Disposiciones Tablet – Teléfonos</p>
-                                </h3>
+                            <div class="well-help">
+                                <strong>Caja de herramientas para Cacao versión aplicación móvil Android.</strong>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h4>Menu</h4>
-                                    <p>En el menú principal se puede acceder a la Lista de guías y a información Acerca de la aplicación. Dentro de cada guía, en la parte izquierda, se cuenta con un menú desplegable que muestra el contenido de la guía y permite navegar en ella. </p>
+                                <img src="{% static 'image/how-it-works/android.png' %}" class="img-responsive" alt="Responsive image Tablet">
+                                
+
                                 </div>
-                                <div class="col-md-4">
-                                    <img src="{% static 'image/how-it-works/3ra-Guia-Tablet2.png' %}" class="img-responsive" alt="Responsive image Tablet">
-                                </div>
-                                <div class="col-md-4">
-                                    <h4>Acciones</h4>
-                                    <p>Dentro de cada guía, en la parte superior derecha, se cuenta con las siguientes acciones: Inicio para volver al Directorio de Guías, Imprimir para acceder a una versión imprimible de la guía , Descargar para descargar la guía en formato HTML que permitirá acceder a ella sin conexión a internet, y Guías que desplega un menú navegable para ver el resto de guías disponibles en el sitio. </p>
+                                <div class="col-md-8">
+                                <p>Es una versión disponible para dispositivos móviles Android, la cual ofrece una experiencia nativa de exploración del contenido de las guías en tu smartphone. La conexión a internet del smartphone es únicamente requerida para descargar los contenidos de cada guía. Posteriormente a la descarga, los contenidos pueden ser visualizados sin el requerimiento de una conectividad a la red.</p>
+        
+                                <iframe width="100%" height="350" style="margin-top:15px;"src="https://www.youtube.com/embed/m05oSw5g1pk" frameborder="0" allowfullscreen></iframe>
+<p>La aplicación puede ser descargada en el siguiente enlace. </p>
+                                <a class="btn btn-google-play" href="https://play.google.com/store/apps/details?id=kronos.cacaomovil" >
+                                    <img src="{% static 'image/google-play.png' %}" alt="image google play image">
+                                </a><br>
                                 </div>
                             </div>
                         </div>
