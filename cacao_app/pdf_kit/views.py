@@ -7,6 +7,7 @@ from django.http import Http404
 from wkhtmltopdf.views import PDFTemplateView
 
 from cacao.models import Guide, Content
+from configuracion.models import Acerca
 
 class PDFDownloadView(PDFTemplateView):
     filename = 'guia.pdf'
@@ -30,9 +31,11 @@ class PDFDownloadView(PDFTemplateView):
         guide_number = self.request.GET.get('guide-id', None)
         guide_obj = Guide.objects.get(number=guide_number)
         content_obj = Content.objects.filter(section__guide=guide_obj).order_by('section', 'peso')
-
+        about_obj = Acerca.objects.get()
+        
         context = {
             'guide_obj': guide_obj,
             'content_obj': content_obj,
+            'about_obj': about_obj,
         }
         return context

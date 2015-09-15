@@ -3,6 +3,17 @@
 {% block content %}
 
     <div>
+      <div class="l-header">
+        <h4>Creditos de la aplicación</h4>
+      </div>
+      <div class="l-body">
+        <p>{{ about_obj.informacion_bienvenida|safe}}</p>
+      </div>
+    </div>
+
+    <div style="page-break-before: always;"></div>
+    
+    <div>
         <div class="l-header">
             <h4><strong>GUÍA {{ guide_obj.number }}: </strong>{{ guide_obj.name }}</h4>
             <h6>Presentación</h6>
@@ -11,8 +22,6 @@
             <p>{{ guide_obj.description|removetags:"iframe frame"|safe }}</p>
         </div>
     </div>
-
-    <div class="page-break"></div>
 
     {% for content in content_obj %}
     <div style="page-break-before: always;">
@@ -25,7 +34,6 @@
             <p>{{ content.description|removetags:"iframe frame"|safe }}</p>
         </div>
     </div>
-    <div class="page-break"></div>
     {% endfor %}
 
 {% endblock content %}
