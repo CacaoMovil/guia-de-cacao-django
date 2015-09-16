@@ -14,7 +14,7 @@ class PDFDownloadView(PDFTemplateView):
     template_name = 'pdf_kit/download.html'
     cmd_options = {
         'margin-top': 15,
-        'margin-bottom': 3,
+        'margin-bottom': 15,
     }
     # allowed_methods = ['post']
 
