@@ -296,14 +296,14 @@ var Mustache;(function(a){if(typeof module!=="undefined"&&module.exports){module
             Scrollbar: function (elem) {
                 $(".no-touch "+elem).each(function (index, value) {
                     $(value).slimScroll({
-                        size: "8px",
+                        size: "0px",
                         distance: "0px",
                         wrapperClass: $(value).data("wrapper") || "viewport",
                         railClass: "scrollrail",
                         barClass: "scrollbar",
                         wheelStep: 10,
-                        railVisible: true,
-                        alwaysVisible: true
+                        railVisible: false,
+                        alwaysVisible: false
                     });
                 });
             },
