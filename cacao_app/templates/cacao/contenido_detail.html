@@ -62,24 +62,7 @@
                     </div>
                     <div class="clearfix"></div>
                         <div class="row">
-                            
-                            <div class="col-sm-6">
-                                {% if contenido.previous == None %}
-                                {% else %}
-                                <a class="next-item" href="{% url 'contenido_detail' contenido.section.guide.number contenido.previous.slug %}">
-                                    <div class="row">
-                                        <div class="col-xs-2">
-                                            <i class="flaticon-thin35 fsize30"></i>
-                                        </div>
-                                        <div class="col-xs-10">
-                                            <span class="text-top text-uppercase">TEMA Anterior</span>
-                                            <span>{{ contenido.previous }}</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                {% endif %}
-                            </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 col-xs-12 pull-right">
                                 {% if contenido.next == None %}
                                 {% else %}
                                 <a class="next-item" href="{% url 'contenido_detail' contenido.section.guide.number contenido.next.slug %}">
@@ -95,6 +78,23 @@
                                 </a>
                                 {% endif %}
                             </div>
+                            <div class="col-sm-6 col-xs-12 pull-left">
+                                {% if contenido.previous == None %}
+                                {% else %}
+                                <a class="next-item" href="{% url 'contenido_detail' contenido.section.guide.number contenido.previous.slug %}">
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                            <i class="flaticon-thin35 fsize30"></i>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <span class="text-top text-uppercase">TEMA Anterior</span>
+                                            <span>{{ contenido.previous }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                {% endif %}
+                            </div>
+
                         </div>
                     </div>
                 </div>
