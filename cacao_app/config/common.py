@@ -273,6 +273,12 @@ class Common(Configuration):
             },
         }
     }
+    # Django REST Framework hide API docs
+    REST_FRAMEWORK = {
+        'DEFAULT_RENDERER_CLASSES': (
+            'rest_framework.renderers.JSONRenderer',
+        )
+    }
     # END LOGGING CONFIGURATION
 
     # Your common stuff: Below this line define 3rd party library settings
