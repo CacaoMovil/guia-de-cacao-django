@@ -34,13 +34,14 @@ class Common(Configuration):
         # 'django.contrib.humanize',
 
         # Admin
+        'suitlocale',
         'suit',
         'django.contrib.admin',
     )
     THIRD_PARTY_APPS = (
         'crispy_forms',
         'allauth',
-        'allauth.account',
+        # 'allauth.account',
         'sorl.thumbnail',
         'envelope',
         'solo',
@@ -140,7 +141,7 @@ class Common(Configuration):
     TIME_ZONE = 'America/Los_Angeles'
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-    LANGUAGE_CODE = 'en-us'
+    LANGUAGE_CODE = 'es-NI'
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
     SITE_ID = 1
@@ -292,8 +293,8 @@ class Common(Configuration):
 
             {'app': 'configuracion', 'icon':'icon-cog'},
 
-            {'label': 'Estaticos', 'icon':'icon-globe', 'models': (
-                {'label': 'Generar Estaticos', 'url': '/admin/static-generator/'},
+            {'label': 'Archivos estaticos', 'icon':'icon-globe', 'models': (
+                {'label': 'Generar archivos estaticos', 'url': '/admin/static-generator/'},
             )},
 
             {'app': 'auth', 'label':'Grupos', 'icon': 'icon-lock'},
@@ -303,7 +304,8 @@ class Common(Configuration):
             {'app': 'sites', 'icon': 'icon-chevron-right'},
         ),
         # misc
-        'LIST_PER_PAGE': 15
+        'LIST_PER_PAGE': 15,
+        'HEADER_DATE_FORMAT': 'l, j, F Y',
     }
     # CKEditor
     CKEDITOR_UPLOAD_PATH = "uploads/"

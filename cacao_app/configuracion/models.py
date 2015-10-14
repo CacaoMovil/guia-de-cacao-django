@@ -23,4 +23,4 @@ class Acerca(SingletonModel):
     informacion_bienvenida = RichTextField('Informacion de Bienvenida', config_name='default')
 
     class Meta:
-        verbose_name = "Configuracion Acerca"
+        verbose_name = "Configuracion de \"Acerca de\""

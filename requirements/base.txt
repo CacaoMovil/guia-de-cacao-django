@@ -37,6 +37,7 @@ pytz==2014.7
 
 # Your custom requirements go here
 -e git+git://github.com/oscarmcm/django-suit.git@oscarmcm-patch-1#egg=django-suit
+django-suit-locale==1.0.10
 sorl-thumbnail==11.12.1b
 django-envelope==1.0
 django-solo==1.1.0

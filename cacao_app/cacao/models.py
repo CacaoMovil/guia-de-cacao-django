@@ -72,7 +72,7 @@ class Section(models.Model):
     relationship with the Guide model because every
     Guide have many sections
     """
-    guide = models.ForeignKey(Guide)
+    guide = models.ForeignKey(Guide, verbose_name='Guia')
     title = models.CharField('Titulo', max_length=250)
     peso = models.PositiveIntegerField(
         "Peso de la Seccion", help_text='Entre mayor sea el peso mas al fondo se ubica')
@@ -175,12 +175,12 @@ class Download(models.Model):
     a relationship with Guide because a Download file
     belongs to a Guide object
     """
-    guide = models.ForeignKey(Guide, related_name='versions')
+    guide = models.ForeignKey(Guide, related_name='versions', verbose_name='Guia')
     file = models.FileField(upload_to='descargas/', null=True)
     num_version = models.PositiveIntegerField()
     # No Visible
     date = models.DateField(auto_now_add=True, editable=False)
-    name = models.CharField(max_length=250)
+    name = models.CharField('Nombre', max_length=250)
 
     class Meta:
         verbose_name = 'Descarga'
