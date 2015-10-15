@@ -290,9 +290,9 @@ class Common(Configuration):
                 {'label': 'Generar Estaticos', 'url': '/admin/static-generator/'},
             )},
 
-            {'app': 'auth', 'label':'Groups', 'icon': 'icon-lock'},
+            {'app': 'auth', 'label':'Grupos', 'icon': 'icon-lock'},
 
-            {'app': 'users', 'icon': 'icon-lock'},
+            {'app': 'users', 'label': 'Usuarios', 'icon': 'icon-user'},
 
             {'app': 'sites', 'icon': 'icon-chevron-right'},
         ),
