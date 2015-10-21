@@ -21,8 +21,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import GuidesSerializer, DownloadSerializer
 
-from phantom_pdf import render_to_pdf
-
 from .models import Guide, Content, Section, Download
 from .exporter import render_guide
 
@@ -109,9 +107,9 @@ def render_element(request):
 
             with open(file_path, 'rb') as download_file:
                 download.file.save('guia%s-version%s.zip' % (element_number, download.num_version),
-                                File(download_file), save=True)
+                                   File(download_file), save=True)
                 #media_file = open('nomedia.txt', 'w+')
-                #media_file.close()
+                # media_file.close()
         except:
             download.delete()
             raise
@@ -125,28 +123,6 @@ def render_element(request):
 
     return render_to_response(template, context,
                               context_instance=RequestContext(request))
-
-
-def create_pdf(request, guide_number):
-    """
-    this method convert the guide and his contents
-    to PDF file based in a new template
-    """
-    template = 'pdf/guia_pdf.html'
-    guide_obj = Guide.objects.get(number=guide_number)
-    content_obj = Content.objects.filter(section__guide=guide_obj).order_by('section', 'peso')
-
-    context = {
-        'guide_obj': guide_obj,
-        'content_obj': content_obj,
-    }
-
-    if request.GET.get('print'):
-        pdf_name = 'guia-%s' % guide_number
-        return render_to_pdf(request, pdf_name)
-    else:
-        return render_to_response(template, context,
-                                  context_instance=RequestContext(request))
 
 
 @api_view(['GET'])
@@ -217,6 +193,8 @@ def guide_last(request, number):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 def download_guide(request, guide_id, version):
-    download = get_object_or_404(Download, guide__id=guide_id, num_version=version)
+    download = get_object_or_404(
+        Download, guide__id=guide_id, num_version=version)
     return redirect(download.file.url)
