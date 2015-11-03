@@ -37,6 +37,23 @@
                         <!-- End Font size selector -->
                         <p class="fsize18 mt15 clearfix"></p>
                         <div class="content-body">
+                        <p> <div class="pull-left">
+                            <div id="fb-root"></div>
+                            <script>(function(d, s, id) {
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) return;
+                              js = d.createElement(s); js.id = id;
+                              js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId=185846191514758";
+                              fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));</script>
+                            <div class="fb-share-button" data-href="https://cacaomovil.com" data-layout="button_count"></div>
+                            </div>
+                            <div class="pull-left" style="margin-top:0px;margin-left:10px;">
+                            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cacaomovil.com">Tweet</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                            </div>
+                            <div style="clear:both"></div>
+                        </p>
                         {{ guia.description|offline_media|safe }}
                         </div>
                     </div>
