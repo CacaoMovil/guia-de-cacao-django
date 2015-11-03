@@ -25,7 +25,7 @@ def build_old_checksum(apps, schema_editor):
     Download = apps.get_model("cacao", "Download")
 
     for download in Download.objects.all():
-        zip_path = MEDIA_ROOT + '/' + str(download.file)
+        zip_path = os.path.join(MEDIA_ROT, str(download.file))
         download.checksum = create_checksum(zip_path)
         download.save()
 
