@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import hashlib
+import os
 from os.path import join, dirname, abspath
 from django.db import models, migrations
 
@@ -39,3 +40,4 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(build_old_checksum)
     ]
+
