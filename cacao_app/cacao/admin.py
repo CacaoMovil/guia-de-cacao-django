@@ -33,10 +33,11 @@ class DownloadAdmin(admin.ModelAdmin):
     model = Download
     search_fields = ('guide',)
     list_filter = ('guide',)
+    readonly_fields = ('checksum',)
     list_display = ('name', 'num_version', 'guide', 'date')
     fieldsets = [
         (None, {
-            'fields': ['guide', 'num_version', 'file']}
+            'fields': ['guide', 'num_version', 'file', 'checksum']}
          )
     ]
 
