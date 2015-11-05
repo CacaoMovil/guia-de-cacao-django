@@ -24,11 +24,11 @@
         <meta name="twitter:url" content="http://cacaomovil.com{{ contenido.get_absolute_url }}" />
         <meta name="twitter:title" content="{{ contenido.title_content }}" />
         <meta name="twitter:description" content="{{ contenido.description|striptags|safe|truncatewords:30 }}" />
-        <meta name="twitter:image" content="{{ contenido.banner.url }}"/>
+        <meta name="twitter:image" content="http://cacaomovil.com{{ contenido.banner.url }}"/>
         <meta property="og:title" content="{{ contenido.title_content }}" />
         <meta property="og:type" content="article"/>
         <meta property="og:url" content="http://cacaomovil.com{{ contenido.get_absolute_url }}"/>
-        <meta property="og:image" content="{{ contenido.image.url }}" />
+        <meta property="og:image" content="http://cacaomovil.com{{ contenido.image.url }}" />
         <meta property="og:description" content="{{ contenido.description|striptags|safe|truncatewords:30 }}"/>
         {% else %}
         <meta property="og:site_name" content="Cacao Movil" />
@@ -38,11 +38,11 @@
         <meta name="twitter:url" content="http://cacaomovil.com{{ guia.get_absolute_url }}" />
         <meta name="twitter:title" content="{{ guia.name }}" />
         <meta name="twitter:description" content="{{ guia.description|striptags|safe|truncatewords:30 }}" />
-        <meta name="twitter:image" content="{{ guia.image.url }}"/>
+        <meta name="twitter:image" content="http://cacaomovil.com{{ guia.image.url }}"/>
         <meta property="og:title" content="{{ guia.name }}" />
         <meta property="og:type" content="article"/>
         <meta property="og:url" content="http://cacaomovil.com{{ guia.get_absolute_url }}"/>
-        <meta property="og:image" content="{{ guia.image.url }}" />
+        <meta property="og:image" content="http://cacaomovil.com{{ guia.image.url }}" />
         <meta property="og:description" content="{{ guia.description|striptags|safe|truncatewords:30 }}"/>
         {% endif %}
         {% endblock meta_tags %}
