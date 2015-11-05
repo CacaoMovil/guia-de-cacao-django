@@ -6,10 +6,47 @@
         <!-- START META SECTION -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Lutheran World Relief</title>
+        {% if contenido %}
+        <title>Lutheran World Relief | {{ contenido.section.guide.name }} | {{ contenido.title_content }}</title>
+        {% else %}
+        <title>Lutheran World Relief | {{ guia.name }}</title>
+        {% endif %}
         <meta name="author" content="kronoscode.com/">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
+        {% block meta_tags %}
+        {% if contenido %}
+        <meta property="og:site_name" content="Cacao Movil" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@LuthWorldRelief" />
+        <meta name="twitter:creator" content="@LuthWorldRelief" />
+        <meta name="twitter:url" content="http://cacaomovil.com{{ contenido.get_absolute_url }}" />
+        <meta name="twitter:title" content="{{ contenido.title_content }}" />
+        <meta name="twitter:description" content="{{ contenido.description|striptags|safe|truncatewords:30 }}" />
+        <meta name="twitter:image" content="{{ contenido.banner.url }}"/>
+        <meta property="og:title" content="{{ contenido.title_content }}" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:url" content="http://cacaomovil.com{{ contenido.get_absolute_url }}"/>
+        <meta property="og:image" content="{{ contenido.image.url }}" />
+        <meta property="og:description" content="{{ contenido.description|striptags|safe|truncatewords:30 }}"/>
+        {% else %}
+        <meta property="og:site_name" content="Cacao Movil" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@LuthWorldRelief" />
+        <meta name="twitter:creator" content="@LuthWorldRelief" />
+        <meta name="twitter:url" content="http://cacaomovil.com{{ guia.get_absolute_url }}" />
+        <meta name="twitter:title" content="{{ guia.name }}" />
+        <meta name="twitter:description" content="{{ guia.description|striptags|safe|truncatewords:30 }}" />
+        <meta name="twitter:image" content="{{ guia.image.url }}"/>
+        <meta property="og:title" content="{{ guia.name }}" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:url" content="http://cacaomovil.com{{ guia.get_absolute_url }}"/>
+        <meta property="og:image" content="{{ guia.image.url }}" />
+        <meta property="og:description" content="{{ guia.description|striptags|safe|truncatewords:30 }}"/>
+        {% endif %}
+        {% endblock meta_tags %}
+
 
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'image/touch/apple-touch-icon-144x144-precomposed.png' %}">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'image/touch/apple-touch-icon-114x114-precomposed.png' %}">
