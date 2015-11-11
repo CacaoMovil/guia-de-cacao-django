@@ -22,9 +22,10 @@
             <!-- START jumbotron -->
             <section class="jumbotron jumbotron-bg2" 
             style="min-height:370px; 
+            {% if contenido.image %}
             {% thumbnail contenido.image "1563x538" crop="center" as img %}
             background: url( {{ img.url }} ) no-repeat center top;
-            {% endthumbnail %}">
+          {% endthumbnail %}" {% endif %}>
                 <!-- pattern overlay -->
                 <div class="pattern overlay"></div>
                 <!--/ pattern overlay -->
