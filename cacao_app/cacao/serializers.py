@@ -13,7 +13,7 @@ class DownloadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Download
-        fields = ('name', 'file', 'date', 'num_version', 'checksum')
+        fields = ('name', 'file', 'date', 'num_version', )
 
     def get_alternate_name(self, obj):
         return obj.get_download_url()
