@@ -24,11 +24,19 @@
         <meta name="twitter:url" content="http://cacaomovil.com{{ contenido.get_absolute_url }}" />
         <meta name="twitter:title" content="{{ contenido.title_content }}" />
         <meta name="twitter:description" content="{{ contenido.description|striptags|safe|truncatewords:30 }}" />
+        {% if contenido.banner %}
         <meta name="twitter:image" content="http://cacaomovil.com{{ contenido.banner.url }}"/>
+        {% else %}
+        <meta property="og:image" content="http://cacaomovil.com/static/image/stellar/background.jpg" />
+        {% endif %}
         <meta property="og:title" content="{{ contenido.title_content }}" />
         <meta property="og:type" content="article"/>
         <meta property="og:url" content="http://cacaomovil.com{{ contenido.get_absolute_url }}"/>
-        <meta property="og:image" content="http://cacaomovil.com{{ contenido.image.url }}" />
+        {% if contenido.banner %}
+        <meta property="og:image" content="http://cacaomovil.com{{ contenido.banner.url }}" />
+        {% else %}
+        <meta property="og:image" content="http://cacaomovil.com/static/image/stellar/background.jpg" />
+        {% endif %}
         <meta property="og:description" content="{{ contenido.description|striptags|safe|truncatewords:30 }}"/>
         {% else %}
         <meta property="og:site_name" content="Cacao Movil" />
@@ -38,7 +46,11 @@
         <meta name="twitter:url" content="http://cacaomovil.com{{ guia.get_absolute_url }}" />
         <meta name="twitter:title" content="{{ guia.name }}" />
         <meta name="twitter:description" content="{{ guia.description|striptags|safe|truncatewords:30 }}" />
+        {% if guia.image %}
         <meta name="twitter:image" content="http://cacaomovil.com{{ guia.image.url }}"/>
+        {% else %}
+        <meta name="twitter:image" content="http://cacaomovil.com/static/image/stellar/background.jpg"/>
+        {% endif %}
         <meta property="og:title" content="{{ guia.name }}" />
         <meta property="og:type" content="article"/>
         <meta property="og:url" content="http://cacaomovil.com{{ guia.get_absolute_url }}"/>
