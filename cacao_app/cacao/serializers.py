@@ -10,7 +10,7 @@ class DownloadSerializer(serializers.ModelSerializer):
     and last guide
     """
     file = serializers.SerializerMethodField('get_alternate_name')
-    tags = serializers.SerializerMethodField('get_tags')
+    tags = serializers.SerializerMethodField('get_guide_tags')
 
     class Meta:
         model = Download
@@ -19,7 +19,7 @@ class DownloadSerializer(serializers.ModelSerializer):
     def get_alternate_name(self, obj):
         return obj.get_download_url()
 
-    def get_tags(self, obj):
+    def get_guide_tags(self, obj):
         return ','.join([t.name for t in obj.guide.tags.all()])
 
 
