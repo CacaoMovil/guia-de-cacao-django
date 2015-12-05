@@ -48,7 +48,7 @@ class GuidesSerializer(serializers.ModelSerializer):
 
     def tag_list(self, guide):
         try:
-            return [t.name for t in guide.tags.all()]
+            return ','.join([t.name for t in guide.tags.all()])
         except:
             return None
 
