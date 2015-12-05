@@ -17,8 +17,10 @@ cache = get_cache('default')
 
 register = template.Library()
 
+
 def render_static():
     return getattr(settings, 'RENDER_STATIC', False)
+
 
 class StaticUrlNode(StaticNode):
 

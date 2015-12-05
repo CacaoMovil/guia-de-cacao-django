@@ -45,3 +45,6 @@ class Local(Common):
     # Your local stuff: Below this line define 3rd party libary settings
     THUMBNAIL_DEBUG = True
     VENV_PATH = os.path.join(os.environ['HOME'], '.virtualenvs/cacao')
+
+    # PERSEUS
+    USE_PERSEUS = False

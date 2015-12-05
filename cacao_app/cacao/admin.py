@@ -7,12 +7,18 @@ from .models import Guide, Section, Content, Download
 
 class GuideAdmin(ModelAdmin):
     search_fields = ('number', 'name')
-    list_display = ('name', 'number')
+    list_display = ('name', 'number', 'tags_list')
+    list_filter = ('tags',)
     fieldsets = [
         (None, {
-            'fields': ['number', 'name', 'description', 'image']}
+            'fields': ['number', 'name', 'tags', 'description', 'image']}
          )
     ]
+
+    def tags_list(self, obj):
+        return ", ".join([t.name for t in obj.tags.all()])
+    tags_list.short_description = 'Etiquetas'
+
 
 
 class ContentInline(admin.StackedInline):

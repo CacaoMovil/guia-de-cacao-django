@@ -53,6 +53,7 @@ class Common(Configuration):
         'ckeditor',
         'widget_tweaks',
         'wkhtmltopdf',
+        'taggit'
     )
 
     # Apps specific for this project go here.

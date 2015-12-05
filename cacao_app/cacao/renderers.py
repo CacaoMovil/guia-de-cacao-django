@@ -22,6 +22,14 @@ from .serializers import GuidesSerializer
 logger = logging.getLogger('perseus')
 
 
+def date_handler(obj):
+    """
+    Simple python handler that conver
+    a datetime.date to human date
+    """
+    return obj.isoformat() if hasattr(obj, 'isoformat') else obj
+
+
 class GuideRenderer(BaseRenderer):
 
     """
@@ -29,10 +37,12 @@ class GuideRenderer(BaseRenderer):
     this serializer convert the name of a url to hashlib and
     append the web file extention.
     """
+
     regex = re.compile("^/guia/(?P<pk>\d+)/$")
     about_regex = re.compile("^/acerca-de/$")
 
     def render_path(self, path=None, view=None):
+
         if path:
             # create deploy dir if not exists
             deploy_dir = settings.PERSEUS_SOURCE_DIR
@@ -54,7 +64,7 @@ class GuideRenderer(BaseRenderer):
             manifest_file.close()
 
             # create the renders page
-            if self.regex.findall(path):
+            if self.regex and self.regex.findall(path):
                 # if the guide is 1 then name it index.html
                 response, mime = self.render_page(path)
                 outpath = os.path.join(outpath, 'index{0}'.format(mime))
@@ -98,14 +108,6 @@ class GuideRenderer(BaseRenderer):
             self.render_path(path=path)
 
 
-def date_handler(obj):
-    """
-    Simple python handler that conver
-    a datetime.date to human date
-    """
-    return obj.isoformat() if hasattr(obj, 'isoformat') else obj
-
-
 class HomeRenderer(GuideRenderer):
 
     """
@@ -115,6 +117,9 @@ class HomeRenderer(GuideRenderer):
 
     def __init__(self, guide_number=None):
         self.guide_number = guide_number
+
+        if not guide_number:
+            self.regex = re.compile('^/static_index/$')
 
     def create_manifest(self):
         """
@@ -146,6 +151,9 @@ class HomeRenderer(GuideRenderer):
             guides = Guide.objects.all()
             contents = Content.objects.all()
 
+            # Add index view to our path list
+            paths.add(reverse('home_static'))
+
         for guide in guides:
             paths.add(guide.get_absolute_url())
         for content in contents:
@@ -155,6 +163,7 @@ class HomeRenderer(GuideRenderer):
         paths.add(reverse('about'))
 
         return paths
+
 
 class AboutUsRenderer(DefaultRenderer):
 

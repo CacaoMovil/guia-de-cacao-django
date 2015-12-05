@@ -13,6 +13,7 @@ def run_renderers(number=None):
         r = render_cls(number)
         r.generate()
 
+
 def run_about_renderer():
     r = AboutUsRenderer()
     r.generate()

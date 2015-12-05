@@ -27,11 +27,12 @@ class GuidesSerializer(serializers.ModelSerializer):
     date = serializers.SerializerMethodField('latest_guide_date')
     file = serializers.SerializerMethodField('guide_file')
     num_version = serializers.SerializerMethodField('guide_version')
+    tags = serializers.SerializerMethodField('tag_list')
     versions = DownloadSerializer(many=True, read_only=True)
 
     class Meta:
         model = Guide
-        fields = ('name', 'file', 'date', 'num_version', 'versions')
+        fields = ('name', 'file', 'date', 'num_version', 'tags', 'versions')
 
     def latest_guide_date(self, guide):
         try:
@@ -45,8 +46,15 @@ class GuidesSerializer(serializers.ModelSerializer):
         except:
             return None
 
+    def tag_list(self, guide):
+        try:
+            return [t.name for t in guide.tags.all()]
+        except:
+            return None
+
     def guide_file(self, guide):
         try:
             return guide.latest_version.file.url
+
         except:
             return ''

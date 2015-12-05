@@ -28,3 +28,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         run_about_renderer()
         run_importers()
+

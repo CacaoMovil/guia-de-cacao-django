@@ -1,0 +1,107 @@
+<!-- START Template Container -->
+{% extends "base.html" %}
+{% load custom_sorl_tags i18n %}
+{% block content %}
+        <!-- START Template Main -->
+        <section id="main" role="main">
+
+            <!-- START jumbotron -->
+            <section class="jumbotron" style="min-height:325px;">
+                <!-- pattern overlay -->
+                <div class="pattern overlay"></div>
+                <!--/ pattern overlay -->
+                <div class="container text-center" style="padding-top:7%;">
+                    <img src="{% static 'image/logo/vaina-cacao.png' %}" alt="Vaina Cacao">
+                    <h1 class="text-white text-uppercase">Caja de herramientas para cacao</h1>
+                    <h4 class="text-white">Aprendiendo e innovando sobre el cacao en sistemas agroforestales</h4>
+                </div>
+            </section>
+            <!--/ END jumbotron -->
+            <div class="container-fluid">
+                <!-- START Row -->
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <h3 class="text-uppercase text-accent">¿EN QUE CONSISTE?</h3>
+                        <p>La Caja de Herramientas para Cacao se compone de 10 guías prácticas con información sobre el cultivo de cacao para productores de cacao y sus cooperativas en la región de América Latina. Los conocimientos de estas guías han sido proporcionados por productores y productoras de cacao, así como organizaciones de productores, centros de investigación y agencias de desarrollo.</p>
+                        <p>Nuestro deseo es que las lean, compartan, y usen en sus parcelas. Y de ser posible, nos retroalimenten con sus sugerencias para mejorarlas. ¡Gracias por compartir!</p>
+                        <p> <div class="pull-left">
+                            <div id="fb-root"></div>
+                            <script>(function(d, s, id) {
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) return;
+                              js = d.createElement(s); js.id = id;
+                              js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId=604401966366912";
+                              fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));</script>
+                            <div class="fb-share-button" data-href="http://cacaomovil.com" data-layout="button_count"></div>
+                            </div>
+                            <div class="pull-left" style="margin-top:0px;margin-left:10px;">
+                            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cacaomovil.com">Tweet</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                            </div>
+                            <div style="clear:both"></div>
+                        </p>
+                    </div>
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <div class="well-help">
+                            <strong>CLICK EN CADA GUÍA PARA LEER GUIA</strong>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <div class="row">
+                            {% for guia in guias %}
+                            <div class="col-lg-4 col-sm-4 col-xs-6 col-480">
+                                <!-- thumbnail -->
+                                <div class="thumbnail animation animating delay fadeInRight">
+                                    <!-- media -->
+                                    <div class="media">
+                                        <!-- toolbar overlay -->
+                                        <div class="overlay visible-md visible-lg">
+                                            <div class="toolbar">
+                                                <a href="{% url 'guia_detail' guia.pk %}" target="_blank" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18"></i></a>
+                                                <a href="{{ guia.get_download_url }}" class="btn back-guia{{ guia.number }}" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
+                                                <a href="javascript:$('.js-print-form__{{ guia.number }}').submit();" class="btn back-guia{{ guia.number }}" title="Imprimir Guía">
+                                                  <form class="js-print-form__{{ guia.number }}" method="GET" action="{% url 'pdf-kit:download' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="guide-id" value="{{ guia.number }}">
+                                                    <i class="flaticon-printer78 fsize18" ></i>
+                                                  </form>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!--/ toolbar overlay -->
+                                        {% thumbnail guia.image "247x311" crop="center" as img %}
+                                         <a href="{% url 'guia_detail' guia.pk %}" target="_blank"><img src="{{ img.url }}" alt="Cover" width="100%" /></a>
+                                        {% endthumbnail %}
+                                        <!-- book effect -->
+                                        <div class="effect"></div>
+                                        <!--/ book effect -->
+                                        <div class="header back-guia{{ guia.number }} text-uppercase text-white">
+                                            <h4 class="title" ><a href="{% url 'guia_detail' guia.pk %}" target="_blank">{{ guia.name }}</a></h4>
+                                            <div class="guia" >
+                                                <span>Guía</span>
+                                                <span class="number">{{ guia.number }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/ media -->
+                                </div>
+                                <!--/ thumbnail -->
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END Row -->
+            </div>
+            <!--/ END Template Container -->
+{% endblock content %}
+{% block extra_footer %}
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('.sidebar').remove();
+        $('.topmenu .home-menu').addClass('active');
+    });
+</script>
+{% endblock extra_footer %}

@@ -9,6 +9,7 @@ from django.template import defaultfilters
 from django.template.base import add_to_builtins
 
 from ckeditor.fields import RichTextField
+from taggit.managers import TaggableManager
 
 
 class Guide(models.Model):
@@ -20,6 +21,7 @@ class Guide(models.Model):
     name = models.CharField('Nombre', max_length=250)
     description = RichTextField('Descripcion', config_name='default')
     image = models.ImageField('Imagen', upload_to='cacao/')
+    tags = TaggableManager()
 
     class Meta:
         verbose_name = 'Guia'
