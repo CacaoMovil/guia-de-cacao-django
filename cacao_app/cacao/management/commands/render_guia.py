@@ -20,6 +20,7 @@ import zipfile
 logger = logging.getLogger('perseus')
 cache = get_cache('default')
 
+
 def zip_dir(file_name, number, version):
     source_dir = getattr(settings, 'PERSEUS_SOURCE_DIR', None)
     if not source_dir:
@@ -48,6 +49,7 @@ def zip_dir(file_name, number, version):
             zip_file.write(location, arcname=zip_name)
             logger.debug('File: {0} added to {1}'.format(zip_name, file_name))
     zip_file.close()
+
 
 class Command(BaseCommand):
     help = 'Make a render from the specific element'

@@ -8,9 +8,12 @@ elements
 """
 # -* coding: utf-8 -*-
 import logging
+from os import remove as rm
+from shutil import move
 
 from optparse import make_option
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.core.cache import get_cache
 
@@ -24,6 +27,7 @@ from .render_guia import zip_dir
 logger = logging.getLogger('perseus')
 cache = get_cache('default')
 
+
 class Command(BaseCommand):
     help = 'Render all elements'
     cache.delete('media_urls')
@@ -34,13 +38,7 @@ class Command(BaseCommand):
                     action='store_true',
                     dest='archive',
                     default=False,
-                    help='Zips the result of the statically generated website'),
-
-        make_option('--filename',
-                    action='store',
-                    dest='filename',
-                    default='',
-                    help='Name of the file to zip'),
+                    help='Zips the result of the statically generated website'),  # noqa
 
     )
 
@@ -50,6 +48,8 @@ class Command(BaseCommand):
         run_importers()
         # make the folder zip
         if options.get('archive'):
-                zip_dir(options.get('filename', 'render.zip'), '1', '1')
+                zip_dir('guia-de-cacao-completa.zip', '1', '1')
 
-
+        # move from tmp to media
+        rm(getattr(settings, 'MEDIA_ROOT', None) + '/guia-de-cacao-completa.zip')  # noqa
+        move(getattr(settings, 'PERSEUS_BUILD_DIR', None) + '/guia-de-cacao-completa.zip', getattr(settings, 'MEDIA_ROOT', None))  # noqa
