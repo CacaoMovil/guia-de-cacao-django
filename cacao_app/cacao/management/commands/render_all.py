@@ -4,11 +4,12 @@ elements
 
 ** Example:
     python manage.py render_all --configuration=Export
-    --archive --filename=cacao.zip
+    --archive
 """
 # -* coding: utf-8 -*-
 import logging
 from os import remove as rm
+from os.path import join
 from shutil import move
 
 from optparse import make_option
@@ -51,5 +52,8 @@ class Command(BaseCommand):
                 zip_dir('guia-de-cacao-completa.zip', '1', '1')
 
         # move from tmp to media
-        rm(getattr(settings, 'MEDIA_ROOT', None) + '/guia-de-cacao-completa.zip')  # noqa
-        move(getattr(settings, 'PERSEUS_BUILD_DIR', None) + '/guia-de-cacao-completa.zip', getattr(settings, 'MEDIA_ROOT', None))  # noqa
+        try:
+            rm(join(settings.MEDIA_ROOT, 'guia-de-cacao-completa.zip'))  # noqa
+        except:
+            pass
+        move(join(settings.PERSEUS_BUILD_DIR, 'guia-de-cacao-completa.zip'), settings.MEDIA_ROOT)  # noqa
