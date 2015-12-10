@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
-from django.http import Http404
-from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic.base import TemplateView
 
 from envelope.views import ContactView
 from braces.views import FormMessagesMixin
 
 from .models import Contacto, Acerca
 
-def acerca(request, template="about.html"):
+
+class AboutView(TemplateView):
     """
     This method is used to render the
     Acerca model in the template
     """
-    try:
-        about = Acerca.objects.get()
-    except Acerca.DoesNotExist:
-        raise Http404
-    return render(request, template, {'about': about})
+    template_name = "about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutView, self).get_context_data(**kwargs)
+        context['about'] = Acerca.objects.get()
+        return context
+
 
 class Contact(FormMessagesMixin, ContactView):
     """

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.conf.urls import patterns, url
 
-from .views import GuideList, GuideStaticList, GuideDetail, ContentDetail
+from .views import GuideList, GuideDetail, ContentDetail
 
 urlpatterns = patterns('cacao.views',
     url(r'^$', GuideList.as_view(), name="home"),
@@ -28,5 +28,6 @@ urlpatterns = patterns('cacao.views',
 if settings.USE_PERSEUS:
     urlpatterns += (
         url(r'^static_index/$',
-            GuideStaticList.as_view(), name="home_static"),
+            GuideList.as_view(template_name='index_static.html'),
+            name="home_static"),
     )

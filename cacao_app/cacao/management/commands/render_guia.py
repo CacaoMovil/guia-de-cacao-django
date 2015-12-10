@@ -21,7 +21,7 @@ logger = logging.getLogger('perseus')
 cache = get_cache('default')
 
 
-def zip_dir(file_name, number, version):
+def zip_dir(file_name, number=None, version=None):
     source_dir = getattr(settings, 'PERSEUS_SOURCE_DIR', None)
     if not source_dir:
         raise Exception('PERSEUS_SOURCE_DIR not defined in settings')
@@ -44,7 +44,10 @@ def zip_dir(file_name, number, version):
         for _file in files:
             location = os.path.join(root, _file)
             # path for file in zip archive
-            new_root = root.replace('/guia', '/guia%s-version%s' % (number, version))
+            if number and version:
+                new_root = root.replace('/guia', '/guia%s-version%s' % (number, version))  # noqa
+            else:
+                new_root = root.replace('/guia', '/guia-cacao')  # noqa
             zip_name = os.path.join(os.path.relpath(new_root, rel_path), _file)
             zip_file.write(location, arcname=zip_name)
             logger.debug('File: {0} added to {1}'.format(zip_name, file_name))

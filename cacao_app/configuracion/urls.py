@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf import settings
-from django.conf.urls import patterns, include, url
-from django.conf.urls.static import static
-from django.views.generic import TemplateView
+from django.conf.urls import patterns, url
 
-from .views import acerca, Contact
+from .views import AboutView, Contact
 
 urlpatterns = patterns('configuracion.views',
-    url(r'^acerca-de/$', 'acerca', name="about"),
-    url(r'^contacto/', Contact.as_view(), name="envelope-contact"),
+	url(r'^acerca-de/$', AboutView.as_view(), name="about"),
+	url(r'^contacto/', Contact.as_view(), name="envelope-contact"),
 )

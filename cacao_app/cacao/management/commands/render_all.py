@@ -9,6 +9,7 @@ elements
 # -* coding: utf-8 -*-
 import logging
 from os import remove as rm
+from os import walk, makedirs
 from os.path import join
 from shutil import move
 
@@ -43,13 +44,31 @@ class Command(BaseCommand):
 
     )
 
+    def handle_dirs(self):
+        content_dir = join(settings.PERSEUS_SOURCE_DIR, 'contenido')
+        makedirs(content_dir, 0755)
+        exclude = set(['static', 'contenido'])
+        for dirname, dirnames, filenames in walk(settings.PERSEUS_SOURCE_DIR, topdown=True):  # noqa
+
+            dirnames[:] = [d for d in dirnames if d not in exclude]
+            for filename in filenames:
+                if not filename == 'index.html':
+                    move(join(dirname, filename), content_dir)
+
+        move(join(settings.PERSEUS_SOURCE_DIR, 'static'), content_dir)
+
     def handle(self, *args, **options):
+
         # first render all elements
         run_renderers()
         run_importers()
+
+        # move the dirs
+        self.handle_dirs()
+
         # make the folder zip
         if options.get('archive'):
-                zip_dir('guia-de-cacao-completa.zip', '1', '1')
+                zip_dir('guia-de-cacao-completa.zip')
 
         # move from tmp to media
         try:

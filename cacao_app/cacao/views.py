@@ -38,10 +38,6 @@ class GuideList(ListView):
     template_name = 'index.html'
 
 
-class GuideStaticList(GuideList):
-    template_name = 'index_static.html'
-
-
 class GuideDetail(DetailView):
 
     """
