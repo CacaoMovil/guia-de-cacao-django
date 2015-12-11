@@ -8,10 +8,10 @@ elements
 """
 # -* coding: utf-8 -*-
 import logging
-from os import remove as rm
-from os import walk, makedirs
-from os.path import join
-from shutil import move
+from os import remove
+from os import walk, mkdir
+from os.path import join, isdir
+from shutil import move, rmtree
 
 from optparse import make_option
 
@@ -46,7 +46,13 @@ class Command(BaseCommand):
 
     def handle_dirs(self):
         content_dir = join(settings.PERSEUS_SOURCE_DIR, 'contenido')
-        makedirs(content_dir, 0755)
+        # check if 'contenido' dir exists
+        if isdir(content_dir):
+            # remove the dir
+            rmtree(content_dir)
+        # create the 'contenido' dir
+        mkdir(content_dir)
+        # exclude some dir from path
         exclude = set(['static', 'contenido'])
         for dirname, dirnames, filenames in walk(settings.PERSEUS_SOURCE_DIR, topdown=True):  # noqa
 
@@ -68,11 +74,11 @@ class Command(BaseCommand):
 
         # make the folder zip
         if options.get('archive'):
-                zip_dir('guia-de-cacao-completa.zip')
+            zip_dir('guia-de-cacao-completa.zip')
 
-        # move from tmp to media
-        try:
-            rm(join(settings.MEDIA_ROOT, 'guia-de-cacao-completa.zip'))  # noqa
-        except:
-            pass
-        move(join(settings.PERSEUS_BUILD_DIR, 'guia-de-cacao-completa.zip'), settings.MEDIA_ROOT)  # noqa
+            # move from tmp to media
+            try:
+                remove(join(settings.MEDIA_ROOT, 'guia-de-cacao-completa.zip'))  # noqa
+            except:
+                pass
+            move(join(settings.PERSEUS_BUILD_DIR, 'guia-de-cacao-completa.zip'), settings.MEDIA_ROOT)  # noqa
