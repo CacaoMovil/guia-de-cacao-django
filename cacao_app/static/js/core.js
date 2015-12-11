@@ -296,7 +296,7 @@ var Mustache;(function(a){if(typeof module!=="undefined"&&module.exports){module
             Scrollbar: function (elem) {
                 $(".no-touch "+elem).each(function (index, value) {
                     $(value).slimScroll({
-                        size: "0px",
+                        size: "8px",
                         distance: "0px",
                         wrapperClass: $(value).data("wrapper") || "viewport",
                         railClass: "scrollrail",
