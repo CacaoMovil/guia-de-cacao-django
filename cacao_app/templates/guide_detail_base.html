@@ -100,9 +100,9 @@
                   $('#print-guide').addClass('hidden');
                   $('#list-guide').addClass('hidden');
                   $('#js-menu-about').removeClass('hidden');
-                  document.getElementById("guias-perseus").href="index.html"; 
-                  document.getElementById("guias-home-perseus").href="index.html"; 
-                  document.getElementById("guias-presentacion-perseus").href="index.html"; 
+                  document.getElementById("guias-perseus").href="index.html";
+                  document.getElementById("guias-home-perseus").href="index.html";
+                  document.getElementById("guias-presentacion-perseus").href="index.html";
                 }
             });
         </script>
@@ -160,7 +160,7 @@
                         </form>
                         <span class="icon"><i class="flaticon-printer78"></i></span>
                         <span class="text">Imprimir</span>
-                      </a>    
+                      </a>
                     </li>
                     <li>
                         <a href="/media/guia-de-cacao-completa.zip" title="Guías" class="hidden-sm hidden-xs" id="download-guide">
@@ -266,7 +266,7 @@
             <!--/ END Sidebar Container -->
         </aside>
         <!--/ END Template Sidebar (Left) -->
-        {% block content %}            
+        {% block content %}
         {% endblock content %}
         <!-- START Template Sidebar (right) -->
         <aside class="sidebar sidebar-right">
@@ -361,9 +361,9 @@
         <!-- START JAVASCRIPT SECTION (Load javascripts at bottom to reduce load time) -->
         <!-- Library script : mandatory -->
         <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/core.js' %}"></script> 
+        <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
         <!--/ Library script -->
- 
+
         <!-- App and page level script -->
          <!-- <script type="text/javascript" src="./js/jquery.sparkline.min.js"></script> -->
         <!-- will be use globaly as a summary on sidebar menu -->
@@ -377,7 +377,7 @@
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-          ga('create', 'UA-64984400-1', 'auto');
+          ga('create', '{% settings_value "GA_APP_ID" %}', 'auto');
           ga('send', 'pageview');
 
         </script>
