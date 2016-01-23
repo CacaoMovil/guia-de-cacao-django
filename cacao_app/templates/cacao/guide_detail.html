@@ -1,5 +1,5 @@
 {% extends "guide_detail_base.html" %}
-{% load cacao_tags custom_sorl_tags %}
+{% load cacao_tags custom_sorl_tags cacao_tags %}
 
 {% block content %}
 <!-- START Template Main -->
@@ -44,7 +44,7 @@
                               var js, fjs = d.getElementsByTagName(s)[0];
                               if (d.getElementById(id)) return;
                               js = d.createElement(s); js.id = id;
-                              js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId=604401966366912";
+                              js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId={% settings_value 'FB_APP_ID' %}";
                               fjs.parentNode.insertBefore(js, fjs);
                             }(document, 'script', 'facebook-jssdk'));</script>
                             <div class="fb-share-button" data-href="http://cacaomovil.com{{ guia.get_absolute_url }}" data-layout="button_count"></div>

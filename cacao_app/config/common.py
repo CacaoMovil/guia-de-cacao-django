@@ -337,6 +337,8 @@ class Common(Configuration):
             'extraAllowedContent': 'iframe[*]',
         },
     }
+    #fB App ID
+    FB_APP_ID = values.SecretValue()
     # used for the views delete folders and open the guide folder
     PROJECT_DIR = dirname(dirname(abspath(__file__)))
 

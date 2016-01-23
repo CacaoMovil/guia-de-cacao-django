@@ -1,5 +1,5 @@
 {% extends "guide_detail_base.html" %}
-{% load i18n cacao_tags custom_sorl_tags %}
+{% load i18n cacao_tags custom_sorl_tags cacao_tags %}
 {% block content %}
         <!-- START Template Main -->
         <section id="main" role="main">
@@ -20,8 +20,8 @@
             <!-- Page Header -->
 
             <!-- START jumbotron -->
-            <section class="jumbotron jumbotron-bg2" 
-            style="min-height:370px; 
+            <section class="jumbotron jumbotron-bg2"
+            style="min-height:370px;
             {% if contenido.image %}
             {% thumbnail contenido.image "1563x538" crop="center" as img %}
             background: url( {{ img.url }} ) no-repeat center top;
@@ -65,7 +65,7 @@
                               var js, fjs = d.getElementsByTagName(s)[0];
                               if (d.getElementById(id)) return;
                               js = d.createElement(s); js.id = id;
-                              js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId=604401966366912";
+                              js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId={% settings_value 'FB_APP_ID' %}";
                               fjs.parentNode.insertBefore(js, fjs);
                             }(document, 'script', 'facebook-jssdk'));</script>
                             <div class="fb-share-button" data-href="http://cacaomovil.com{{contenido.get_absolute_url }}" data-layout="button_count"></div>
@@ -122,7 +122,7 @@
 
             <!-- START To Top Scroller -->
             <a href="#" class="totop animation" data-toggle="waypoints totop" data-showanim="bounceIn" data-hideanim="bounceOut" data-offset="50%"><i class="ico-angle-up"></i></a>
-            
+
             <!--/ END To Top Scroller -->
         </section>
         <!--/ END Template Main -->

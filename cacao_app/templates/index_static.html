@@ -1,4 +1,4 @@
-{% load custom_sorl_tags i18n %}
+{% load custom_sorl_tags i18n cacao_tags %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -135,7 +135,7 @@
                                 var js, fjs = d.getElementsByTagName(s)[0];
                                 if (d.getElementById(id)) return;
                                 js = d.createElement(s); js.id = id;
-                                js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId=604401966366912";
+                                js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId={% settings_value 'FB_APP_ID' %}";
                                 fjs.parentNode.insertBefore(js, fjs);
                                 }(document, 'script', 'facebook-jssdk'));
                             </script>

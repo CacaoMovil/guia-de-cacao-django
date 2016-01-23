@@ -7,6 +7,15 @@ cache = get_cache('default')
 
 register = template.Library()
 
+
+@register.simple_tag
+def settings_value(name):
+    '''
+    {% settings_value "LANGUAGE_CODE" %}
+    '''
+    return getattr(settings, name, "")
+
+
 @register.filter
 def offline_media(value):
     if getattr(settings, "USE_PERSEUS", False):
