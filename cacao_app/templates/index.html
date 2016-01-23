@@ -59,7 +59,7 @@
                                         <div class="overlay visible-md visible-lg">
                                             <div class="toolbar">
                                                 <a href="{{ guia.get_absolute_url }}" target="_blank" class="btn back-guia{{ guia.number }}" title="Ver Guía"><i class="flaticon-eye46 fsize18"></i></a>
-                                                <a href="{{ guia.get_download_url }}" class="btn back-guia{{ guia.number }}" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
+                                                <a href="/media/guia-de-cacao-completa.zip" class="btn back-guia{{ guia.number }}" title="Descargar Guía"><i class="flaticon-download170 fsize18" ></i></a>
                                                 <a href="javascript:$('.js-print-form__{{ guia.number }}').submit();" class="btn back-guia{{ guia.number }}" title="Imprimir Guía">
                                                   <form class="js-print-form__{{ guia.number }}" method="GET" action="{% url 'pdf-kit:download' %}">
                                                     {% csrf_token %}
@@ -100,7 +100,7 @@
 {% block extra_footer %}
 <script type="text/javascript">
     $( document ).ready(function() {
-        $('.topmenu .home-menu').addClass('active'); 
+        $('.topmenu .home-menu').addClass('active');
     });
 </script>
 {% endblock extra_footer %}
