@@ -2,6 +2,7 @@
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from django.http import Http404
 
 from wkhtmltopdf.views import PDFTemplateView
 
@@ -32,7 +33,11 @@ class PDFDownloadView(PDFTemplateView):
     def get_context_data(self, **kwargs):
         context = super(PDFTemplateView, self).get_context_data(**kwargs)
         guide_number = self.request.GET.get('guide-id', None)
-        guide_obj = Guide.objects.get(number=guide_number)
+
+        try:
+            guide_obj = Guide.objects.get(number=guide_number)
+        except Guide.DoesNotExist:
+            raise Http404
 
         self.set_filename(guide_number)
 
