@@ -34,10 +34,10 @@ class PDFDownloadView(PDFTemplateView):
         context = super(PDFTemplateView, self).get_context_data(**kwargs)
         guide_number = self.request.GET.get('guide-id', None)
 
-        try:
-            guide_obj = Guide.objects.get(number=guide_number)
-        except Guide.DoesNotExist:
+        if guide_number is None:
             raise Http404
+        else:
+            guide_obj = Guide.objects.get(number=guide_number)
 
         self.set_filename(guide_number)
 
