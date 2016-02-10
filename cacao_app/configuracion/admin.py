@@ -5,7 +5,7 @@ from django.forms import ModelForm
 from solo.admin import SingletonModelAdmin
 from ckeditor.widgets import CKEditorWidget
 
-from .models import Contacto, Acerca
+from .models import Contacto, Acerca, Application
 
 class ContactoAdmin(SingletonModelAdmin):
     model = Contacto
@@ -25,3 +25,4 @@ class AcercaAdmin(SingletonModelAdmin):
 
 admin.site.register(Contacto, ContactoAdmin)
 admin.site.register(Acerca, AcercaAdmin)
+admin.site.register(Application, SingletonModelAdmin)

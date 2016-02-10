@@ -22,6 +22,7 @@ urlpatterns = patterns('cacao.views',
     url(r'^api/v1/guide/(?P<number>\d+)/$', 'guide_elements'),
     url(r'^api/v1/guide/(?P<number>\d+)/version/(?P<num_version>\d+)/$', 'guide_element'),  # noqa
     url(r'^api/v1/guide/(?P<number>\d+)/last/$', 'guide_last'),
+    url(r'^api/v1/settings/$', 'app_settings'),
 )
 
 if settings.USE_PERSEUS:

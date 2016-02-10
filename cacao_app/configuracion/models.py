@@ -24,3 +24,11 @@ class Acerca(SingletonModel):
 
     class Meta:
         verbose_name = "Configuracion de \"Acerca de\""
+
+class Application(SingletonModel):
+    title = models.CharField('Titulo', max_length=250)
+    sub_title = models.CharField('Sub Titulo', max_length=250)
+    logo = models.ImageField('Imagen', upload_to='cacao/')
+
+    class Meta:
+        verbose_name = "Configuracion de Aplicación"

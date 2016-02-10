@@ -24,6 +24,8 @@ from .serializers import GuidesSerializer, DownloadSerializer
 from .models import Guide, Content, Section, Download
 from .exporter import render_guide
 
+from configuracion.models import Application
+
 
 class GuideList(ListView):
 
@@ -230,6 +232,29 @@ def guide_last(request, number):
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def app_settings(request):
+    """
+    This method is for the api and list all guides
+    with the last version
+    """
+    if request.method == 'GET':
+        app_config = Application.objects.get()
+        if settings.MEDIA_URL.startswith('http'):
+            logo_url = app_config.logo.url
+        else:
+            logo_url = request.build_absolute_uri(app_config.logo.url)
+
+        data = {
+                'title': app_config.title,
+                'welcome_title': app_config.sub_title,
+                'logo': logo_url,
+                }
+        return Response(data)
+    else:
+        errors = {}
+        return Response(errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def download_guide(request, guide_id, version):
