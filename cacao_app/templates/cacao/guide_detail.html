@@ -13,7 +13,7 @@
                         </span>
                         <span class="text text-uppercase">Indice</span>
                     </a>
-                    <div class="next"><a href="{% url 'contenido_detail' guia.number guia.next_content.slug %}"><i class="flaticon-next15"></i></a></div>
+                    <div class="next"><a href="{% url 'contenido_detail' guia.number guia.next_section.slug %}"><i class="flaticon-next15"></i></a></div>
                     <h4 class="title-item text-capitalize">Presentación</h4>
                 </div>
             </nav>
@@ -61,11 +61,11 @@
                 </div>
                 <div class="row">
                     <div class="col-md-5 col-sm-6 col-sm-offset-3 col-md-offset-6">
-                        <a class="next-item" href="{% url 'contenido_detail' guia.number guia.next_content.slug %}">
+                        <a class="next-item" href="{% url 'contenido_detail' guia.number guia.next_section.slug %}">
                             <div class="row">
                                 <div class="col-xs-10">
                                     <span class="text-top text-uppercase">SIGUIENTE TEMA</span>
-                                    <span>{{ guia.next_content }}</span>
+                                    <span>{{ guia.next_section }}</span>
                                 </div>
                                 <div class="col-xs-2">
                                     <i class="flaticon-right106 fsize30"></i>

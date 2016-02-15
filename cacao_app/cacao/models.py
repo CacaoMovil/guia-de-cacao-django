@@ -42,22 +42,13 @@ class Guide(models.Model):
         except:
             return None
 
-    def next_content(self):
+    def next_section(self):
         """
         Return First Content Of A Guide
         """
         try:
-            return Content.objects.filter(section=self.section_set.all())[0]
-        except:
-            return None
-
-    def next_section(self):
-        """
-        Return the next section of a guide of a guide pointing
-        to the first Content of this section
-        """
-        try:
-            return Content.objects.filter(section=self.section_set.all())[0]
+            section = self.section_set.all().order_by('peso').first()
+            return section.contenidos.all().first()
         except:
             return None
 
@@ -79,12 +70,14 @@ class Section(models.Model):
     guide = models.ForeignKey(Guide, verbose_name='Guia')
     title = models.CharField('Titulo', max_length=250)
     peso = models.PositiveIntegerField(
-        "Peso de la Seccion", help_text='Entre mayor sea el peso mas al fondo se ubica')
+        "Peso de la Seccion",
+        help_text='Entre mayor sea el peso mas al fondo se ubica')
     image = models.ImageField('Imagen', upload_to='cacao/', blank=True)
 
     class Meta:
         verbose_name = 'Seccion'
         verbose_name_plural = 'Secciones'
+        ordering = ['guide__number', 'peso']
 
     def __unicode__(self):
         return "%s - Guia: %s" % (self.title, self.guide)
@@ -94,7 +87,7 @@ class Section(models.Model):
         return the next section
         """
         try:
-            return Section.objects.filter(peso__gt=self.peso, guide=self.guide)[0]
+            return Section.objects.filter(peso__gt=self.peso, guide=self.guide)[0]  # noqa
         except Exception, e:
             raise e
 
@@ -103,7 +96,7 @@ class Section(models.Model):
         return the previous section
         """
         try:
-            return Section.objects.filter(peso__lt=self.peso, guide=self.guide)[0]
+            return Section.objects.filter(peso__lt=self.peso, guide=self.guide).last()  # noqa
         except Exception, e:
             raise e
 
@@ -121,9 +114,11 @@ class Content(models.Model):
     extract = models.CharField("Extracto del Contenido", max_length=250)
     description = RichTextField('Descripcion', config_name='default')
     peso = models.PositiveIntegerField(
-        "Peso del Contenido", help_text='Entre mayor sea el peso mas al fondo se ubica')
+        "Peso del Contenido",
+        help_text='Entre mayor sea el peso mas al fondo se ubica')
     image = models.ImageField(
-        'Imagen', upload_to='cacao/', help_text='Required dimensions 1563x538', blank=True)
+        'Imagen', upload_to='cacao/',
+        help_text='Required dimensions 1563x538', blank=True)
     slug = models.SlugField(max_length=100)
 
     class Meta:
@@ -148,10 +143,10 @@ class Content(models.Model):
         return the next Content
         """
         try:
-            return Content.objects.filter(peso__gt=self.peso, section=self.section)[0]
+            return Content.objects.filter(peso__gt=self.peso, section=self.section)[0]  # noqa
         except IndexError:
             try:
-                return Content.objects.filter(section=self.section.next())[0]
+                return Content.objects.filter(section=self.section.next())[0]  # noqa
             except:
                 return None
 
@@ -160,10 +155,10 @@ class Content(models.Model):
         return the previous Content
         """
         try:
-            return Content.objects.filter(peso__lt=self.peso, section=self.section).order_by('-peso')[0]
+            return Content.objects.filter(peso__lt=self.peso, section=self.section).order_by('-peso')[0]  # noqa
         except IndexError:
             try:
-                return Content.objects.filter(section=self.section.previous())[0]
+                return Content.objects.filter(section=self.section.previous()).last()  # noqa
             except:
                 return None
 

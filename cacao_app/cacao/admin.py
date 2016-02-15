@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django.contrib.admin import ModelAdmin
 
 from .models import Guide, Section, Content, Download
 
 
-class GuideAdmin(ModelAdmin):
+class GuideAdmin(admin.ModelAdmin):
     search_fields = ('number', 'name')
     list_display = ('name', 'number', 'tags_list')
     list_filter = ('tags',)
@@ -20,7 +19,6 @@ class GuideAdmin(ModelAdmin):
     tags_list.short_description = 'Etiquetas'
 
 
-
 class ContentInline(admin.StackedInline):
     model = Content
     exclude = ('slug',)
@@ -32,7 +30,7 @@ class SectionAdmin(admin.ModelAdmin):
     inlines = [ContentInline, ]
     search_fields = ('title',)
     list_filter = ('title', 'guide')
-    list_display = ('title', 'guide')
+    list_display = ('title', 'guide', 'peso')
 
 
 class DownloadAdmin(admin.ModelAdmin):

@@ -337,7 +337,7 @@ class Common(Configuration):
             'extraAllowedContent': 'iframe[*]',
         },
     }
-    #fB App ID
+    # FB App ID
     FB_APP_ID = values.SecretValue()
     # GA APP ID
     GA_APP_ID = values.SecretValue()
