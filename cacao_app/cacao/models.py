@@ -37,7 +37,7 @@ class Guide(models.Model):
     def get_download_url(self):
         try:
             download = Download.objects.filter(
-                guide=self.number).order_by('-num_version')[0]
+                guide=self).order_by('-num_version').first()
             return download.file.url
         except:
             return None
@@ -47,15 +47,15 @@ class Guide(models.Model):
         Return First Content Of A Guide
         """
         try:
-            section = self.section_set.all().order_by('peso').first()
-            return section.contenidos.all().first()
+            section = self.section_set.order_by('peso').first()
+            return section.contenidos.first()
         except:
             return None
 
     @property
     def latest_version(self):
         try:
-            return self.versions.order_by('-num_version')[0]
+            return self.versions.order_by('-num_version').first()
         except:
             return None
 
@@ -87,9 +87,9 @@ class Section(models.Model):
         return the next section
         """
         try:
-            return Section.objects.filter(peso__gt=self.peso, guide=self.guide)[0]  # noqa
-        except Exception, e:
-            raise e
+            return Section.objects.filter(peso__gt=self.peso, guide=self.guide).first()  # noqa
+        except:
+            return None
 
     def previous(self):
         """
@@ -97,8 +97,8 @@ class Section(models.Model):
         """
         try:
             return Section.objects.filter(peso__lt=self.peso, guide=self.guide).last()  # noqa
-        except Exception, e:
-            raise e
+        except:
+            return None
 
 
 class Content(models.Model):
@@ -142,25 +142,23 @@ class Content(models.Model):
         """
         return the next Content
         """
-        try:
-            return Content.objects.filter(peso__gt=self.peso, section=self.section)[0]  # noqa
-        except IndexError:
-            try:
-                return Content.objects.filter(section=self.section.next())[0]  # noqa
-            except:
-                return None
+        next_content = Content.objects.filter(peso__gt=self.peso, section=self.section).first()  # noqa
+
+        if not next_content and self.section.next():
+            next_content = Content.objects.filter(section=self.section.next()).first()  # noqa
+
+        return next_content
 
     def previous(self):
         """
         return the previous Content
         """
-        try:
-            return Content.objects.filter(peso__lt=self.peso, section=self.section).order_by('-peso')[0]  # noqa
-        except IndexError:
-            try:
-                return Content.objects.filter(section=self.section.previous()).last()  # noqa
-            except:
-                return None
+        previous_content = Content.objects.filter(peso__lt=self.peso, section=self.section).last()  # noqa
+
+        if not previous_content and self.section.previous():
+            previous_content = Content.objects.filter(section=self.section.previous()).last()  # noqa
+
+        return previous_content
 
     @property
     def guide(self):
@@ -210,7 +208,7 @@ class Download(models.Model):
         if self.file:
             return self.file.url
         else:
-            return reverse('download_guide', args=(self.guide.id, self.num_version))
+            return reverse('download_guide', args=(self.guide.id, self.num_version))  # noqa
 
     def create_checksum(self, file_path):
         """
