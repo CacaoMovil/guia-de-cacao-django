@@ -1,13 +1,30 @@
 {% extends "base.html" %}
 
-{% block title %}Server Error{% endblock %}
+{% block title %}404 - Page Not found{% endblock %}
 
 {% block content %}
-<h1>Ooops!!! 500</h1>
+<section id="main" role="main">
 
-<h3>Looks like something went wrong!</h3>
-
-<p>We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, try refreshing.</p>
+  <!-- START jumbotron -->
+  <section class="jumbotron" style="min-height:325px;">
+    <!-- pattern overlay -->
+    <div class="pattern overlay"></div>
+    <!--/ pattern overlay -->
+    <div class="container text-center" style="padding-top:7%;">
+      <img src="{% static 'image/logo/vaina-cacao.png' %}" alt="Vaina Cacao">
+      <h1 class="text-white text-uppercase">Caja de herramientas para cacao</h1>
+      <h4 class="text-white">Aprendiendo e innovando sobre el cacao en sistemas agroforestales</h4>
+    </div>
+  </section>
+  <!--/ END jumbotron -->
+  <div class="container-fluid">
+    <!-- START Row -->
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1">
+        <h1>Error interno del servidor</h1>
+        <p>Se encontró una condición inesperada.</p>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock content %}
-
-

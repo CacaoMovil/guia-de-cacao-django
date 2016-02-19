@@ -8,6 +8,7 @@ from django.views.generic import TemplateView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.views import defaults as default_views
 
 from cacao.views import render_element
 
@@ -23,12 +24,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    # User management
-    url(r'^accounts/', include('allauth.urls')),
-
-    # Uncomment the next line to enable avatars
-    url(r'^avatar/', include('avatar.urls')),
-
     url(r'^pdf-kit/', include('pdf_kit.urls', namespace='pdf-kit')),
 
     # Your stuff: custom urls go here
@@ -37,3 +32,13 @@ urlpatterns = patterns('',
     url(r'^ckeditor/', include('ckeditor.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    # This allows the error pages to be debugged during development, just visit
+    # these url in browser to see how these error pages look like.
+    urlpatterns += (
+        url(r'^400/$', default_views.bad_request),
+        url(r'^403/$', default_views.permission_denied),
+        url(r'^404/$', default_views.page_not_found),
+        url(r'^500/$', default_views.server_error),
+    )
