@@ -48,7 +48,7 @@ class ContentDetail(DetailView):
 
     def get_queryset(self, **kwargs):
         qs = super(ContentDetail, self).get_queryset().filter(section__guide=self.kwargs.get('guide'))
-        return qs 
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super(ContentDetail, self).get_context_data(**kwargs)
@@ -57,7 +57,7 @@ class ContentDetail(DetailView):
 
 @staff_member_required
 def renderElement(request):
-    template = 'admin/render_static.html' 
+    template = 'admin/render_static.html'
     guia = Guide.objects.all()
     context = {
         'guias': guia,
@@ -68,22 +68,24 @@ def renderElement(request):
         element_number = request.POST.get('element')
 
         guide_element = Guide.objects.get(number=element_number)
-        
-        subprocess.call(['python', 'manage.py', 'render_guia', 
-            '--settings=config.export', 
+
+        output = subprocess.call(['python', 'manage.py', 'render_guia',
+            '--settings=config.export',
             '--element=%s' %element_number,
             '--archive',
             '--filename=guia%s.zip' %element_number ])
-        
+
+        messages.add_message(request, messages.INFO, output)
+
         file_path = os.path.join(settings.PERSEUS_BUILD_DIR, 'guia%s.zip' %element_number)
-        
+
         download.guide = guide_element
         download.num_version = download.get_last_version(guide_element.number)
         with open(file_path, 'rb') as download_file:
             download.file.save('guia%s-version%s.zip' %(element_number, download.get_last_version(guide_element.number)),
-                                File(download_file), save=True)        
+                                File(download_file), save=True)
         download.save()
-        
+
         messages.add_message(request, messages.INFO, 'Se ha renderizado correctamente.')
 
         shutil.rmtree(settings.PERSEUS_SOURCE_DIR)
@@ -92,23 +94,22 @@ def renderElement(request):
     return render_to_response(template, context,
                               context_instance=RequestContext(request))
 def createPdf(request):
-    template = 'pdf/guia_pdf.html' 
+    template = 'pdf/guia_pdf.html'
     obj = Guide.objects.get(number=1)
     context = {
         'obj': obj,
     }
-    
+
     if request.GET.get('print'):
         pdf_name = 'guia'
         return render_to_pdf(request, pdf_name)
     else:
         return render_to_response(template, context,
                               context_instance=RequestContext(request))
-    
+
     return render_to_response(template, context,
                               context_instance=RequestContext(request))
-        
-    
+
 
 @api_view(['GET'])
 def guides_collection(request):
@@ -116,7 +117,7 @@ def guides_collection(request):
         guides = Guide.objects.all()
         serializer = GuidesSerializer(guides, many=True)
         return Response(serializer.data)
-    else: 
+    else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
@@ -129,7 +130,7 @@ def guide_elements(request, pk):
     if request.method == 'GET':
         serializer = GuideSerializer(download, many=True)
         return Response(serializer.data)
-    else: 
+    else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
@@ -142,7 +143,7 @@ def guide_element(request, pk, num_version):
     if request.method == 'GET':
         serializer = GuideSerializer(download)
         return Response(serializer.data)
-    else: 
+    else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
