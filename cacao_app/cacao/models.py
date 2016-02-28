@@ -17,7 +17,7 @@ class Guide(models.Model):
         verbose_name = "Guia"
         verbose_name_plural  = "Guias"
         ordering = ["number"]
-            
+
     def __unicode__(self):
         return self.name
 
@@ -43,7 +43,7 @@ class Guide(models.Model):
             return self.versions.order_by('-num_version')[0]
         except:
             return None
-    
+
 
 class Section(models.Model):
     """docstring for seccion"""
@@ -63,9 +63,9 @@ class Content(models.Model):
     section = models.ForeignKey(Section, related_name='contenidos')
     title = models.CharField(max_length=250)
     extract = models.CharField("Extracto del Contenido",max_length=250)
-    description = models.TextField()
-    peso = models.PositiveIntegerField("Peso del contenido", unique=True)
-    image = models.ImageField(upload_to='cacao/', help_text="Required dimensions 1563x538")
+    description = models.TextField('Descripcion')
+    peso = models.PositiveIntegerField("Peso del Contenido", unique=True)
+    image = models.ImageField('Imagen', upload_to='cacao/', help_text='Required dimensions 1563x538', blank=True)
     slug = models.SlugField(max_length=100)
 
     class Meta:

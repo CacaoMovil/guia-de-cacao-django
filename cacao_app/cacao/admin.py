@@ -13,7 +13,7 @@ class GuideForm(ModelForm):
         model = Guide
 
         _ck_editor_toolbar = [
-            {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup']},
+            {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup', 'undo', 'clipboard']},
             {'name': 'paragraph',
              'groups': ['list', 'indent', 'blocks', 'align']},
             {'name': 'document', 'groups': ['mode']}, '/',
@@ -54,7 +54,7 @@ class ContentForm(ModelForm):
         model = Content
 
         _ck_editor_toolbar = [
-            {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup']},
+            {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup', 'undo', 'clipboard']},
             {'name': 'paragraph',
              'groups': ['list', 'indent', 'blocks', 'align']},
             {'name': 'document', 'groups': ['mode']}, '/',
