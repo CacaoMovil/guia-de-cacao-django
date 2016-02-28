@@ -54,8 +54,9 @@ class Section(models.Model):
     Guide have many sections
     """
     guide = models.ForeignKey(Guide)
-    title = models.CharField(max_length=250)
-    image = models.ImageField(upload_to='cacao/')
+    title = models.CharField('Titulo', max_length=250)
+    peso = models.PositiveIntegerField("Peso de la Seccion", help_text='Entre mayor sea el peso mas al fondo se ubica')
+    image = models.ImageField('Imagen', upload_to='cacao/', blank=True)
 
     class Meta:
         verbose_name = "Seccion"

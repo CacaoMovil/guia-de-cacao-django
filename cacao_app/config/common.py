@@ -302,7 +302,7 @@ class Common(Configuration):
     PROJECT_DIR = dirname(dirname(abspath(__file__)))
 
     PERSEUS_BUILD_DIR = '/tmp/perseus/build'
-    PERSEUS_SOURCE_DIR = '/tmp/perseus/_output'
+    PERSEUS_SOURCE_DIR = '/tmp/perseus/guia'
     # config for create pdf's
     GENERATE_PDF_JS = os.path.join(
         os.path.dirname(

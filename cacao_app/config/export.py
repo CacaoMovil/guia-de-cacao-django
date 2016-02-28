@@ -14,7 +14,7 @@ class Local(Production):
     DEBUG = True
     RENDER_STATIC = True
     PERSEUS_BUILD_DIR = '/tmp/perseus/build'
-    PERSEUS_SOURCE_DIR = '/tmp/perseus/_output'
+    PERSEUS_SOURCE_DIR = '/tmp/perseus/guia'
     PERSEUS_STATIC_DIR = os.path.join(
         PERSEUS_SOURCE_DIR, "static"
     )
