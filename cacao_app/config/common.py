@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import phantom_pdf_bin
-from os.path import join, dirname
+from os.path import join, dirname, abspath
 
 from configurations import Configuration, values
 
@@ -319,3 +319,7 @@ class Common(Configuration):
     PHANTOMJS_PDF_DIR=os.path.join(PHANTOM_ROOT_DIR, 'pdfs')
     PHANTOMJS_FORMAT='A4'
     PHANTOMJS_ORIENTATION='portrait'
+
+    PROJECT_DIR = dirname(dirname(abspath(__file__)))
+
+    VENV_PATH = '~/.virtualenvs/cacao'

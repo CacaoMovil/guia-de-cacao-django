@@ -3,6 +3,8 @@ import os
 import shutil
 import subprocess
 
+from fabric.tasks import execute
+
 from django.core.files import File
 from django.conf import settings
 
@@ -22,9 +24,11 @@ from .serializers import GuidesSerializer, GuideSerializer
 
 from phantom_pdf import render_to_pdf
 
-from tasks import makeRender, test_celery
+from tasks import makeRender
 
 from .models import Guide, Content, Section, Download
+from .export import render_guide
+
 
 class GuideList(ListView):
     model = Guide
@@ -69,13 +73,15 @@ def renderElement(request):
 
         guide_element = Guide.objects.get(number=element_number)
 
-        output = subprocess.call(['python', 'manage.py', 'render_guia',
-            '--settings=config.export',
-            '--element=%s' %element_number,
-            '--archive',
-            '--filename=guia%s.zip' %element_number ])
+        execute(render_guide, element_number)
 
-        messages.add_message(request, messages.INFO, output)
+        #output = subprocess.call(['python', 'manage.py', 'render_guia',
+        #    '--settings=config.export',
+        #    '--element=%s' %element_number,
+        #    '--archive',
+        #    '--filename=guia%s.zip' %element_number ])
+
+        #messages.add_message(request, messages.INFO, output)
 
         file_path = os.path.join(settings.PERSEUS_BUILD_DIR, 'guia%s.zip' %element_number)
 

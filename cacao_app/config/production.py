@@ -131,3 +131,5 @@ class Production(Common):
 
     PERSEUS_BUILD_DIR = '/tmp/perseus/build'
     PERSEUS_SOURCE_DIR = '/tmp/perseus/_output'
+
+    VENV_PATH = '/home/kronos/.virtualenvs/cacao'
