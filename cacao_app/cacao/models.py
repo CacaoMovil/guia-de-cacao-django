@@ -16,9 +16,9 @@ class Guide(models.Model):
     image = models.ImageField('Imagen', upload_to='cacao/')
 
     class Meta:
-        verbose_name = "Guia"
-        verbose_name_plural  = "Guias"
-        ordering = ["number"]
+        verbose_name = 'Guia'
+        verbose_name_plural  = 'Guias'
+        ordering = ['number']
 
     def __unicode__(self):
         return self.name
@@ -59,8 +59,8 @@ class Section(models.Model):
     image = models.ImageField('Imagen', upload_to='cacao/', blank=True)
 
     class Meta:
-        verbose_name = "Seccion"
-        verbose_name_plural  = "Secciones"
+        verbose_name = 'Seccion'
+        verbose_name_plural  = 'Secciones'
 
     def __unicode__(self):
         return "%s - Guia: %s" %(self.title, self.guide)
@@ -76,13 +76,15 @@ class Content(models.Model):
     title_content = models.CharField('Titulo Contenido', max_length=250)
     extract = models.CharField("Extracto del Contenido", max_length=250)
     description = models.TextField('Descripcion')
-    peso = models.PositiveIntegerField("Peso del Contenido", unique=True)
+    peso = models.PositiveIntegerField("Peso del Contenido", help_text='Entre mayor sea el peso mas al fondo se ubica')
     image = models.ImageField('Imagen', upload_to='cacao/', help_text='Required dimensions 1563x538', blank=True)
     slug = models.SlugField(max_length=100)
 
     class Meta:
-        verbose_name = "Contenido"
-        verbose_name_plural  = "Contenidos"
+        verbose_name = 'Contenido'
+        verbose_name_plural  = 'Contenidos'
+        ordering = ['peso']
+        unique_together = ('peso', 'section')
 
     def __unicode__(self):
         return self.title
@@ -126,9 +128,9 @@ class Download(models.Model):
     name = models.CharField(max_length=250)
 
     class Meta:
-        verbose_name = "Descarga"
-        verbose_name_plural = "Descargas"
-        unique_together = ("guide", "num_version")
+        verbose_name = 'Descarga'
+        verbose_name_plural = 'Descargas'
+        unique_together = ('guide', 'num_version')
 
     def __unicode__(self):
         return self.guide.name
