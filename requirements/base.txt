@@ -47,3 +47,4 @@ redis==2.10.3
 djangorestframework==3.0.2
 #django-phantom-pdf==0.13
 -e git+git://github.com/BananaDesk/django-phantom-pdf.git#egg=django-phantom-pdf
+Fabric==1.10.1

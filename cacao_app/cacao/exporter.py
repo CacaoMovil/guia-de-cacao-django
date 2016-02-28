@@ -1,4 +1,4 @@
-from fabric.api import local, task, cd
+from fabric.api import local, task, lcd
 from django.conf import settings
 
 
@@ -8,11 +8,11 @@ def virtualenv(command):
               'command': command,
               'venv': settings.VENV_PATH
              }
-    local('source %(venv)s/bin/activate && %(command)s' % params)
+    local('source %(venv)s/bin/activate && %(command)s' % params, shell='/bin/bash')
 
 
 @task
 def render_guide(element_number):
-    with cd(settings.PROJECT_DIR):
+    with lcd(settings.PROJECT_DIR):
         command = "python manage.py render_guia --settings=config.export --element=%(element)s --archive --filename=guia-%(element)s.zip" % {'element': element_number}
         virtualenv(command)

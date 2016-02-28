@@ -27,7 +27,7 @@ from phantom_pdf import render_to_pdf
 from tasks import makeRender
 
 from .models import Guide, Content, Section, Download
-from .export import render_guide
+from .exporter import render_guide
 
 
 class GuideList(ListView):
@@ -83,7 +83,7 @@ def renderElement(request):
 
         #messages.add_message(request, messages.INFO, output)
 
-        file_path = os.path.join(settings.PERSEUS_BUILD_DIR, 'guia%s.zip' %element_number)
+        file_path = os.path.join(settings.PERSEUS_BUILD_DIR, 'guia-%s.zip' %element_number)
 
         download.guide = guide_element
         download.num_version = download.get_last_version(guide_element.number)
