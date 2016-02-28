@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import hashlib
+
 from django.db import models
 from django.db.models import Max
 from django.conf import settings
@@ -175,9 +177,12 @@ class Download(models.Model):
     a relationship with Guide because a Download file
     belongs to a Guide object
     """
-    guide = models.ForeignKey(Guide, related_name='versions', verbose_name='Guia')
+    guide = models.ForeignKey(
+        Guide, related_name='versions', verbose_name='Guia')
     file = models.FileField(upload_to='descargas/', null=True)
     num_version = models.PositiveIntegerField()
+    checksum = models.CharField(max_length=32, blank=True)
+
     # No Visible
     date = models.DateField(auto_now_add=True, editable=False)
     name = models.CharField('Nombre', max_length=250)
@@ -209,6 +214,19 @@ class Download(models.Model):
             return self.file.url
         else:
             return reverse('download_guide', args=(self.guide.id, self.num_version))
+
+    def create_checksum(self, file_path):
+        """
+        Simple method that is used
+        for generating a MD5 checksum
+        of a file
+        """
+        hash = hashlib.md5()
+        with open(file_path, "rb") as f:
+            for chunk in iter(lambda: f.read(4096), b""):
+                hash.update(chunk)
+        return hash.hexdigest()
+
 
 # Monkey Patch
 if getattr(settings, 'USE_PERSEUS', False):

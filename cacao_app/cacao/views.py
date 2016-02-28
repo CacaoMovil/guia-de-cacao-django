@@ -53,6 +53,7 @@ class GuideDetail(DetailView):
             section__guide=self.object)
         context['seccion_list'] = Section.objects.filter(
             guide=self.object).order_by('peso')
+
         return context
 
 
@@ -89,40 +90,73 @@ def render_element(request):
     context = {
         'guias': guia,
     }
+
     if request.method == 'POST':
-        download = Download()
-
         element_number = request.POST.get('element')
-
         guide_element = Guide.objects.get(number=element_number)
+
+        download = Download()
 
         download.guide = guide_element
         download.num_version = download.get_last_version(guide_element.number)
         download.save()
+
         try:
+            # Run fabric task for django perseus shell command
             execute(render_guide, element_number, download.num_version)
 
+            # Get perseus path
             file_path = os.path.join(
                 settings.PERSEUS_BUILD_DIR, 'guia-%s.zip' % element_number)
 
             with open(file_path, 'rb') as download_file:
+                # store the file in the models based in the file generated
+                # with django perseus in tmp dir
                 download.file.save('guia%s-version%s.zip' % (element_number, download.num_version),
                                    File(download_file), save=True)
-                #media_file = open('nomedia.txt', 'w+')
-                # media_file.close()
         except:
             download.delete()
             raise
 
         download.save()
+        # Generate checksum from the zip file rendered
+        # NOTE: file_path is the same file that download.file.url
+        download.checksum = download.create_checksum(file_path)
+        download.save()
+
+        # Show admin message when the render finish
         message_text = 'Se ha renderizado correctamente la guia: %s.' % guide_element.name
         messages.add_message(request, messages.INFO, message_text)
 
+        # remove perseus generated file in tmp dir
         shutil.rmtree(settings.PERSEUS_SOURCE_DIR)
         shutil.rmtree(settings.PERSEUS_BUILD_DIR)
 
     return render_to_response(template, context,
                               context_instance=RequestContext(request))
+
+
+def create_pdf(request, guide_number):
+    """
+    this method convert the guide and his contents
+    to PDF file based in a new template
+    """
+    template = 'pdf/guia_pdf.html'
+    guide_obj = Guide.objects.get(number=guide_number)
+    content_obj = Content.objects.filter(
+        section__guide=guide_obj).order_by('section', 'peso')
+
+    context = {
+        'guide_obj': guide_obj,
+        'content_obj': content_obj,
+    }
+
+    if request.GET.get('print'):
+        pdf_name = 'guia-%s' % guide_number
+        return render_to_pdf(request, pdf_name)
+    else:
+        return render_to_response(template, context,
+                                  context_instance=RequestContext(request))
 
 
 @api_view(['GET'])

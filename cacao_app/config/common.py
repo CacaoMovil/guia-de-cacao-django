@@ -183,9 +183,6 @@ class Common(Configuration):
         'django.template.loaders.app_directories.Loader',
     )
 
-    # See: http://django-crispy-forms.readthedocs.org/en/latest/install.html#template-packs
-    #CRISPY_TEMPLATE_PACK = 'bootstrap3'
-    # END TEMPLATE CONFIGURATION
 
     # STATIC FILE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
