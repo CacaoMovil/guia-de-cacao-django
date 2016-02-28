@@ -1,0 +1,31 @@
+{% extends "pdf_kit/base.html" %}
+
+{% block content %}
+
+    <div>
+        <div class="l-header">
+            <h4><strong>GUÍA {{ guide_obj.number }}: </strong>{{ guide_obj.name }}</h4>
+            <h6>Presentación</h6>
+        </div>
+        <div class="l-body">
+            <p>{{ guide_obj.description|removetags:"iframe frame"|safe }}</p>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    {% for content in content_obj %}
+    <div style="page-break-before: always;">
+        <div class="l-header">
+            <h4>{{ content.section }}</h4>
+            <h5><strong>{{ content.title }} </strong></h5>
+            <h6><strong>{{ content.extract }} </strong></h6>
+        </div>
+        <div class="l-body">
+            <p>{{ content.description|removetags:"iframe frame"|safe }}</p>
+        </div>
+    </div>
+    <div class="page-break"></div>
+    {% endfor %}
+
+{% endblock content %}

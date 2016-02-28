@@ -99,15 +99,17 @@
                         </a>
                     </li>
                     <li>
-                      <a  title="Guías" 
-                      {% if contenido %}
-                      href="{% url 'create_pdf' contenido.section.guide.number %}?print=true"
-                      {% else %}
-                      href="{% url 'create_pdf' guia.number %}?print=true"
-                      {% endif %}
-                      class="hidden-sm hidden-xs" id="print-guide">
-                          <span class="icon"><i class="flaticon-printer78"></i></span>
-                          <span class="text">Imprimir</span>
+                      <a  title="Guías" class="hidden-sm hidden-xs" id="print-guide" href="javascript:$('.js-print-form').submit();">
+                        <form class="js-print-form" method="GET" action="{% url 'pdf-kit:download' %}">
+                        {% csrf_token %}
+                        {% if contenido %}
+                        <input type="hidden" name="guide-id" value="{{ contenido.section.guide.number }}">
+                        {% else %}
+                        <input type="hidden" name="guide-id" value="{{ guia.number }}">
+                        {% endif %}
+                        </form>
+                        <span class="icon"><i class="flaticon-printer78"></i></span>
+                        <span class="text">Imprimir</span>
                       </a>    
                     </li>
                     <li>

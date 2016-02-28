@@ -44,8 +44,7 @@ django-perseus==0.1.1
 celery==3.1.17
 redis==2.10.3
 djangorestframework==3.0.2
-#django-phantom-pdf==0.13
--e git+git://github.com/BananaDesk/django-phantom-pdf.git#egg=django-phantom-pdf
+django-wkhtmltopdf==2.0.2
 Fabric==1.10.1
 django-ckeditor==4.4.8
 pyquery==1.2.9

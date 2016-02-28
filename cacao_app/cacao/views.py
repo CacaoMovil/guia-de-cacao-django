@@ -134,7 +134,7 @@ def create_pdf(request, guide_number):
     """
     template = 'pdf/guia_pdf.html'
     guide_obj = Guide.objects.get(number=guide_number)
-    content_obj = Content.objects.filter(section__guide=guide_obj)
+    content_obj = Content.objects.filter(section__guide=guide_obj).order_by('section', 'peso')
 
     context = {
         'guide_obj': guide_obj,

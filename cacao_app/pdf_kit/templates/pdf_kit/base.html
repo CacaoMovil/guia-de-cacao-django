@@ -1,0 +1,30 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,500">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body { background-color: #FFF !important; }
+        * { font-family: 'Roboto', sans-serif; }
+        .l-header {
+            margin-top: 50px;
+            border-bottom: 3px solid #000;
+            margin-bottom: 10px;
+        }
+        .l-body { text-align: justify; }
+        @media all {
+          .page-break   { display: none; }
+        }
+        @media print {
+          .page-break   { display: block; page-break-before: always; }
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

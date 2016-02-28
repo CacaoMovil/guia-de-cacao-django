@@ -30,6 +30,8 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable avatars
     url(r'^avatar/', include('avatar.urls')),
 
+    url(r'^pdf-kit/', include('pdf_kit.urls', namespace='pdf-kit')),
+
     # Your stuff: custom urls go here
     url(r'', include('cacao.urls')),
     url(r'', include('configuracion.urls')),

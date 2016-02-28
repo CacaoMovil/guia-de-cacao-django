@@ -48,11 +48,13 @@ class Common(Configuration):
         'rest_framework',
         'ckeditor',
         'widget_tweaks',
+        'wkhtmltopdf',
     )
 
     # Apps specific for this project go here.
     LOCAL_APPS = (
         'users',  # custom users
+        'pdf_kit',
         'cacao',
         'configuracion',
     )
@@ -324,16 +326,4 @@ class Common(Configuration):
     PERSEUS_BUILD_DIR = '/tmp/perseus/build'
     PERSEUS_SOURCE_DIR = '/tmp/perseus/guia'
     # config for create pdf's
-    GENERATE_PDF_JS = os.path.join(
-        os.path.dirname(
-            phantom_pdf_bin.__file__), 'generate_pdf.js')
-    PHANTOM_ROOT_DIR = '/tmp/phantom_pdf'
-    PHANTOMJS_BIN = '/usr/local/bin/phantomjs'
-    PHANTOMJS_COOKIE_DIR=os.path.join(PHANTOM_ROOT_DIR, 'cookies')
-    PHANTOMJS_GENERATE_PDF=GENERATE_PDF_JS
-    PHANTOMJS_PDF_DIR=os.path.join(PHANTOM_ROOT_DIR, 'pdfs')
-    PHANTOMJS_FORMAT='A4'
-    PHANTOMJS_ORIENTATION='portrait'
-
-
-    VENV_PATH = '~/.virtualenvs/cacao'
+    PDF_KIT_MODEL = 'cacao.Content'
