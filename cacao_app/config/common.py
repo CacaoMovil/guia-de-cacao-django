@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import phantom_pdf_bin
 from os.path import join, dirname
 
 from configurations import Configuration, values
@@ -306,4 +307,15 @@ class Common(Configuration):
         BASE_DIR, '..', "_output"
     )
     # config for create pdf's
+    GENERATE_PDF_JS = os.path.join(
+        os.path.dirname(
+            phantom_pdf_bin.__file__), 'generate_pdf.js')
+    PHANTOM_ROOT_DIR = os.path.join(
+        BASE_DIR, 'pdf'
+    )
     PHANTOMJS_BIN = '/usr/local/bin/phantomjs'
+    PHANTOMJS_COOKIE_DIR=os.path.join(PHANTOM_ROOT_DIR, 'cookies')
+    PHANTOMJS_GENERATE_PDF=GENERATE_PDF_JS
+    PHANTOMJS_PDF_DIR=os.path.join(PHANTOM_ROOT_DIR, 'pdfs')
+    PHANTOMJS_FORMAT='A4'
+    PHANTOMJS_ORIENTATION='portrait'

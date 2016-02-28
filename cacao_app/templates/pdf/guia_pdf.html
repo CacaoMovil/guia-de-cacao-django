@@ -1,0 +1,60 @@
+{% load i18n %}
+<html>
+<head>
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/layout.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/uielement.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/custom.min.css' %}">
+  <meta name="viewport" content="width=470px, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+</head>
+<body id="guia-{{ obj.number }}">
+
+  <header id="header" class="navbar navbar-fixed-top">
+    <div class="navbar-toolbar clearfix">
+      <div class="navbar-title text-uppercase">
+        <span><strong class="visible-lg-inline">GUÍA {{ obj.number }}: </strong>{{ obj.name }}</span>
+      </div>
+    </div>
+  </header>
+
+  <section id="main" role="main">
+    <nav class="page-header page-header-block affix">
+      <div class="pager">
+        <h4 class="title-item text-capitalize">Presentación</h4>
+      </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-sm-10 col-sm-offset-1 col-lg-offset-2">
+                <p class="fsize18 mt15"></p>
+                <p>{{ obj.description|safe }}</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <footer class="footer hidden-md hidden-lg">
+    <section class="container-fluid">
+      <div class="row">
+        <div class="col-xs-6 col-480">
+          <div class="wrapper">
+            <div class="table-layout">
+                <img src="{% static 'image/logo/logo-min.png' %}">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-480">
+          <div class="wrapper">
+            <div class="table-layout">
+              <img src="{% static 'image/kronoscode.png' %}"  style="padding: 9px 0;" >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </footer>
+
+</body>
+</html>

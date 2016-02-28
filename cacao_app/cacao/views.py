@@ -92,10 +92,21 @@ def renderElement(request):
     return render_to_response(template, context,
                               context_instance=RequestContext(request))
 def createPdf(request):
-    if request.GET.get("print", None) == "pdf":
-        return render_to_pdf(request, 'frula')
+    template = 'pdf/guia_pdf.html' 
+    obj = Guide.objects.get(number=1)
+    context = {
+        'obj': obj,
+    }
+    
+    if request.GET.get('print'):
+        pdf_name = 'guia'
+        return render_to_pdf(request, pdf_name)
     else:
-        return HttpResponse("Hello World!")
+        return render_to_response(template, context,
+                              context_instance=RequestContext(request))
+    
+    return render_to_response(template, context,
+                              context_instance=RequestContext(request))
         
     
 
