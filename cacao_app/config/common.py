@@ -297,9 +297,9 @@ class Common(Configuration):
                 {'label': 'Generar archivos estaticos', 'url': '/admin/static-generator/'},
             )},
 
-            {'app': 'auth', 'label':'Grupos', 'icon': 'icon-lock'},
+            {'app': 'auth', 'label': 'Grupos', 'icon': 'icon-lock'},
 
-            {'app': 'users', 'label': 'Usuarios', 'icon': 'icon-user'},
+            {'app': 'users', 'label': 'Usuarios', 'icon': 'icon-lock'},
 
             {'app': 'sites', 'icon': 'icon-chevron-right'},
         ),
