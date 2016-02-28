@@ -5,18 +5,20 @@ from django.core.exceptions import ImproperlyConfigured
 
 from wkhtmltopdf.views import PDFTemplateView
 
-from cacao.models import Guide, Content
+from cacao.models import Guide
 from configuracion.models import Acerca
 
 
 class PDFDownloadView(PDFTemplateView):
-    filename = ''
     template_name = 'pdf_kit/download.html'
     cmd_options = {
         'margin-top': 15,
         'margin-bottom': 15,
     }
-    # allowed_methods = ['post']
+
+    def set_filename(self, guide_name):
+        self.filename = 'guia-%s.pdf' % guide_name
+        return self.filename
 
     def get(self, request, *args, **kwargs):
         if not hasattr(settings, 'PDF_KIT_MODEL'):
@@ -30,15 +32,15 @@ class PDFDownloadView(PDFTemplateView):
     def get_context_data(self, **kwargs):
         context = super(PDFTemplateView, self).get_context_data(**kwargs)
         guide_number = self.request.GET.get('guide-id', None)
-        self.filename = 'guia-%s.pdf' % guide_number
         guide_obj = Guide.objects.get(number=guide_number)
-        content_obj = Content.objects.filter(
-            section__guide=guide_obj).order_by('section', 'peso')
-        about_obj = Acerca.objects.get()
 
-        context = {
-            'guide_obj': guide_obj,
-            'content_obj': content_obj,
-            'about_obj': about_obj,
-        }
+        self.set_filename(guide_number)
+
+        context['guide_obj'] = guide_obj
+
+        context['content_obj'] = self.model.objects.filter(
+            section__guide=guide_obj).order_by('section', 'peso')
+
+        context['about_obj'] = Acerca.objects.get()
+
         return context
