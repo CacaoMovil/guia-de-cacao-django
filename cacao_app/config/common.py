@@ -53,7 +53,7 @@ class Common(Configuration):
 
     # Apps specific for this project go here.
     LOCAL_APPS = (
-        'users',  # custom users 
+        'users',  # custom users
         'cacao',
         'configuracion',
     )
@@ -306,3 +306,5 @@ class Common(Configuration):
     PERSEUS_SOURCE_DIR = os.path.join(
         BASE_DIR, '..', "_output"
     )
+    # config for create pdf's
+    PHANTOMJS_BIN = '/usr/local/bin/phantomjs'
