@@ -1,6 +1,6 @@
 """
 Utils based in Django Perseus, with minimal
-changes, this accept an id from the object that 
+changes, this accept a number from the object that
 you need render.
 """
 # -*- coding: utf-8 -*-

@@ -44,3 +44,4 @@ class Local(Common):
 
     # Your local stuff: Below this line define 3rd party libary settings
     THUMBNAIL_DEBUG = True
+    VENV_PATH = '/Users/oscarmcm/.virtualenvs/cacao'

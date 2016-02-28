@@ -7,11 +7,13 @@ from django.template import defaultfilters
 from django.template.base import add_to_builtins
 
 class Guide(models.Model):
-    """docstring for Guia"""
-    number = models.IntegerField()
-    name = models.CharField(max_length=250)
-    description = models.TextField()
-    image = models.ImageField(upload_to='cacao/')
+    """
+    This model store the Guia objects
+    """
+    number = models.IntegerField('Numero')
+    name = models.CharField('Nombre', max_length=250)
+    description = models.TextField('Descripcion')
+    image = models.ImageField('Imagen', upload_to='cacao/')
 
     class Meta:
         verbose_name = "Guia"
@@ -46,7 +48,11 @@ class Guide(models.Model):
 
 
 class Section(models.Model):
-    """docstring for seccion"""
+    """
+    This model store the Section object and have a
+    relationship with the Guide model because every
+    Guide have many sections
+    """
     guide = models.ForeignKey(Guide)
     title = models.CharField(max_length=250)
     image = models.ImageField(upload_to='cacao/')
@@ -59,10 +65,14 @@ class Section(models.Model):
         return "%s - Guia: %s" %(self.title, self.guide)
 
 class Content(models.Model):
-    """docstring for Contenido"""
+    """
+    This model store the Contenido object and have a
+    relationshipwith the Section model because every
+    Content have many Contents
+    """
     section = models.ForeignKey(Section, related_name='contenidos')
-    title = models.CharField(max_length=250)
-    extract = models.CharField("Extracto del Contenido",max_length=250)
+    title = models.CharField('Titulo', max_length=250)
+    extract = models.CharField("Extracto del Contenido", max_length=250)
     description = models.TextField('Descripcion')
     peso = models.PositiveIntegerField("Peso del Contenido", unique=True)
     image = models.ImageField('Imagen', upload_to='cacao/', help_text='Required dimensions 1563x538', blank=True)
@@ -101,14 +111,17 @@ class Content(models.Model):
         return self.section.guide
 
 class Download(models.Model):
-    """docstring for Descargas"""
+    """
+    This model store the Descargas object and have
+    a relationship with Guide because a Download file
+    belongs to a Guide object
+    """
     guide = models.ForeignKey(Guide, related_name='versions')
     file = models.FileField(upload_to='descargas/')
     num_version = models.PositiveIntegerField()
     # No Visible
     date = models.DateField(auto_now_add=True, editable=False)
     name = models.CharField(max_length=250)
-
 
     class Meta:
         verbose_name = "Descarga"
@@ -136,5 +149,3 @@ if getattr(settings, 'USE_PERSEUS', False):
     add_to_builtins('cacao.templatetags.django_perseus_tags')
 else:
     add_to_builtins('django.templatetags.static')
-
-

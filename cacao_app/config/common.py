@@ -18,7 +18,6 @@ from configurations import Configuration, values
 
 BASE_DIR = dirname(dirname(__file__))
 
-
 class Common(Configuration):
 
     # APP CONFIGURATION
@@ -300,6 +299,8 @@ class Common(Configuration):
         'LIST_PER_PAGE': 15
     }
     # used for the views delete folders and open the guide folder
+    PROJECT_DIR = dirname(dirname(abspath(__file__)))
+
     PERSEUS_BUILD_DIR = os.path.join(
         BASE_DIR, '..', "temp"
     )
@@ -320,6 +321,5 @@ class Common(Configuration):
     PHANTOMJS_FORMAT='A4'
     PHANTOMJS_ORIENTATION='portrait'
 
-    PROJECT_DIR = dirname(dirname(abspath(__file__)))
 
     VENV_PATH = '~/.virtualenvs/cacao'

@@ -6,55 +6,62 @@
   <link rel="stylesheet" href="{% static 'css/layout.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/uielement.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/custom.min.css' %}">
-  <meta name="viewport" content="width=470px, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=370">
 
 </head>
-<body id="guia-{{ obj.number }}">
+<body id="guia-{{ guide_obj.number }}">
+  <!-- Guia Template -->
+  <center>
+    <div style="width: 20px; height: 20px;"></div>
 
-  <header id="header" class="navbar navbar-fixed-top">
-    <div class="navbar-toolbar clearfix">
-      <div class="navbar-title text-uppercase">
-        <span><strong class="visible-lg-inline">GUÍA {{ obj.number }}: </strong>{{ obj.name }}</span>
-      </div>
+    <div style="padding-top: 20px; margin-top: 15px; border-top: 2px solid black;">
+      <h4 class="title-item" style="text-align: left; padding-left:40px; font-size: 26px;"><strong>GUÍA {{ guide_obj.number }}: </strong>{{ guide_obj.name }}</h4>
     </div>
-  </header>
 
-  <section id="main" role="main">
-    <nav class="page-header page-header-block affix">
-      <div class="pager">
-        <h4 class="title-item text-capitalize">Presentación</h4>
-      </div>
-    </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-8 col-sm-10 col-sm-offset-1 col-lg-offset-2">
-                <p class="fsize18 mt15"></p>
-                <p>{{ obj.description|safe }}</p>
-            </div>
-        </div>
+    <div style="padding-top: 10px; border-bottom: 2px solid black;">
+      <h4 class="title-item text-capitalize" style="text-align: left; padding-left: 40px; font-size: 18px; font-weight: bold;">Presentación</h4>
     </div>
-  </section>
 
-  <footer class="footer hidden-md hidden-lg">
-    <section class="container-fluid">
-      <div class="row">
-        <div class="col-xs-6 col-480">
-          <div class="wrapper">
-            <div class="table-layout">
-                <img src="{% static 'image/logo/logo-min.png' %}">
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-480">
-          <div class="wrapper">
-            <div class="table-layout">
-              <img src="{% static 'image/kronoscode.png' %}"  style="padding: 9px 0;" >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </footer>
+    <div style="padding-top: 30px; padding-left: 40px; padding-right: 30px; text-align: left;">
+      <p>{{ guide_obj.description|safe }}</p>
+    </div>
 
+  </center>
+
+  <center>
+    <footer style="padding-top: 10px; border-top: 1px solid black;">
+      <img src="{% static 'image/logo/logo-min.png' %}">
+      <img src="{% static 'image/kronoscode.png' %}">
+    </footer>
+  </center>
+
+  <!-- End Guia Template -->
+
+  <!-- Content Template -->
+  <center>
+    {% for content in content_obj %}
+    <div style="width: 20px; height: 40px;"></div>
+
+    <div style="padding-top: 20px; margin-top: 15px; border-top: 2px solid black;">
+      <h4 class="title-item text-capitalize" style="text-align: left; padding-left: 40px; font-size: 26px; font-weight: bold;">{{ content.section }}</h4>
+    </div>
+
+    <div style="padding-top: 10px; border-bottom: 2px solid black;">
+      <h4 class="title-item" style="text-align: left; padding-left: 40px; font-size: 18px;"><strong>{{ content.title }} </strong></h4>
+      <h4 class="title-item" style="text-align: left; padding-left: 40px; font-size: 14px;"><strong>{{ content.extract }} </strong></h4>
+    </div>
+
+    <div style="padding-top: 30px; padding-left: 40px; padding-right: 30px; text-align: left;">
+      <p>{{ content.description|safe }}</p>
+    </div>
+
+    {% endfor %}
+    <div style="width: 20px; height: 40px;"></div>
+    <footer style="padding-top: 10px; border-top: 1px solid black;">
+      <img src="{% static 'image/logo/logo-min.png' %}">
+      <img src="{% static 'image/kronoscode.png' %}">
+    </footer>
+  </center>
+  <!-- End Content Template -->
 </body>
 </html>

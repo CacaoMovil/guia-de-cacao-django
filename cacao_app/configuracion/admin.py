@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django.contrib.admin import ModelAdmin
 from django.forms import ModelForm
 
 from solo.admin import SingletonModelAdmin
@@ -13,7 +12,7 @@ class ContactoForm(ModelForm):
         model = Contacto
 
         _ck_editor_toolbar = [
-            {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup']},
+            {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup', 'undo', 'clipboard']},
             {'name': 'paragraph',
              'groups': ['list', 'indent', 'blocks', 'align']},
             {'name': 'document', 'groups': ['mode']}, '/',
@@ -47,7 +46,7 @@ class AcercaForm(ModelForm):
         model = Acerca
 
         _ck_editor_toolbar = [
-            {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup']},
+            {'name': 'basicstyles', 'groups': ['basicstyles', 'cleanup', 'undo', 'clipboard']},
             {'name': 'paragraph',
              'groups': ['list', 'indent', 'blocks', 'align']},
             {'name': 'document', 'groups': ['mode']}, '/',

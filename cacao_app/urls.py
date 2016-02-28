@@ -9,7 +9,7 @@ from django.views.generic import TemplateView
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 
-from cacao.views import renderElement
+from cacao.views import render_element
 
 admin.autodiscover()
 
@@ -18,7 +18,7 @@ urlpatterns = patterns('',
         TemplateView.as_view(template_name='how_works.html'),
         name="how_it_works"),
 
-    url(r'^admin/static-generator/$', renderElement),
+    url(r'^admin/static-generator/$', render_element),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),

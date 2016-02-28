@@ -6,7 +6,9 @@ static or media files and move to the deploy dir
 from django_perseus.importers.base import BaseImporter
 
 class MediaImporter(BaseImporter):
-
+    """
+    This class import the media files
+    """
     target_dir = 'PERSEUS_STATIC_DIR'
     source_dir = 'MEDIA_ROOT'
     sub_dirs = [
@@ -15,6 +17,9 @@ class MediaImporter(BaseImporter):
     ]
 
 class StaticImporter(BaseImporter):
+    """
+    This class import the static files
+    """
     target_dir = 'PERSEUS_STATIC_DIR'
     source_dir = 'STATIC_ROOT'
     sub_dirs = [

@@ -69,13 +69,16 @@
                         </a>
                     </li>
                     <li>
-                          <form action="{% url 'create_pdf' %}" method="GET" id="make_pdf_form">
-                              <input type="hidden" name="print" value="pdf">
-                          </form>
-                          <a  title="Guías" href="javascript:void(0)" id="make_pdf" class="hidden-sm hidden-xs">
-                              <span class="icon"><i class="flaticon-printer78"></i></span>
-                              <span class="text">Imprimir</span>
-                          </a>
+                      <a  title="Guías" 
+                      {% if contenido %}
+                      href="{% url 'create_pdf' contenido.section.guide.number %}?print=true"
+                      {% else %}
+                      href="{% url 'create_pdf' guia.number %}?print=true"
+                      {% endif %}
+                      class="hidden-sm hidden-xs">
+                          <span class="icon"><i class="flaticon-printer78"></i></span>
+                          <span class="text">Imprimir</span>
+                      </a>    
                     </li>
                     <li>
                         <a href="{% if contenido %}{{ contenido.section.guide.get_download_url }}{% else %}{{ guia.get_download_url }}{% endif %}" title="Guías" class="hidden-sm hidden-xs">
@@ -276,13 +279,6 @@
         <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
         <!--/ App and page level script -->
         <!--/ END JAVASCRIPT SECTION -->
-        <script type="text/javascript">
-          $(document).ready(function () {
-            $("#make_pdf").click(function(){
-              $("#make_pdf_form").submit();
-            });
-          });
-      </script>
     </body>
     <!--/ END Body -->
 </html>

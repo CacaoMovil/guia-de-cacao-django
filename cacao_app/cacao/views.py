@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 import shutil
-import subprocess
 
 from fabric.tasks import execute
 
@@ -24,18 +23,24 @@ from .serializers import GuidesSerializer, GuideSerializer
 
 from phantom_pdf import render_to_pdf
 
-from tasks import makeRender
-
 from .models import Guide, Content, Section, Download
 from .exporter import render_guide
 
 
 class GuideList(ListView):
+    """
+    This Class list all Guides objects
+    from the Guide model
+    """
     model = Guide
     context_object_name = 'guias'
     template_name = 'index.html'
 
 class GuideDetail(DetailView):
+    """
+    This Class list one Guide object
+    from the Guide model
+    """
     model = Guide
     context_object_name = 'guia'
 
@@ -46,6 +51,10 @@ class GuideDetail(DetailView):
         return context
 
 class ContentDetail(DetailView):
+    """
+    This class list one Content object
+    from the Content model
+    """
     model = Content
     context_object_name = "contenido"
     template_name = 'cacao/contenido_detail.html'
@@ -60,7 +69,11 @@ class ContentDetail(DetailView):
         return context
 
 @staff_member_required
-def renderElement(request):
+def render_element(request):
+    """
+    This method create the render from the
+    dynamic pages, creating a html file
+    """
     template = 'admin/render_static.html'
     guia = Guide.objects.all()
     context = {
@@ -74,14 +87,6 @@ def renderElement(request):
         guide_element = Guide.objects.get(number=element_number)
 
         execute(render_guide, element_number)
-
-        #output = subprocess.call(['python', 'manage.py', 'render_guia',
-        #    '--settings=config.export',
-        #    '--element=%s' %element_number,
-        #    '--archive',
-        #    '--filename=guia%s.zip' %element_number ])
-
-        #messages.add_message(request, messages.INFO, output)
 
         file_path = os.path.join(settings.PERSEUS_BUILD_DIR, 'guia-%s.zip' %element_number)
 
@@ -99,26 +104,34 @@ def renderElement(request):
 
     return render_to_response(template, context,
                               context_instance=RequestContext(request))
-def createPdf(request):
+
+def create_pdf(request, guide_number):
+    """
+    this method convert the guide and his contents
+    to PDF file based in a new template
+    """
     template = 'pdf/guia_pdf.html'
-    obj = Guide.objects.get(number=1)
+    guide_obj = Guide.objects.get(number=guide_number)
+    content_obj = Content.objects.filter(section__guide=guide_obj)
+
     context = {
-        'obj': obj,
+        'guide_obj': guide_obj,
+        'content_obj': content_obj,
     }
 
     if request.GET.get('print'):
-        pdf_name = 'guia'
+        pdf_name = 'guia-%s' % guide_number
         return render_to_pdf(request, pdf_name)
     else:
         return render_to_response(template, context,
                               context_instance=RequestContext(request))
 
-    return render_to_response(template, context,
-                              context_instance=RequestContext(request))
-
-
 @api_view(['GET'])
 def guides_collection(request):
+    """
+    This method is for the api and list all guides
+    with the last version
+    """
     if request.method == 'GET':
         guides = Guide.objects.all()
         serializer = GuidesSerializer(guides, many=True)
@@ -128,6 +141,10 @@ def guides_collection(request):
 
 @api_view(['GET'])
 def guide_elements(request, pk):
+    """
+    This method is for the api and return all
+    the elements from a Guide in specific
+    """
     try:
         download = Download.objects.filter(guide=pk).all()
     except Download.DoesNotExist:
@@ -141,6 +158,10 @@ def guide_elements(request, pk):
 
 @api_view(['GET'])
 def guide_element(request, pk, num_version):
+    """
+    This method is for the api and retun one specific
+    element from the Guide based in her num_version
+    """
     try:
         download = Download.objects.get(guide=pk, num_version=num_version)
     except Download.DoesNotExist:
@@ -154,6 +175,10 @@ def guide_element(request, pk, num_version):
 
 @api_view(['GET'])
 def guide_last(request, pk):
+    """
+    This method is for the api and return the last
+    version from a Guide in specific
+    """
     try:
         download = Download.objects.filter(guide=pk).order_by('-num_version')[0]
     except Download.DoesNotExist:

@@ -17,7 +17,7 @@ logger = logging.getLogger('perseus')
 class GuideRenderer(BaseRenderer):
     """
     This serializer extend from Django perseus - BaseRenderer
-    this serializer convert the name of a url to hashlib and 
+    this serializer convert the name of a url to hashlib and
     append the web file extention.
     """
     def render_path(self, path=None, view=None):
@@ -37,10 +37,9 @@ class GuideRenderer(BaseRenderer):
             else:
                 response, mime = self.render_page(path)
                 name = '%s.html' % hashlib.sha1(path).hexdigest()
-                outpath = os.path.join(deploy_dir, name)            
+                outpath = os.path.join(deploy_dir, name)
                 self.save_page(response, outpath)
                 return
-            
 
     def render_page(self, path):
         response = self.client.get(path)
@@ -88,6 +87,5 @@ class HomeRenderer(GuideRenderer):
             paths.add(content.get_absolute_url())
 
         return paths
-
 
 renderers = [HomeRenderer, ]
