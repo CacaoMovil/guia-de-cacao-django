@@ -30,28 +30,39 @@ class Guide(models.Model):
 
     def get_download_url(self):
         try:
-            download = Download.objects.filter(guide=self.pk).order_by('-num_version')[0]
+            download = Download.objects.filter(guide=self.number).order_by('-num_version')[0]
             return download.file.url
         except:
             return None
 
     def next_content(self):
+        """
+        Return First Content Of A Guide
+        """
         try:
-            return Content.objects.get(pk=self.pk)
+            return Content.objects.filter(section=self.section_set.all())[0]
         except:
             return None
 
-    def next_guide(self):
+    def next_section(self):
+        """
+        Return the next section of a guide of a guide pointing
+        to the first Content of this section
+        """
         try:
-            return Guide.objects.get(number=self.number+1)
+            return Content.objects.filter(section=self.section_set.all())[0]
         except:
-            return Guide.objects.get(number=self.number)
+            return None
 
-    def previous_guide(self):
+    def previous_section(self):
+        """
+        Return the previous section of a guide pointing
+        to the first Content of this section
+        """
         try:
-            return Guide.objects.get(number=self.number-1)
+            return Content.objects.filter(section=self.section_set.all())[0]
         except:
-            return Guide.objects.get(number=self.number)
+            return None
 
     @property
     def latest_version(self):
@@ -79,11 +90,29 @@ class Section(models.Model):
     def __unicode__(self):
         return "%s - Guia: %s" %(self.title, self.guide)
 
+    def next(self):
+        """
+        return the next section
+        """
+        try:
+            return Section.objects.filter(peso__gt=self.peso, guide=self.guide)[0]
+        except Exception, e:
+            raise e
+
+    def previous(self):
+        """
+        return the previous section
+        """
+        try:
+            return Section.objects.filter(peso__lt=self.peso, guide=self.guide)[0]
+        except Exception, e:
+            raise e
+
 class Content(models.Model):
     """
     This model store the Contenido object and have a
     relationshipwith the Section model because every
-    Content have many Contents
+    Content have many Sections
     """
     section = models.ForeignKey(Section, related_name='contenidos')
     title = models.CharField('Titulo Menu', max_length=250)
@@ -113,16 +142,28 @@ class Content(models.Model):
         return reverse('contenido_detail', args=[guide, self.slug])
 
     def next(self):
+        """
+        return the next Content
+        """
         try:
-            return Content.objects.get(pk=self.pk+1)
-        except:
-            return None
+            return Content.objects.filter(peso__gt=self.peso, section=self.section)[0]
+        except IndexError:
+            try:
+                return Content.objects.filter(section=self.section.next())[0]
+            except:
+                return None
 
     def previous(self):
+        """
+        return the previous Content
+        """
         try:
-            return Content.objects.get(pk=self.pk-1)
-        except:
-            return None
+            return Content.objects.filter(peso__lt=self.peso, section=self.section)[0]
+        except IndexError:
+            try:
+                return Content.objects.filter(section=self.section.previous())[0]
+            except:
+                return None
 
     @property
     def guide(self):
