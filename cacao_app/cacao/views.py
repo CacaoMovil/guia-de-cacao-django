@@ -167,7 +167,7 @@ def guides_collection(request):
     """
     if request.method == 'GET':
         guides = Guide.objects.all()
-        serializer = GuidesSerializer(guides, many=True)
+        serializer = GuidesSerializer(guides, many=True, context={"request": request})
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -185,7 +185,7 @@ def guide_elements(request, number):
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = DownloadSerializer(download, many=True)
+        serializer = DownloadSerializer(download, many=True, context={"request": request})
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -203,7 +203,7 @@ def guide_element(request, number, num_version):
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = DownloadSerializer(download)
+        serializer = DownloadSerializer(download, context={"request": request})
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -222,10 +222,11 @@ def guide_last(request, number):
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = DownloadSerializer(download)
+        serializer = DownloadSerializer(download, context={"request": request})
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 def app_settings(request):

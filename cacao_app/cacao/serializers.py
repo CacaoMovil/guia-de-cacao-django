@@ -14,10 +14,10 @@ class DownloadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Download
-        fields = ('name', 'file', 'date', 'num_version', 'tags' )
+        fields = ('name', 'file', 'date', 'num_version', 'tags')
 
     def get_alternate_name(self, obj):
-        return obj.get_download_url()
+        return self.context['request'].build_absolute_uri(obj.get_download_url())  # noqa
 
     def get_guide_tags(self, obj):
         return ','.join([t.name for t in obj.guide.tags.all()])
@@ -58,7 +58,6 @@ class GuidesSerializer(serializers.ModelSerializer):
 
     def guide_file(self, guide):
         try:
-            return guide.latest_version.file.url
-
+            return self.context['request'].build_absolute_uri(guide.latest_version.file.url)  # noqa
         except:
             return ''
