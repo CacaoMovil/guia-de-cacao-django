@@ -9,11 +9,11 @@ from .views import GuideList, GuideDetail, ContentDetail
 urlpatterns = patterns('cacao.views',
     url(r'^$', GuideList.as_view(), name="home"),
 
-    url(r'^guia/(?P<number>\d+)/$',
+    url(r'^guia/(?P<guide_number>\d+)/$',
         GuideDetail.as_view(), name="guia_detail"),
-    url(r'^guia/(?P<guide>\d+)/contenido/(?P<slug>[-\w]+)/$',
+    url(r'^guia/(?P<guide_number>\d+)/contenido/(?P<slug>[-\w]+)/$',
         ContentDetail.as_view(), name="contenido_detail"),
-    url(r'^guia/descargas/guia(?P<guide_id>\d+)-version(?P<version>\d+).zip$', 'download_guide', name="download_guide"),  # noqa
+    url(r'^guia/descargas/guia(?P<guide_number>\d+)-version(?P<version>\d+).zip$', 'download_guide', name="download_guide"),  # noqa
 
     url(r'^render/$', 'render_element', name="render_element"),
 

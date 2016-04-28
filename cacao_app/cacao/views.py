@@ -47,7 +47,7 @@ class GuideDetail(DetailView):
     model = Guide
     context_object_name = 'guia'
     slug_field = 'number'
-    slug_url_kwarg = 'number'
+    slug_url_kwarg = 'guide_number'
 
     def get_context_data(self, **kwargs):
         context = super(GuideDetail, self).get_context_data(**kwargs)
@@ -69,7 +69,7 @@ class ContentDetail(DetailView):
 
     def get_queryset(self, **kwargs):
         qs = super(ContentDetail, self).get_queryset().filter(
-            section__guide=self.kwargs.get('guide'))
+            section__guide__number=self.kwargs.get('guide_number'))
         return qs
 
     def get_context_data(self, **kwargs):
