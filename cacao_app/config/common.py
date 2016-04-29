@@ -118,8 +118,8 @@ class Common(Configuration):
     # MANAGER CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
     ADMINS = values.SingleNestedTupleValue((
-	('Alice', 'alice@localhost'),
-	('Bob', 'bob@localhost'),
+        ('Alice', 'alice@localhost'),
+        ('Bob', 'bob@localhost'),
     ))
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
