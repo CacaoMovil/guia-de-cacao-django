@@ -112,6 +112,86 @@ Ahora corremos el servidor de django
 
 Entra desde tu navegador a la dirección [localhost:8000](http:localhost:8000) para ver el proyecto
 
+## Edición de estilos
+
+Existen diferentes maneras de modificar el estilo de este proyecto, y dependera mucho del requerimiento que se desee cumplir como producto final.
+
+### Estilos Básicos
+
+La manera mas fácil es agregando un nuevo archivo ```.css``` con reglas que sobre escriban las existentes. 
+Esta es una solución muy util para casos en donde se requieran realizar cambios minimos a los estilos actuales.
+
+A continuación se listan las importaciones de archivos de estilos actuales y se muestra un ejemplo de como debe agregarse al final de la lista, el archivo con los estilos propios. En este caso el archivo con estilos personalizados se le ha llamado ```custom-project.css```.
+
+```
+<!-- Application stylesheet -->
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/layout.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/uielement.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+<link rel="stylesheet" href="{% static 'css/colors-guias.min.css' %}">
+<!--/ Application stylesheet -->
+
+<!-- Custom styles for project-->
+<link rel="stylesheet" href="{% static 'css/custom-project.css' %}">
+
+```
+
+Este archivo debe ser agregado en las plantillas ```base.html``` y ```guide_detail_base.html```.
+
+### Estilos Avanzados
+
+Los estilos del proyecto son generados a partir de la edición de archivos ```.less``` que se encuentran ubicados en el directorio ```/static/less```. Estos archivos luego de ser compilados, se generan en sus versiones respectivas ```.css```. Less es un preprocesador de css, para mayor información sobre su sintaxis en [lesscss.org](http://lesscss.org/)
+
+
+Dentro del directorio ```/static/``` se encuentra un archivo ```Gruntfile.js``` el cual contiene todas las tareas de ***Grunt*** necesarias para compilar los archivos de estilo. Para mayor información [gruntjs.com](http://gruntjs.com/)
+
+Es requerido tener instalado ***npm***, para mayor información [npm.js](https://www.npmjs.com/)
+
+Para instalar ***Grunt*** y todas sus dependencias, se debe ubicarse dentro del directorio ```/static/``` y ejecutar el comando:
+
+```$ npm install ```
+
+Finalmente iniciar Grunt.
+
+```$ grunt```
+
+Mientras ***Grunt*** este corriendo, cualquier cambio que se realice sobre los archivos ```.less```, disparara la tarea de Grunt que compila los archivos a sus versiones minificadas ```.css```.
+
+### Colores personalizados para guías.
+
+Se pueden definir colores personalizados para cada guía. Se tienen colores predefinidos en los estilos del proyecto para las 10 primeras guías de documentos. Por lo cual se si desea editar esos colores o agregar nuevos, se debe seguir el siguiente proceso.
+
+En primera instancia es requerido, tener lista la configuración para editar archivos ```.less``` que fue explicado en el punto anterior (Estilos avanzados).
+
+En el archivo ```/static/less/variables.less``` y ubicar la sección en donde se definen las variables para los colores de cada guía.
+
+```
+// color guias
+@colors:								10;
+@color-guia-default:					#56687F;							
+@color-guia1:							#872058;
+@color-guia2:							#7A132C;
+@color-guia3:							#26799B;
+@color-guia4:							#894C1D;
+@color-guia5:							#DC661E;
+@color-guia6:							#918144;
+@color-guia7:							#5F2E23;
+@color-guia8:							#991A72;
+@color-guia9:							#C01772;
+@color-guia10:							#CD8739;
+```
+
+Basicamente se debe editar cada variable con el color deseado. En caso de requerir colores para mayor de 10 guías, deben agregarse consecutivamente de la misma forma como estan definidas actualmente y tambien cambiar el valor de la variable ```@colors``` con el valor total de las guías que requieran colores personalizados. En el caso de no necesitar definir colores adicionales, se usa para todas las guías el color definido en la variable ```@color-guia-default: #56687F;```.
+
+El archivo ```css/colors-guias.min.css``` esta agregado en las plantillas ```base.html``` y ```guide_detail_base.html```.
+
+```
+<link rel="stylesheet" href="{% static 'css/colors-guias.min.css' %}">
+```
+
+En el caso de no requerir estilos personalizados para cada guía solo se debe eliminar la importación a este archivo, y las guías utilizarían el color por defecto.
+
 ## Contribución
 
 Si quieres contribuir a este proyecto, por favor, lea el archivo de contribuyentes y realice los siguientes pasos
