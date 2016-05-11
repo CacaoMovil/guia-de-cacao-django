@@ -13,7 +13,9 @@
                         </span>
                         <span class="text text-uppercase">Indice</span>
                     </a>
+                    {% if guia.next_section %}
                     <div class="next"><a href="{% url 'contenido_detail' guia.number guia.next_section.slug %}"><i class="flaticon-next15"></i></a></div>
+                    {% endif %}
                     <h4 class="title-item text-capitalize">Presentación</h4>
                 </div>
             </nav>
@@ -61,6 +63,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-5 col-sm-6 col-sm-offset-3 col-md-offset-6">
+                        {% if guia.next_section %}
                         <a class="next-item" href="{% url 'contenido_detail' guia.number guia.next_section.slug %}">
                             <div class="row">
                                 <div class="col-xs-10">
@@ -72,6 +75,7 @@
                                 </div>
                             </div>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                 <!-- END Rows -->
