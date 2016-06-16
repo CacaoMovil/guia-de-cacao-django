@@ -2,6 +2,7 @@
 '''
 Production Configurations
 '''
+from os import environ
 from configurations import values
 
 from .common import Common
@@ -38,7 +39,7 @@ class Production(Common):
     # CACHING
     # Only do this here because thanks to django-pylibmc-sasl and pylibmc
     # memcacheify is painful to install on windows.
-    REDIS_DB = values.IntegerValue(1)
+    REDIS_DB = environ['DJANGO_REDIS_DB'] or '1'
     CACHES = {
         'default': {
             'BACKEND': 'redis_cache.RedisCache',
