@@ -1,8 +1,8 @@
 # Bleeding edge Django
-django==1.7.3
+django==1.7.11
 
 # Configuration
-django-configurations==0.8
+django-configurations==1.0
 django-secure==1.0
 django-cache-url==0.8.0
 dj-database-url==0.3.0
@@ -16,14 +16,14 @@ django-crispy-forms==1.4.0
 django-model-utils==2.2
 
 # images
-Pillow==2.6.0
+Pillow>=2.6.0,<=3.0.0
 
 # For user registration, either via email or social
 # Well-built with regular release cycles!
 django-allauth==0.18.0
 
 # For the persistance stores
-psycopg2==2.5.4
+psycopg2>=2.5.4,<=2.6.1
 
 # Unicode slugification
 unicode-slugify==0.1.1

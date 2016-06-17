@@ -73,6 +73,7 @@
         <link rel="stylesheet" href="{% static 'css/layout.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/uielement.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <link rel="stylesheet" href="{% static 'css/colors-guias.min.css' %}">
         <!--/ Application stylesheet -->
         <!-- END STYLESHEETS -->
 
@@ -194,7 +195,7 @@
                 <!-- START Template Navigation/Menu reverse('guia_detail', args=(self.pk,)) -->
                 <ul class="topmenu topmenu-responsive" data-toggle="menu">
                     <li {% if not contenido %}class="active"{% endif %}>
-                        <a href="{% if contenido %}{% url 'guia_detail' contenido.section.guide.pk %}{% else %}{% url 'guia_detail' guia.pk %}{% endif %}" id="guias-presentacion-perseus">
+                        <a href="{% if contenido %}{% url 'guia_detail' contenido.section.guide.number %}{% else %}{% url 'guia_detail' guia.number %}{% endif %}" id="guias-presentacion-perseus">
                             <span class="text text-uppercase">Presentación</span>
                         </a>
                     </li>
@@ -209,7 +210,7 @@
                         <ul id="{{ seccion.id }}" class="submenu collapse {% if contenido.section.id == seccion.id %}in{% endif %}">
                           {% for obj in seccion.contenidos.all %}
                           <li {% if obj == contenido %}class="active"{% endif %}>
-                              <a href="{% url 'contenido_detail' obj.section.guide.pk obj.slug %}">
+                              <a href="{% url 'contenido_detail' obj.section.guide.number obj.slug %}">
                                   <span class="figure"><i class="ico-file8"></i></span>
                                   <span class="text">{{ obj.title }}</span>
                               </a>

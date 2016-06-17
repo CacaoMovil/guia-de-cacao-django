@@ -117,9 +117,10 @@ class Common(Configuration):
 
     # MANAGER CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
-    ADMINS = (
-        ("""Kronoscode""", 'lead@kronoscode.com'),
-    )
+    ADMINS = values.SingleNestedTupleValue((
+        ('Alice', 'alice@localhost'),
+        ('Bob', 'bob@localhost'),
+    ))
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
     MANAGERS = ADMINS

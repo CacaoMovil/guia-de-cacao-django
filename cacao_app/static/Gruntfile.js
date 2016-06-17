@@ -1,19 +1,19 @@
 module.exports = function(grunt) {
 grunt.initConfig({
 
-    connect: {
-        server: {
-            options: {
-                port: 4567,
-                protocol: 'http',
-                hostname: '0.0.0.0',
-                base: '.',
-                open: true,
-                debug: true,
-                keepalive: false
-            }
-        }
-    },
+    // connect: {
+    //     server: {
+    //         options: {
+    //             port: 4567,
+    //             protocol: 'http',
+    //             hostname: '0.0.0.0',
+    //             base: '.',
+    //             open: true,
+    //             debug: true,
+    //             keepalive: false
+    //         }
+    //     }
+    // },
 
     less: {
         development: {
@@ -24,7 +24,10 @@ grunt.initConfig({
                 optimization: 2
             },
             files: {
-                "css/custom.css": "less/custom.less"
+                "css/custom.css": "less/custom.less",
+                "css/uielement.min.css": "less/uielement.less",
+                "css/layout.min.css": "less/layout.less",
+                "css/colors-guias.min.css": "less/colors-guias.less"
             }
         }
     },
@@ -58,11 +61,12 @@ grunt.initConfig({
     }
 });
 
-    grunt.loadNpmTasks('grunt-contrib-connect');
+    //grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['connect','watch']);
+    //grunt.registerTask('default', ['connect','watch']);
+    grunt.registerTask('default', ['watch']);
     grunt.registerTask('buildless', ['less', 'autoprefixer']);
 };
