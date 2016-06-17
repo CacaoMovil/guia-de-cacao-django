@@ -17,7 +17,10 @@ class DownloadSerializer(serializers.ModelSerializer):
         fields = ('name', 'file', 'date', 'num_version', 'tags')
 
     def get_alternate_name(self, obj):
-        return self.context['request'].build_absolute_uri(obj.get_download_url())  # noqa
+        try:
+            return self.context['request'].build_absolute_uri(obj.get_download_url())  # noqa
+        except:
+            return ''
 
     def get_guide_tags(self, obj):
         return ','.join([t.name for t in obj.guide.tags.all()])
