@@ -2,7 +2,7 @@
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from django.http import Http404
+from django.http import Http404, HttpRedirect
 
 from wkhtmltopdf.views import PDFTemplateView
 
@@ -22,6 +22,12 @@ class PDFDownloadView(PDFTemplateView):
         return self.filename
 
     def get(self, request, *args, **kwargs):
+
+        guide_number = self.request.GET.get('guide-id', None)
+        pdf_path = os.path.join(settings.MEDIA_ROOT, 'guias/guia-%s.pdf' % guide_number)
+        if os.path.exists(pdf_path):
+            return HttpRedirect('%sguias/guia-%s.pdf' % (settings.MEDIA_URL, guide_number))
+
         if not hasattr(settings, 'PDF_KIT_MODEL'):
             raise ImproperlyConfigured(
                 'You need to set PDF_KIT_MODEL in settings')
