@@ -146,7 +146,7 @@ class HomeRenderer(GuideRenderer):
         paths = set([])
         if self.guide_number:
             guides = Guide.objects.filter(number=self.guide_number)
-            contents = Content.objects.filter(section__guide=self.guide_number)
+            contents = Content.objects.filter(section__guide__number=self.guide_number)
         else:
             guides = Guide.objects.all()
             contents = Content.objects.all()
