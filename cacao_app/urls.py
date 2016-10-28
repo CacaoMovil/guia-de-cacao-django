@@ -28,6 +28,7 @@ urlpatterns = patterns('',
 
     # Your stuff: custom urls go here
     url(r'', include('cacao.urls')),
+    url(r'', include('event.urls')),
     url(r'', include('configuracion.urls')),
     url(r'^ckeditor/', include('ckeditor.urls')),
 
