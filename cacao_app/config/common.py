@@ -61,6 +61,7 @@ class Common(Configuration):
         'pdf_kit',
         'cacao',
         'configuracion',
+        'event',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -297,6 +298,8 @@ class Common(Configuration):
 
             {'app': 'configuracion', 'icon': 'icon-cog'},
 
+            {'app': 'event', 'icon': 'icon-chevron-right'},
+
             {'label': 'Archivos estaticos', 'icon': 'icon-globe', 'models': (
                 {'label': 'Generar archivos estaticos',
                     'url': '/admin/static-generator/'},
@@ -305,6 +308,7 @@ class Common(Configuration):
             {'app': 'auth', 'label': 'Usuarios y Grupos', 'icon': 'icon-lock'},
 
             {'app': 'sites', 'icon': 'icon-chevron-right'},
+
 
             {'app': 'redirects', 'icon': 'icon-repeat'},
         ),
