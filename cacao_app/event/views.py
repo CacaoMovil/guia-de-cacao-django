@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from django.http import HttpResponse
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
 from .serializers import EventsSerializer
-from .models import Event
+from .models import Event, CountryEvent
 
 
 @api_view(['GET'])
@@ -20,12 +22,14 @@ def events_collection(request):
 
 @api_view(['GET'])
 def events_per_country(request, country_code):
+
     try:
-        download = Download.objects.get(guide=number, num_version=num_version)
-    except Download.DoesNotExist:
+        ev = Event.objects.filter(events_country__country=country_code)
+    except Event.DoesNotExist:
         return HttpResponse(status=404)
+
     if request.method == 'GET':
-        serializer = DownloadSerializer(download, context={"request": request})
+        serializer = EventsSerializer(ev, many=True, context={"request": request})  # NOQA
         return Response(serializer.data)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

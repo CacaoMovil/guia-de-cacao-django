@@ -12,7 +12,6 @@ class Event(models.Model):
     start = models.DateTimeField('Inicio')
     end = models.DateTimeField('Fin')
     created_on = models.DateTimeField('Creado', auto_now_add=True)
-    country = CountryField()
 
     class Meta:
         verbose_name = 'Evento'
@@ -21,3 +20,15 @@ class Event(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class CountryEvent(models.Model):
+    event = models.ForeignKey(Event, related_name='events_country')
+    country = CountryField()
+
+    class Meta:
+        verbose_name = 'Disponible en'
+        verbose_name_plural = 'Disponible en'
+
+    def __unicode__(self):
+        return self.event.name
