@@ -13,7 +13,7 @@ from .models import Event
 @api_view(['GET'])
 def events_collection(request):
     if request.method == 'GET':
-        events = Event.objects.filter(start__lte=datetime.now(), end__gte=datetime.now())
+        events = Event.objects.filter(end__gte=datetime.now())
         serializer = EventsSerializer(events, many=True, context={"request": request})  # NOQA
         return Response(serializer.data)
     else:
@@ -25,7 +25,6 @@ def events_per_country(request, country_code):
 
     try:
         ev = Event.objects.filter(
-            start__lte=datetime.now(),
             end__gte=datetime.now(),
             events_country__country=country_code
         )
