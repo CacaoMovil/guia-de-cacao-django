@@ -29,6 +29,7 @@ class CountryEvent(models.Model):
     class Meta:
         verbose_name = 'Disponible en'
         verbose_name_plural = 'Disponible en'
+        unique_together = ('event', 'country')
 
     def __unicode__(self):
         return self.event.name
