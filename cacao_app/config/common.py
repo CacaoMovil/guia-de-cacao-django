@@ -114,6 +114,8 @@ class Common(Configuration):
 
     # EMAIL CONFIGURATION
     EMAIL_BACKEND = values.Value('django.core.mail.backends.smtp.EmailBackend')
+    # https://docs.djangoproject.com/en/1.10/ref/settings/#default-from-email
+    DEFAULT_FROM_EMAIL = values.SecretValue()
     # END EMAIL CONFIGURATION
 
     # MANAGER CONFIGURATION
