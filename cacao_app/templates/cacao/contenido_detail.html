@@ -104,6 +104,17 @@
                             </div>
                             <div class="col-sm-6 col-xs-12 pull-left">
                                 {% if contenido.previous == None %}
+                                <a class="next-item" href="{% url 'guia_detail' contenido.section.guide.number %}">
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                            <i class="flaticon-thin35 fsize30"></i>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            <span class="text-top text-uppercase">Presentación</span>
+                                            <span>{{ contenido.section.guide.name }}</span>
+                                        </div>
+                                    </div>
+                                </a>
                                 {% else %}
                                 <a class="next-item" href="{% url 'contenido_detail' contenido.section.guide.number contenido.previous.slug %}">
                                     <div class="row">
