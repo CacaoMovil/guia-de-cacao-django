@@ -30,3 +30,8 @@ def offline_media(value):
         return new_val
     else:
         return value
+
+
+@register.assignment_tag
+def use_perseus():
+    return settings.USE_PERSEUS

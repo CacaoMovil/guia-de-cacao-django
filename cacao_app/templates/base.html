@@ -1,4 +1,5 @@
 {% load i18n  cacao_tags %}
+{% use_perseus as usp %}
 <!DOCTYPE html>
 <html>
     <!-- START Head -->
@@ -10,7 +11,12 @@
         <title>Caja de herramientas para cacao</title>
         <meta name="author" content="kronoscode.com/">
         <meta name="description" content="">
+
+        {% if usp %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        {% else %}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        {% endif %}
 
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'image/touch/apple-touch-icon-144x144-precomposed.png' %}">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'image/touch/apple-touch-icon-114x114-precomposed.png' %}">
