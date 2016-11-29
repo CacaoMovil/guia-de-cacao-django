@@ -64,6 +64,21 @@
         {% endif %}
         {% endblock meta_tags %}
 
+        <script type="text/javascript" src="{% static 'js/smartbanner.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'css/smartbanner.min.css' %}">
+
+        <style>.smartbanner{position:fixed;z-index:1100;}</style>
+
+        <!-- Start SmartBanner configuration -->
+        <meta name="smartbanner:title" content="Cacao Móvil">
+        <meta name="smartbanner:author" content="LWR - Proyecto Cacao Móvil Educación">
+        <meta name="smartbanner:price" content="FREE">
+        <meta name="smartbanner:price-suffix-google" content=" - En Google Play">
+        <meta name="smartbanner:icon-google" content="{% static 'image/logo/vaina-cacao.png' %}">
+        <meta name="smartbanner:button" content="VIEW">
+        <meta name="smartbanner:button-url-google" content="https://play.google.com/store/apps/details?id=kronos.cacaomovil">
+        <meta name="smartbanner:enabled-platforms" content="android">
+        <!-- End SmartBanner configuration -->
 
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'image/touch/apple-touch-icon-144x144-precomposed.png' %}">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'image/touch/apple-touch-icon-114x114-precomposed.png' %}">
