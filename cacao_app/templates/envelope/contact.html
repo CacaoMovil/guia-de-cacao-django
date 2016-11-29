@@ -1,81 +1,74 @@
 {% extends "base.html" %}
 {% load envelope_tags widget_tweaks %}
 {% block content %}
-        <!-- START Template Main -->
-        <section id="main" role="main">
+<!-- START Template Main -->
+<section id="main" role="main">
 
 
-            
-            <!--/ END page header -->
-            <!-- START Contact Form + Infos -->
-            <section class="section"> <!-- bgcolor-white -->
-                <div class="container-fluid pl15">
-                    <!-- START Row -->
-                    <div class="row">
-                        <!-- START Left Section -->
-                        <div class="col-md-6 col-md-offset-1 col- mb15">
-                            <!-- Header -->
-                            <h3 class="text-uppercase text-accent">Contactenos</h3><br>
-                            <!--/ Header -->
-                            <!-- Form -->
-                              <div class="form-horizontal">
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <p class="form-control-static">{{ contact.contacto_general|safe }}</p>
-                                    </div>
-                                </div>
-                                <form action="{% url 'envelope-contact' %}" class="form-horizontal" method="post">
-                                  {% csrf_token %}
-                                  {% antispam_fields %}
-                                  <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <label for="contact_name" class="control-label">Nombre <span class="text-danger">*</span></label>
-                                        {{ form.sender|add_class:"form-control" }}
-                                    </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <label for="contact_email" class="control-label">Email <span class="text-danger">*</span></label>
-                                        {{ form.email|add_class:"form-control" }}
-                                    </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <div class="col-sm-12">
-                                          <label for="contact_email" class="control-label">Tu mensaje <span class="text-danger">*</span></label>
-                                          {{ form.message|add_class:"form-control" }}
-                                      </div>
-                                  </div>
-                                  <button class="btn btn-primary" type="submit">Enviar Mensaje</button>
-                                </form>
-                              </div>
-                            <!--/ Form -->
-                        </div>
-                        <!--/ END Left Section -->
-                        <!-- START Right Section -->
-                        <div class="col-lg-3 col-md-4 col-lg-offset-1 col-md-offset-1">
-                            <div class="row">
-                                <!-- Address -->
-                                <div class="mb15 col-md-12 col-sm-4">
-                                    <!-- Header -->
-                                    <!--/ Header -->
-                                    <address style="margin-top:80px;">
-                                        {{ contact.informacion_contacto|safe }}
-                                    </address>
-                                </div>
-                                <!--/ Address -->
-                            </div>
-                        </div>
-                        <!--/ END Right Section -->
-                    </div>
-                    <!--/ END Row -->
+  <!--/ END page header -->
+  <!-- START Contact Form + Infos -->
+  <section class="section"> <!-- bgcolor-white -->
+    <div class="container-fluid pl15">
+      <!-- START Row -->
+      <div class="row">
+        <!-- START Left Section -->
+        <div class="col-md-6 col-md-offset-1 col- mb15">
+          <!-- Header -->
+          <h3 class="text-uppercase text-accent">Contactenos</h3><br>
+          <!--/ Header -->
+          <!-- Form -->
+          <div class="form-horizontal">
+            <div class="form-group">
+              <div class="col-sm-12">
+                <p class="form-control-static">{{ contact.contacto_general|safe }}</p>
+              </div>
+            </div>
+            <form action="{% url 'envelope-contact' %}" class="form-horizontal" method="post">
+              {% csrf_token %}
+              {% antispam_fields %}
+
+              {% for ff in form %}
+              <div class="form-group {% if ff.errors %}has-error{% endif %}">
+                <div class="col-sm-12">
+                  <label for="contact_name" class="control-label">{{ ff.label }} {% if ff.field.required %}<span class="text-danger">*</span>{% endif %}</label>
+                  {{ ff|add_class:"form-control" }}
+                  <span class="help-block">{{ ff.help_text }}</span>
+                  <span class="help-block">{{ ff.errors }}</span>
                 </div>
-            </section>
-            <!--/ END Contact Form + Infos -->
-{% endblock content %}
-{% block extra_footer %}
-<script type="text/javascript">
-    $( document ).ready(function() {
-        $('.topmenu .contact-menu').addClass('active'); 
-    });
-</script>
-{% endblock extra_footer %}
+              </div>
+              {% endfor %}
+
+              <button class="btn btn-primary" type="submit">Enviar Mensaje</button>
+            </form>
+          </div>
+          <!--/ Form -->
+        </div>
+        <!--/ END Left Section -->
+        <!-- START Right Section -->
+        <div class="col-lg-3 col-md-4 col-lg-offset-1 col-md-offset-1">
+          <div class="row">
+            <!-- Address -->
+            <div class="mb15 col-md-12 col-sm-4">
+              <!-- Header -->
+              <!--/ Header -->
+              <address style="margin-top:80px;">
+                {{ contact.informacion_contacto|safe }}
+              </address>
+            </div>
+            <!--/ Address -->
+          </div>
+        </div>
+        <!--/ END Right Section -->
+      </div>
+      <!--/ END Row -->
+    </div>
+  </section>
+  <!--/ END Contact Form + Infos -->
+  {% endblock content %}
+  {% block extra_footer %}
+  <script type="text/javascript">
+  $( document ).ready(function() {
+    $('.topmenu .contact-menu').addClass('active');
+  });
+  </script>
+  {% endblock extra_footer %}
