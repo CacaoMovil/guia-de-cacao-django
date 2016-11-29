@@ -1,4 +1,5 @@
 {% load i18n thumbnail cacao_tags %}
+{% use_perseus as usp %}
 <!DOCTYPE html>
 <html>
     <!-- START Head -->
@@ -13,7 +14,11 @@
         {% endif %}
         <meta name="author" content="LWR">
         <meta name="description" content="CAJA DE HERRAMIENTAS PARA CACAO - Aprendiendo e innovando sobre el cacao en sistemas agroforestales">
+        {% if usp %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        {% else %}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        {% endif %}
 
         {% block meta_tags %}
         {% if contenido %}

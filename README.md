@@ -91,19 +91,21 @@ El proyecto cuenta con un archivo para configurar variables de entorno (.env) es
 nuestros datos no son visibles para otros usuarios, recuerde mantener su archivo (.env) seguro y sea cuidadoso con quien lo
 comparte.
 
-Actualmente hay dos variables de entorno que son requeridas para poder ejecutar el proyecto:
+Actualmente hay tres variables de entorno que son requeridas para poder ejecutar el proyecto:
 
 - Facebook APP ID
 - Google App ID
+- Correo de contacto
 
 Este es un ejemplo de como es el archivo para variables de entorno:
 
 ```bash
 DJANGO_GA_APP_ID=1234
 DJANGO_FB_APP_ID=1234
+DJANGO_DEFAULT_FROM_EMAIL='hola@cacaomovil.com'
 ```
 
-Recuerde cambiar los valores por defecto que poseen, anteponer la palabra 'DJANGO' y escribirlas en su preferencia en mayusculas.
+Recuerde cambiar los valores por defecto que poseen, anteponer la palabra 'DJANGO' y escribirlas siempre en mayusculas.
 
 
 Ahora corremos el servidor de django
@@ -118,7 +120,7 @@ Existen diferentes maneras de modificar el estilo de este proyecto, y dependera 
 
 ### Estilos Básicos
 
-La manera mas fácil es agregando un nuevo archivo ```.css``` con reglas que sobre escriban las existentes. 
+La manera mas fácil es agregando un nuevo archivo ```.css``` con reglas que sobre escriban las existentes.
 Esta es una solución muy util para casos en donde se requieran realizar cambios minimos a los estilos actuales.
 
 A continuación se listan las importaciones de archivos de estilos actuales y se muestra un ejemplo de como debe agregarse al final de la lista, el archivo con los estilos propios. En este caso el archivo con estilos personalizados se le ha llamado ```custom-project.css```.
