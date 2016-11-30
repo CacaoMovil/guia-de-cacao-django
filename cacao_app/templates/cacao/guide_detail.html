@@ -55,7 +55,7 @@
                               <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cacaomovil.com{{ guia.get_absolute_url }}">Tweet</a>
                               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                             </div>
-                            <div class="pull-left" style="margin-top:0px;margin-left:10px;">
+                            <div class="pull-left hidden-md hidden-lg" style="margin-top:0px;margin-left:10px;">
                               <a style="background-color: rgb(28,191,75);padding:2px 5px;color:white;border-radius:3px;" href="whatsapp://send?text={{ guia.name }} - http://cacaomovil.com{{ guia.get_absolute_url }}" data-action="share/whatsapp/share">
                                 <img src="{% static 'image/ws.png' %}" alt="Whatsapp" width="15"/>
                                 <span style="font-size:11px;">Whatsapp</span>
