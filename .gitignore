@@ -13,7 +13,7 @@ __pycache__
 *.log
 pip-log.txt
 
-staticfiles/
+.env
 
 # Unit test / coverage reports
 .coverage
@@ -40,5 +40,6 @@ node_modules/
 .sass-cache
 fabfile.py
 
-#OSX
-.DS_Store
+# User-uploaded media
+staticfiles/
+
