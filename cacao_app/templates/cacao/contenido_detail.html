@@ -1,5 +1,7 @@
 {% extends "guide_detail_base.html" %}
-{% load i18n cacao_tags custom_sorl_tags cacao_tags %}
+{% load i18n cacao_tags custom_sorl_tags %}
+{% use_perseus as usp %}
+
 {% block content %}
         <!-- START Template Main -->
         <section id="main" role="main">
@@ -74,7 +76,7 @@
                               <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cacaomovil.com{{ contenido.get_absolute_url }}">Tweet</a>
                               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                             </div>
-                            <div class="pull-left" style="margin-top:0px;margin-left:10px;">
+                            <div class="pull-left hidden-md hidden-lg" style="margin-top:0px;margin-left:10px;">
                               <a style="background-color: rgb(28,191,75);padding:2px 5px;color:white;border-radius:3px;" href="whatsapp://send?text={{ contenido.section.guide.name }} > {{ contenido.section.title }} | {{ contenido.title_content }} - http://cacaomovil.com{{ contenido.get_absolute_url }}" data-action="share/whatsapp/share">
                                 <img src="{% static 'image/ws.png' %}" alt="Whatsapp" width="15"/>
                                 <span style="font-size:11px;">Whatsapp</span>
@@ -104,7 +106,12 @@
                             </div>
                             <div class="col-sm-6 col-xs-12 pull-left">
                                 {% if contenido.previous == None %}
-                                <a class="next-item" href="{% url 'guia_detail' contenido.section.guide.number %}">
+                                <a class="next-item"
+                                {% if usp %}
+                                href="index.html"
+                                {% else %}
+                                href="{% url 'guia_detail' contenido.section.guide.number %}"
+                                {% endif %}>
                                     <div class="row">
                                         <div class="col-xs-2">
                                             <i class="flaticon-thin35 fsize30"></i>
