@@ -11,6 +11,7 @@
         <title>Caja de herramientas para cacao</title>
         <meta name="author" content="kronoscode.com/">
         <meta name="description" content="">
+        <meta name="mobile-web-app-capable" content="yes">
 
         {% if usp %}
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
@@ -34,12 +35,23 @@
         <meta name="smartbanner:enabled-platforms" content="android">
         <!-- End SmartBanner configuration -->
 
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'image/touch/apple-touch-icon-144x144-precomposed.png' %}">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'image/touch/apple-touch-icon-114x114-precomposed.png' %}">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'image/touch/apple-touch-icon-72x72-precomposed.png' %}">
-        <link rel="apple-touch-icon-precomposed" href="{% static 'image/touch/apple-touch-icon-57x57-precomposed.png' %}">
-        <link rel="shortcut icon" href="{% static 'image/favicon.ico' %}">
-        <!--/ END META SECTION -->
+        <link rel="apple-touch-icon" sizes="57x57" href="{% static 'image/app/apple-icon-57x57.png' %}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{% static 'image/app/apple-icon-60x60.png' %}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{% static 'image/app/apple-icon-72x72.png' %}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'image/app/apple-icon-76x76.png' %}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{% static 'image/app/apple-icon-114x114.png' %}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{% static 'image/app/apple-icon-120x120.png' %}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{% static 'image/app/apple-icon-144x144.png' %}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{% static 'image/app/apple-icon-152x152.png' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'image/app/apple-icon-180x180.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'image/app/android-icon-192x192.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'image/app/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'image/app/favicon-96x96.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'image/app/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'image/app/manifest.json' %}">
+        <meta name="msapplication-TileColor" content="#99bd43">
+        <meta name="msapplication-TileImage" content="{% static 'image/app/ms-icon-144x144.png' %}">
+        <meta name="theme-color" content="#99bd43">
 
         <!-- Application stylesheet : mandatory -->
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
