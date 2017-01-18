@@ -114,6 +114,8 @@ class Common(Configuration):
 
     # EMAIL CONFIGURATION
     EMAIL_BACKEND = values.Value('django.core.mail.backends.smtp.EmailBackend')
+    # https://docs.djangoproject.com/en/1.10/ref/settings/#default-from-email
+    DEFAULT_FROM_EMAIL = values.SecretValue()
     # END EMAIL CONFIGURATION
 
     # MANAGER CONFIGURATION
@@ -324,12 +326,12 @@ class Common(Configuration):
     CKEDITOR_CONFIGS = {
         'default': {
             'toolbar': [
-                ['Format', 'Bold', 'Italic', 'Underline', 'SpellChecker',
-                 '-', 'NumberedList', 'BulletedList', 'Indent', 'Outdent', 'JustifyLeft', 'JustifyCenter',
-                 '-', 'JustifyRight', 'JustifyBlock', 'PasteText', 'PasteFromWord',
-                 '-', 'Find', 'Replace', 'Cut', 'Copy', 'Paste',
-                 '-', 'Image', 'Table', 'Link', 'Unlink', 'SectionLink', 'Undo', 'Redo', 'Source',
-                 'Maximize',
+                ['Undo', 'Redo',
+                 '-', 'Format', 'Bold', 'Italic', 'Underline', 'NumberedList', 'BulletedList', 'Blockquote',
+                 '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
+                 '-', 'Link', 'Unlink', 'Scayt',
+                 '-', 'Cut', 'Copy', 'PasteText',
+                 '-', 'Source', 'Image', 'Iframe',
                  ],
             ],
             'width': 'auto',

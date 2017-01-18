@@ -6,6 +6,7 @@ from envelope.views import ContactView
 from braces.views import FormMessagesMixin
 
 from .models import Contacto, Acerca
+from .forms import ContactForm
 
 
 class AboutView(TemplateView):
@@ -29,6 +30,7 @@ class Contact(FormMessagesMixin, ContactView):
     """
     form_invalid_message = _(u"There was en error in the contact form.")
     form_valid_message = _(u"Thank you for your message.")
+    form_class = ContactForm
 
     def get_context_data(self, **kwargs):
         context = super(Contact, self).get_context_data(**kwargs)
