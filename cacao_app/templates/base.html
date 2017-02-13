@@ -1,4 +1,5 @@
 {% load i18n  cacao_tags %}
+g
 {% use_perseus as usp %}
 <!DOCTYPE html>
 <html>
@@ -199,6 +200,13 @@
                     </div>
                 </div>
                 <!--/ Credit -->
+                <div class="wrapper text-center text-white">
+                  <form action="{% url 'google-cse:search' %}" method="get" accept-charset="utf-8" id="search-form" class="hidden-md hidden-sm">
+                    {% csrf_token %}
+                    <p><input type="text" placeholder="buscar" name="q"> 
+                    <input type="submit" value="Buscar" style="display:none;"/></p>
+                  </form>
+
             </section>
             <!--/ END Sidebar Container -->
         </aside>
