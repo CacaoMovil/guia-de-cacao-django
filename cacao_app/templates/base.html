@@ -200,12 +200,13 @@ g
                     </div>
                 </div>
                 <!--/ Credit -->
-                <div class="wrapper text-center text-white">
+                <div class="wrapper text-center">
                   <form action="{% url 'google-cse:search' %}" method="get" accept-charset="utf-8" id="search-form" class="hidden-md hidden-sm">
                     {% csrf_token %}
                     <p><input type="text" placeholder="buscar" name="q"> 
                     <input type="submit" value="Buscar" style="display:none;"/></p>
                   </form>
+                </div>
 
             </section>
             <!--/ END Sidebar Container -->

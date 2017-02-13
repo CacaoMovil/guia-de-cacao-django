@@ -296,6 +296,13 @@
                         </a>
                     </div>
                 </div>
+                <div class="wrapper text-center ">
+                  <form action="{% url 'google-cse:search' %}" method="get" accept-charset="utf-8" id="search-form" class="hidden-md hidden-sm">
+                    {% csrf_token %}
+                    <p><input type="text" placeholder="buscar" name="q"> 
+                    <input type="submit" value="Buscar" style="display:none;"/></p>
+                  </form>
+                </div>
                 <!--/ Credit -->
             </section>
             <!--/ END Sidebar Container -->
@@ -386,6 +393,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </section>
