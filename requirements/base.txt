@@ -52,3 +52,5 @@ pyquery==1.2.9
 django-widget-tweaks==1.3
 django-taggit==0.17.5
 django-countries==4.0
+
+-e git+git@github.com:kronoscode/django-google-cse.git@master#egg=django_google_cse

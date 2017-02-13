@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     url(r'', include('event.urls')),
     url(r'', include('configuracion.urls')),
     url(r'^ckeditor/', include('ckeditor.urls')),
+    url(r'^busqueda/', include('google_cse.urls', namespace='google-cse')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
