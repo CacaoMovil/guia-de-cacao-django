@@ -130,7 +130,7 @@
                 });
 
                 // Hide menu for app
-                if (window.location.protocol != "http:") {
+                if (window.location.protocol != "http:" && window.location.protocol != "https:") {
                   $('#download-guide').addClass('hidden');
                   $('#print-guide').addClass('hidden');
                   $('#list-guide').addClass('hidden');
