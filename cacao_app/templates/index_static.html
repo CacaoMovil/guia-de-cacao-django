@@ -208,7 +208,7 @@
               $('.sidebar').remove();
               $('.topmenu .home-menu').addClass('active');
             });
-            if (window.location.protocol != "http:") {
+            if (window.location.protocol != "http:" && window.location.protocol != "https:") {
               $('#js-offline-menu__about').removeClass('hidden');
               $('#js-offline-menu__home').removeClass('hidden');
               $('.about-menu').addClass('hidden');
